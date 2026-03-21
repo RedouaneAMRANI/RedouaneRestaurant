@@ -1,0 +1,14 @@
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\RestaurantManagement.exe.config
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\RestaurantManagement.exe
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\RestaurantManagement.pdb
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\DevComponents.DotNetBar2.dll
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\DevComponents.DotNetBar2.xml
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.csproj.AssemblyReference.cache
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.Dashboard.resources
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.Form1.resources
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.Properties.Resources.resources
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.csproj.GenerateResource.cache
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.csproj.CoreCompileInputs.cache
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\Restaura.B356954C.Up2Date
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.exe
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.pdb
