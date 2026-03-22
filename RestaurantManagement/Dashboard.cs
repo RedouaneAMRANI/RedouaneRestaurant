@@ -13,21 +13,31 @@ namespace RestaurantManagement
 {
     public partial class Dashboard : Form
     {
+
         public Dashboard()
         {
             InitializeComponent();
         }
 
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            labelDate.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+        }
+
         private void Dashboard_Load(object sender, EventArgs e)
         {
+            //Timer date and time
+            timer1.Interval = 1000;
+            timer1.Tick += Timer1_Tick;
+            timer1.Start();
+
+            //Tabcontrol
             dash.Visible = true;
             orders.Visible = false;
             menu.Visible = false;
             staff.Visible = false;
             payment.Visible = false;
             receiptprint.Visible = false;
-
-            btn_logout.Visible = false;
         }
 
         private void btn_dashboard_Click(object sender, EventArgs e)
@@ -90,16 +100,12 @@ namespace RestaurantManagement
             receiptprint.Visible = true;
         }
 
-        private void btn_login_Click(object sender, EventArgs e)
-        {
-            btn_login.Visible = false;
-            btn_logout.Visible = true;
-        }
-
         private void btn_logout_Click(object sender, EventArgs e)
         {
-            btn_login.Visible = true;
-            btn_logout.Visible = false;
+            Form1 auth = new Form1();
+            auth.Show();
+
+            this.Hide();
         }
     }
 }

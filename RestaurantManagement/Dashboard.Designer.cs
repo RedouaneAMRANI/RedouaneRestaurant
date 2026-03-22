@@ -30,16 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelDate = new System.Windows.Forms.Label();
             this.btn_notifyon = new Guna.UI2.WinForms.Guna2CircleButton();
             this.btn_notifyoff = new Guna.UI2.WinForms.Guna2CircleButton();
             this.btn_logout = new Guna.UI2.WinForms.Guna2CircleButton();
-            this.btn_login = new Guna.UI2.WinForms.Guna2CircleButton();
             this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -82,6 +81,7 @@
             this.btn_orders = new Guna.UI2.WinForms.Guna2Button();
             this.btn_dashboard = new Guna.UI2.WinForms.Guna2Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
@@ -104,11 +104,10 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.labelDate);
             this.panel2.Controls.Add(this.btn_notifyon);
             this.panel2.Controls.Add(this.btn_notifyoff);
             this.panel2.Controls.Add(this.btn_logout);
-            this.panel2.Controls.Add(this.btn_login);
             this.panel2.Controls.Add(this.guna2CirclePictureBox1);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
@@ -122,23 +121,23 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(830, 46);
+            this.label4.Location = new System.Drawing.Point(730, 46);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(105, 24);
             this.label4.TabIndex = 7;
             this.label4.Text = "Welcome";
             // 
-            // label3
+            // labelDate
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(470, 49);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(155, 24);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "date and time";
+            this.labelDate.AutoSize = true;
+            this.labelDate.Font = new System.Drawing.Font("Cooper Black", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDate.Location = new System.Drawing.Point(378, 43);
+            this.labelDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelDate.Name = "labelDate";
+            this.labelDate.Size = new System.Drawing.Size(180, 27);
+            this.labelDate.TabIndex = 6;
+            this.labelDate.Text = "date and time";
             // 
             // btn_notifyon
             // 
@@ -187,7 +186,7 @@
             this.btn_logout.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btn_logout.ForeColor = System.Drawing.Color.White;
             this.btn_logout.HoverState.Parent = this.btn_logout;
-            this.btn_logout.Location = new System.Drawing.Point(1534, 40);
+            this.btn_logout.Location = new System.Drawing.Point(1528, 37);
             this.btn_logout.Margin = new System.Windows.Forms.Padding(2);
             this.btn_logout.Name = "btn_logout";
             this.btn_logout.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -196,29 +195,10 @@
             this.btn_logout.TabIndex = 3;
             this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click);
             // 
-            // btn_login
-            // 
-            this.btn_login.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_login.BackgroundImage")));
-            this.btn_login.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_login.CheckedState.Parent = this.btn_login;
-            this.btn_login.CustomImages.Parent = this.btn_login;
-            this.btn_login.FillColor = System.Drawing.Color.Transparent;
-            this.btn_login.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btn_login.ForeColor = System.Drawing.Color.White;
-            this.btn_login.HoverState.Parent = this.btn_login;
-            this.btn_login.Location = new System.Drawing.Point(1534, 37);
-            this.btn_login.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_login.Name = "btn_login";
-            this.btn_login.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.btn_login.ShadowDecoration.Parent = this.btn_login;
-            this.btn_login.Size = new System.Drawing.Size(56, 48);
-            this.btn_login.TabIndex = 3;
-            this.btn_login.Click += new System.EventHandler(this.btn_login_Click);
-            // 
             // guna2CirclePictureBox1
             // 
             this.guna2CirclePictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2CirclePictureBox1.Image")));
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(997, 21);
+            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(897, 21);
             this.guna2CirclePictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
             this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -232,7 +212,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(94, 47);
+            this.label2.Location = new System.Drawing.Point(90, 45);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(127, 26);
@@ -243,7 +223,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1097, 49);
+            this.label1.Location = new System.Drawing.Point(997, 49);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(166, 20);
@@ -352,18 +332,18 @@
             // 
             // chart1
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart1.Legends.Add(legend3);
+            chartArea8.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea8);
+            legend8.Name = "Legend1";
+            this.chart1.Legends.Add(legend8);
             this.chart1.Location = new System.Drawing.Point(283, 597);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            series3.YValuesPerPoint = 2;
-            this.chart1.Series.Add(series3);
+            series8.ChartArea = "ChartArea1";
+            series8.Legend = "Legend1";
+            series8.Name = "Series1";
+            series8.YValuesPerPoint = 2;
+            this.chart1.Series.Add(series8);
             this.chart1.Size = new System.Drawing.Size(1038, 342);
             this.chart1.TabIndex = 1;
             this.chart1.Text = "chart1";
@@ -811,6 +791,11 @@
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -874,11 +859,9 @@
         private DevComponents.DotNetBar.TabItem payment;
         private DevComponents.DotNetBar.TabControlPanel tabControlPanel4;
         private DevComponents.DotNetBar.TabItem staff;
-        private Guna.UI2.WinForms.Guna2CircleButton btn_login;
-        private Guna.UI2.WinForms.Guna2CircleButton btn_logout;
         private Guna.UI2.WinForms.Guna2CircleButton btn_notifyoff;
         private Guna.UI2.WinForms.Guna2CircleButton btn_notifyon;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelDate;
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox2;
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox3;
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox1;
@@ -901,5 +884,7 @@
         private System.Windows.Forms.Label label8;
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox5;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Timer timer1;
+        protected Guna.UI2.WinForms.Guna2CircleButton btn_logout;
     }
 }
