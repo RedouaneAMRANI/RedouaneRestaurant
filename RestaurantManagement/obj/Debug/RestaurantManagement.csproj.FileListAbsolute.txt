@@ -12,3 +12,4 @@ C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\De
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\Restaura.B356954C.Up2Date
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.exe
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.pdb
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\MetroFramework.dll
