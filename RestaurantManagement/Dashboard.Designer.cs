@@ -30,9 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.labelDate = new System.Windows.Forms.Label();
@@ -48,9 +45,19 @@
             this.superTabControlPanel4 = new DevComponents.DotNetBar.SuperTabControlPanel();
             this.superTabItem3 = new DevComponents.DotNetBar.SuperTabItem();
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
+            this.tabControlPanel2 = new DevComponents.DotNetBar.TabControlPanel();
+            this.guna2ComboBox3 = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.guna2ComboBox2 = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.orders = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.guna2GroupBox4 = new Guna.UI2.WinForms.Guna2GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.guna2CirclePictureBox5 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2GroupBox2 = new Guna.UI2.WinForms.Guna2GroupBox();
@@ -63,16 +70,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.guna2CirclePictureBox4 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.dash = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabControlPanel2 = new DevComponents.DotNetBar.TabControlPanel();
-            this.orders = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabControlPanel3 = new DevComponents.DotNetBar.TabControlPanel();
+            this.menu = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel6 = new DevComponents.DotNetBar.TabControlPanel();
             this.receiptprint = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel5 = new DevComponents.DotNetBar.TabControlPanel();
             this.payment = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel4 = new DevComponents.DotNetBar.TabControlPanel();
             this.staff = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabControlPanel3 = new DevComponents.DotNetBar.TabControlPanel();
-            this.menu = new DevComponents.DotNetBar.TabItem(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_receiptprint = new Guna.UI2.WinForms.Guna2Button();
             this.btn_payment = new Guna.UI2.WinForms.Guna2Button();
@@ -82,12 +87,16 @@
             this.btn_dashboard = new Guna.UI2.WinForms.Guna2Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.tabControlPanel2.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.guna2GroupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox5)).BeginInit();
             this.guna2GroupBox2.SuspendLayout();
@@ -96,6 +105,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox3)).BeginInit();
             this.guna2GroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox4)).BeginInit();
+            this.tabControlPanel3.SuspendLayout();
+            this.tabControlPanel6.SuspendLayout();
+            this.tabControlPanel5.SuspendLayout();
+            this.tabControlPanel4.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -193,7 +206,7 @@
             this.btn_logout.ShadowDecoration.Parent = this.btn_logout;
             this.btn_logout.Size = new System.Drawing.Size(56, 45);
             this.btn_logout.TabIndex = 3;
-            this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click);
+            this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click_1);
             // 
             // guna2CirclePictureBox1
             // 
@@ -283,12 +296,12 @@
             this.tabControl1.ColorScheme.TabPanelBackground = System.Drawing.Color.White;
             this.tabControl1.ColorScheme.TabPanelBackground2 = System.Drawing.Color.White;
             this.tabControl1.ColorScheme.TabPanelBorder = System.Drawing.Color.White;
-            this.tabControl1.Controls.Add(this.tabControlPanel1);
             this.tabControl1.Controls.Add(this.tabControlPanel2);
+            this.tabControl1.Controls.Add(this.tabControlPanel3);
             this.tabControl1.Controls.Add(this.tabControlPanel6);
             this.tabControl1.Controls.Add(this.tabControlPanel5);
             this.tabControl1.Controls.Add(this.tabControlPanel4);
-            this.tabControl1.Controls.Add(this.tabControlPanel3);
+            this.tabControl1.Controls.Add(this.tabControlPanel1);
             this.tabControl1.Location = new System.Drawing.Point(284, 91);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
@@ -306,9 +319,146 @@
             this.tabControl1.TabsVisible = false;
             this.tabControl1.Text = "tabControl1";
             // 
+            // tabControlPanel2
+            // 
+            this.tabControlPanel2.Controls.Add(this.guna2ComboBox3);
+            this.tabControlPanel2.Controls.Add(this.guna2ComboBox2);
+            this.tabControlPanel2.Controls.Add(this.guna2ComboBox1);
+            this.tabControlPanel2.Controls.Add(this.label12);
+            this.tabControlPanel2.Controls.Add(this.label11);
+            this.tabControlPanel2.Controls.Add(this.label13);
+            this.tabControlPanel2.Controls.Add(this.label10);
+            this.tabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel2.Location = new System.Drawing.Point(0, 26);
+            this.tabControlPanel2.Margin = new System.Windows.Forms.Padding(2);
+            this.tabControlPanel2.Name = "tabControlPanel2";
+            this.tabControlPanel2.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel2.Size = new System.Drawing.Size(1636, 983);
+            this.tabControlPanel2.Style.BackColor1.Color = System.Drawing.Color.White;
+            this.tabControlPanel2.Style.BackColor2.Color = System.Drawing.Color.White;
+            this.tabControlPanel2.Style.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabControlPanel2.Style.BackgroundImage")));
+            this.tabControlPanel2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel2.Style.BorderColor.Color = System.Drawing.Color.White;
+            this.tabControlPanel2.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel2.Style.GradientAngle = 90;
+            this.tabControlPanel2.TabIndex = 2;
+            this.tabControlPanel2.TabItem = this.orders;
+            // 
+            // guna2ComboBox3
+            // 
+            this.guna2ComboBox3.BackColor = System.Drawing.Color.Transparent;
+            this.guna2ComboBox3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.guna2ComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.guna2ComboBox3.FocusedColor = System.Drawing.Color.Empty;
+            this.guna2ComboBox3.FocusedState.Parent = this.guna2ComboBox3;
+            this.guna2ComboBox3.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.guna2ComboBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.guna2ComboBox3.FormattingEnabled = true;
+            this.guna2ComboBox3.HoverState.Parent = this.guna2ComboBox3;
+            this.guna2ComboBox3.ItemHeight = 30;
+            this.guna2ComboBox3.Items.AddRange(new object[] {
+            "Select Table"});
+            this.guna2ComboBox3.ItemsAppearance.Parent = this.guna2ComboBox3;
+            this.guna2ComboBox3.Location = new System.Drawing.Point(689, 184);
+            this.guna2ComboBox3.Name = "guna2ComboBox3";
+            this.guna2ComboBox3.ShadowDecoration.Parent = this.guna2ComboBox3;
+            this.guna2ComboBox3.Size = new System.Drawing.Size(252, 36);
+            this.guna2ComboBox3.TabIndex = 1;
+            // 
+            // guna2ComboBox2
+            // 
+            this.guna2ComboBox2.BackColor = System.Drawing.Color.Transparent;
+            this.guna2ComboBox2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.guna2ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.guna2ComboBox2.FocusedColor = System.Drawing.Color.Empty;
+            this.guna2ComboBox2.FocusedState.Parent = this.guna2ComboBox2;
+            this.guna2ComboBox2.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.guna2ComboBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.guna2ComboBox2.FormattingEnabled = true;
+            this.guna2ComboBox2.HoverState.Parent = this.guna2ComboBox2;
+            this.guna2ComboBox2.ItemHeight = 30;
+            this.guna2ComboBox2.Items.AddRange(new object[] {
+            "WaitList",
+            "Preparing",
+            "Served"});
+            this.guna2ComboBox2.ItemsAppearance.Parent = this.guna2ComboBox2;
+            this.guna2ComboBox2.Location = new System.Drawing.Point(1224, 184);
+            this.guna2ComboBox2.Name = "guna2ComboBox2";
+            this.guna2ComboBox2.ShadowDecoration.Parent = this.guna2ComboBox2;
+            this.guna2ComboBox2.Size = new System.Drawing.Size(252, 36);
+            this.guna2ComboBox2.TabIndex = 1;
+            // 
+            // guna2ComboBox1
+            // 
+            this.guna2ComboBox1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2ComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.guna2ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.guna2ComboBox1.FocusedColor = System.Drawing.Color.Empty;
+            this.guna2ComboBox1.FocusedState.Parent = this.guna2ComboBox1;
+            this.guna2ComboBox1.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.guna2ComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.guna2ComboBox1.FormattingEnabled = true;
+            this.guna2ComboBox1.HoverState.Parent = this.guna2ComboBox1;
+            this.guna2ComboBox1.ItemHeight = 30;
+            this.guna2ComboBox1.Items.AddRange(new object[] {
+            "Dine In",
+            "Take Away"});
+            this.guna2ComboBox1.ItemsAppearance.Parent = this.guna2ComboBox1;
+            this.guna2ComboBox1.Location = new System.Drawing.Point(107, 184);
+            this.guna2ComboBox1.Name = "guna2ComboBox1";
+            this.guna2ComboBox1.ShadowDecoration.Parent = this.guna2ComboBox1;
+            this.guna2ComboBox1.Size = new System.Drawing.Size(252, 36);
+            this.guna2ComboBox1.TabIndex = 1;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Cooper Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(1235, 143);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(73, 21);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Status";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Cooper Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(705, 143);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(142, 21);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "TableNumber";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Cooper Black", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(112, 46);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(95, 31);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Order";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Cooper Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(115, 143);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(120, 21);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Order Type";
+            // 
+            // orders
+            // 
+            this.orders.AttachedControl = this.tabControlPanel2;
+            this.orders.Name = "orders";
+            this.orders.Text = "orders";
+            // 
             // tabControlPanel1
             // 
-            this.tabControlPanel1.Controls.Add(this.chart1);
             this.tabControlPanel1.Controls.Add(this.guna2GroupBox4);
             this.tabControlPanel1.Controls.Add(this.guna2GroupBox2);
             this.tabControlPanel1.Controls.Add(this.guna2GroupBox3);
@@ -330,31 +480,15 @@
             this.tabControlPanel1.TabIndex = 1;
             this.tabControlPanel1.TabItem = this.dash;
             // 
-            // chart1
-            // 
-            chartArea8.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea8);
-            legend8.Name = "Legend1";
-            this.chart1.Legends.Add(legend8);
-            this.chart1.Location = new System.Drawing.Point(283, 597);
-            this.chart1.Name = "chart1";
-            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
-            series8.ChartArea = "ChartArea1";
-            series8.Legend = "Legend1";
-            series8.Name = "Series1";
-            series8.YValuesPerPoint = 2;
-            this.chart1.Series.Add(series8);
-            this.chart1.Size = new System.Drawing.Size(1038, 342);
-            this.chart1.TabIndex = 1;
-            this.chart1.Text = "chart1";
-            // 
             // guna2GroupBox4
             // 
+            this.guna2GroupBox4.Controls.Add(this.label9);
+            this.guna2GroupBox4.Controls.Add(this.label3);
             this.guna2GroupBox4.Controls.Add(this.label8);
             this.guna2GroupBox4.Controls.Add(this.guna2CirclePictureBox5);
             this.guna2GroupBox4.Font = new System.Drawing.Font("Cooper Black", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2GroupBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.guna2GroupBox4.Location = new System.Drawing.Point(1101, 61);
+            this.guna2GroupBox4.Location = new System.Drawing.Point(1101, 46);
             this.guna2GroupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.guna2GroupBox4.Name = "guna2GroupBox4";
             this.guna2GroupBox4.ShadowDecoration.Parent = this.guna2GroupBox4;
@@ -363,10 +497,30 @@
             this.guna2GroupBox4.Text = "DineIn vs TakeAway";
             this.guna2GroupBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(223, 103);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(27, 17);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "Vs";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(270, 102);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 17);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "label5";
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(179, 102);
+            this.label8.Location = new System.Drawing.Point(149, 103);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(53, 17);
@@ -393,7 +547,7 @@
             this.guna2GroupBox2.Controls.Add(this.guna2CirclePictureBox2);
             this.guna2GroupBox2.Font = new System.Drawing.Font("Cooper Black", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2GroupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.guna2GroupBox2.Location = new System.Drawing.Point(164, 61);
+            this.guna2GroupBox2.Location = new System.Drawing.Point(164, 46);
             this.guna2GroupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.guna2GroupBox2.Name = "guna2GroupBox2";
             this.guna2GroupBox2.ShadowDecoration.Parent = this.guna2GroupBox2;
@@ -432,13 +586,13 @@
             this.guna2GroupBox3.Controls.Add(this.guna2CirclePictureBox3);
             this.guna2GroupBox3.Font = new System.Drawing.Font("Cooper Black", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2GroupBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.guna2GroupBox3.Location = new System.Drawing.Point(614, 338);
+            this.guna2GroupBox3.Location = new System.Drawing.Point(614, 310);
             this.guna2GroupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.guna2GroupBox3.Name = "guna2GroupBox3";
             this.guna2GroupBox3.ShadowDecoration.Parent = this.guna2GroupBox3;
             this.guna2GroupBox3.Size = new System.Drawing.Size(337, 198);
             this.guna2GroupBox3.TabIndex = 0;
-            this.guna2GroupBox3.Text = "Top Menus";
+            this.guna2GroupBox3.Text = "Orders Served / Pending";
             this.guna2GroupBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label7
@@ -454,7 +608,9 @@
             // guna2CirclePictureBox3
             // 
             this.guna2CirclePictureBox3.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CirclePictureBox3.Location = new System.Drawing.Point(27, 73);
+            this.guna2CirclePictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("guna2CirclePictureBox3.BackgroundImage")));
+            this.guna2CirclePictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.guna2CirclePictureBox3.Location = new System.Drawing.Point(26, 77);
             this.guna2CirclePictureBox3.Margin = new System.Windows.Forms.Padding(2);
             this.guna2CirclePictureBox3.Name = "guna2CirclePictureBox3";
             this.guna2CirclePictureBox3.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -470,7 +626,7 @@
             this.guna2GroupBox1.Controls.Add(this.guna2CirclePictureBox4);
             this.guna2GroupBox1.Font = new System.Drawing.Font("Cooper Black", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2GroupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.guna2GroupBox1.Location = new System.Drawing.Point(614, 61);
+            this.guna2GroupBox1.Location = new System.Drawing.Point(614, 46);
             this.guna2GroupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.guna2GroupBox1.Name = "guna2GroupBox1";
             this.guna2GroupBox1.ShadowDecoration.Parent = this.guna2GroupBox1;
@@ -509,33 +665,35 @@
             this.dash.Name = "dash";
             this.dash.Text = "dashboard";
             // 
-            // tabControlPanel2
+            // tabControlPanel3
             // 
-            this.tabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel2.Location = new System.Drawing.Point(0, 26);
-            this.tabControlPanel2.Margin = new System.Windows.Forms.Padding(2);
-            this.tabControlPanel2.Name = "tabControlPanel2";
-            this.tabControlPanel2.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel2.Size = new System.Drawing.Size(1636, 983);
-            this.tabControlPanel2.Style.BackColor1.Color = System.Drawing.Color.White;
-            this.tabControlPanel2.Style.BackColor2.Color = System.Drawing.Color.White;
-            this.tabControlPanel2.Style.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabControlPanel2.Style.BackgroundImage")));
-            this.tabControlPanel2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel2.Style.BorderColor.Color = System.Drawing.Color.White;
-            this.tabControlPanel2.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            this.tabControlPanel3.Controls.Add(this.label14);
+            this.tabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel3.Location = new System.Drawing.Point(0, 26);
+            this.tabControlPanel3.Margin = new System.Windows.Forms.Padding(2);
+            this.tabControlPanel3.Name = "tabControlPanel3";
+            this.tabControlPanel3.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel3.Size = new System.Drawing.Size(1636, 983);
+            this.tabControlPanel3.Style.BackColor1.Color = System.Drawing.Color.White;
+            this.tabControlPanel3.Style.BackColor2.Color = System.Drawing.Color.White;
+            this.tabControlPanel3.Style.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabControlPanel3.Style.BackgroundImage")));
+            this.tabControlPanel3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel3.Style.BorderColor.Color = System.Drawing.Color.White;
+            this.tabControlPanel3.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
             | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanel2.Style.GradientAngle = 90;
-            this.tabControlPanel2.TabIndex = 2;
-            this.tabControlPanel2.TabItem = this.orders;
+            this.tabControlPanel3.Style.GradientAngle = 90;
+            this.tabControlPanel3.TabIndex = 3;
+            this.tabControlPanel3.TabItem = this.menu;
             // 
-            // orders
+            // menu
             // 
-            this.orders.AttachedControl = this.tabControlPanel2;
-            this.orders.Name = "orders";
-            this.orders.Text = "orders";
+            this.menu.AttachedControl = this.tabControlPanel3;
+            this.menu.Name = "menu";
+            this.menu.Text = "menu";
             // 
             // tabControlPanel6
             // 
+            this.tabControlPanel6.Controls.Add(this.label17);
             this.tabControlPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlPanel6.Location = new System.Drawing.Point(0, 26);
             this.tabControlPanel6.Margin = new System.Windows.Forms.Padding(2);
@@ -561,6 +719,7 @@
             // 
             // tabControlPanel5
             // 
+            this.tabControlPanel5.Controls.Add(this.label16);
             this.tabControlPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlPanel5.Location = new System.Drawing.Point(0, 26);
             this.tabControlPanel5.Margin = new System.Windows.Forms.Padding(2);
@@ -586,6 +745,7 @@
             // 
             // tabControlPanel4
             // 
+            this.tabControlPanel4.Controls.Add(this.label15);
             this.tabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlPanel4.Location = new System.Drawing.Point(0, 26);
             this.tabControlPanel4.Margin = new System.Windows.Forms.Padding(2);
@@ -608,31 +768,6 @@
             this.staff.AttachedControl = this.tabControlPanel4;
             this.staff.Name = "staff";
             this.staff.Text = "staff";
-            // 
-            // tabControlPanel3
-            // 
-            this.tabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel3.Location = new System.Drawing.Point(0, 26);
-            this.tabControlPanel3.Margin = new System.Windows.Forms.Padding(2);
-            this.tabControlPanel3.Name = "tabControlPanel3";
-            this.tabControlPanel3.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel3.Size = new System.Drawing.Size(1636, 983);
-            this.tabControlPanel3.Style.BackColor1.Color = System.Drawing.Color.White;
-            this.tabControlPanel3.Style.BackColor2.Color = System.Drawing.Color.White;
-            this.tabControlPanel3.Style.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabControlPanel3.Style.BackgroundImage")));
-            this.tabControlPanel3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel3.Style.BorderColor.Color = System.Drawing.Color.White;
-            this.tabControlPanel3.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
-            | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanel3.Style.GradientAngle = 90;
-            this.tabControlPanel3.TabIndex = 3;
-            this.tabControlPanel3.TabItem = this.menu;
-            // 
-            // menu
-            // 
-            this.menu.AttachedControl = this.tabControlPanel3;
-            this.menu.Name = "menu";
-            this.menu.Text = "menu";
             // 
             // panel1
             // 
@@ -671,6 +806,7 @@
             this.btn_receiptprint.TabIndex = 2;
             this.btn_receiptprint.Text = "ReceiptPrint";
             this.btn_receiptprint.TextOffset = new System.Drawing.Point(20, 0);
+            this.btn_receiptprint.Click += new System.EventHandler(this.btn_receiptprint_Click);
             // 
             // btn_payment
             // 
@@ -693,6 +829,7 @@
             this.btn_payment.TabIndex = 2;
             this.btn_payment.Text = "Payment";
             this.btn_payment.TextOffset = new System.Drawing.Point(20, 0);
+            this.btn_payment.Click += new System.EventHandler(this.btn_payment_Click);
             // 
             // btn_staff
             // 
@@ -715,6 +852,7 @@
             this.btn_staff.TabIndex = 2;
             this.btn_staff.Text = "Staff Management";
             this.btn_staff.TextOffset = new System.Drawing.Point(20, 0);
+            this.btn_staff.Click += new System.EventHandler(this.btn_staff_Click);
             // 
             // btn_menu
             // 
@@ -737,6 +875,7 @@
             this.btn_menu.TabIndex = 2;
             this.btn_menu.Text = "Menu Management";
             this.btn_menu.TextOffset = new System.Drawing.Point(20, 0);
+            this.btn_menu.Click += new System.EventHandler(this.btn_menu_Click);
             // 
             // btn_orders
             // 
@@ -758,6 +897,7 @@
             this.btn_orders.Size = new System.Drawing.Size(257, 70);
             this.btn_orders.TabIndex = 2;
             this.btn_orders.Text = "Orders";
+            this.btn_orders.Click += new System.EventHandler(this.btn_orders_Click);
             // 
             // btn_dashboard
             // 
@@ -779,6 +919,7 @@
             this.btn_dashboard.Size = new System.Drawing.Size(257, 70);
             this.btn_dashboard.TabIndex = 2;
             this.btn_dashboard.Text = "Dashboard";
+            this.btn_dashboard.Click += new System.EventHandler(this.btn_dashboard_Click);
             // 
             // pictureBox2
             // 
@@ -795,6 +936,42 @@
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(415, 84);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(56, 13);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "jjfjfggfjgfjfg";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(675, 338);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(41, 13);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "label15";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(814, 242);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(41, 13);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "label16";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(467, 480);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(41, 13);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "label17";
             // 
             // Dashboard
             // 
@@ -816,8 +993,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.tabControlPanel2.ResumeLayout(false);
+            this.tabControlPanel2.PerformLayout();
             this.tabControlPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.guna2GroupBox4.ResumeLayout(false);
             this.guna2GroupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox5)).EndInit();
@@ -830,6 +1008,14 @@
             this.guna2GroupBox1.ResumeLayout(false);
             this.guna2GroupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox4)).EndInit();
+            this.tabControlPanel3.ResumeLayout(false);
+            this.tabControlPanel3.PerformLayout();
+            this.tabControlPanel6.ResumeLayout(false);
+            this.tabControlPanel6.PerformLayout();
+            this.tabControlPanel5.ResumeLayout(false);
+            this.tabControlPanel5.PerformLayout();
+            this.tabControlPanel4.ResumeLayout(false);
+            this.tabControlPanel4.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
@@ -883,8 +1069,20 @@
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox4;
         private System.Windows.Forms.Label label8;
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox5;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Timer timer1;
         protected Guna.UI2.WinForms.Guna2CircleButton btn_logout;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label10;
+        private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox2;
+        private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox1;
+        private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox3;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
     }
 }

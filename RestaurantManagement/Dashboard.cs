@@ -50,10 +50,18 @@ namespace RestaurantManagement
             receiptprint.Visible = false;
         }
 
+        private void btn_logout_Click_1(object sender, EventArgs e)
+        {
+            Form1 auth = new Form1();
+            auth.Show();
+
+            this.Hide();
+        }
+
         private void btn_orders_Click(object sender, EventArgs e)
         {
-            dash.Visible = false;
             orders.Visible = true;
+            dash.Visible = false;
             menu.Visible = false;
             staff.Visible = false;
             payment.Visible = false;
@@ -62,9 +70,9 @@ namespace RestaurantManagement
 
         private void btn_menu_Click(object sender, EventArgs e)
         {
+            menu.Visible = true;
             dash.Visible = false;
             orders.Visible = false;
-            menu.Visible = true;
             staff.Visible = false;
             payment.Visible = false;
             receiptprint.Visible = false;
@@ -72,40 +80,32 @@ namespace RestaurantManagement
 
         private void btn_staff_Click(object sender, EventArgs e)
         {
-            dash.Visible = false;
-            orders.Visible = false;
-            menu.Visible = false;
             staff.Visible = true;
+            menu.Visible = false;
+            orders.Visible = false;
+            dash.Visible = false;
             payment.Visible = false;
             receiptprint.Visible = false;
         }
 
         private void btn_payment_Click(object sender, EventArgs e)
         {
-            dash.Visible = false;
-            orders.Visible = false;
-            menu.Visible = false;
-            staff.Visible = false;
             payment.Visible = true;
+            staff.Visible = false;
+            menu.Visible = false;
+            orders.Visible = false;
+            dash.Visible = false;
             receiptprint.Visible = false;
         }
 
         private void btn_receiptprint_Click(object sender, EventArgs e)
         {
-            dash.Visible = false;
-            orders.Visible = false;
-            menu.Visible = false;
-            staff.Visible = false;
-            payment.Visible = false;
             receiptprint.Visible = true;
-        }
-
-        private void btn_logout_Click(object sender, EventArgs e)
-        {
-            Form1 auth = new Form1();
-            auth.Show();
-
-            this.Hide();
+            payment.Visible = false;
+            staff.Visible = false;
+            menu.Visible = false;
+            orders.Visible = false;
+            dash.Visible = false;
         }
     }
 }
