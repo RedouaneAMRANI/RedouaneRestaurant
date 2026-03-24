@@ -12,9 +12,6 @@ namespace RestaurantManagement
 {
     public partial class Form1 : Form
     {
-        private Button btn_login;
-        private Button btn_logout;
-
         public Form1()
         {
             InitializeComponent();

@@ -13,7 +13,6 @@ namespace RestaurantManagement
 {
     public partial class Dashboard : Form
     {
-
         public Dashboard()
         {
             InitializeComponent();
@@ -32,19 +31,12 @@ namespace RestaurantManagement
             timer1.Start();
 
             //Tabcontrol
-            dash.Visible = true;
-            orders.Visible = false;
-            menu.Visible = false;
-            staff.Visible = false;
-            payment.Visible = false;
-            receiptprint.Visible = false;
-        }
+            ActivateButton(btn_dashboard);
 
-        private void btn_dashboard_Click(object sender, EventArgs e)
-        {
             dash.Visible = true;
             orders.Visible = false;
             menu.Visible = false;
+            products.Visible = false;   
             staff.Visible = false;
             payment.Visible = false;
             receiptprint.Visible = false;
@@ -57,12 +49,40 @@ namespace RestaurantManagement
 
             this.Hide();
         }
+        
+        Guna.UI2.WinForms.Guna2Button currentButton;
+
+        private void ActivateButton(object sender)
+        {
+            if (currentButton != null)
+            {
+                currentButton.FillColor = Color.FromArgb(62, 39, 35); // Brown
+            }
+            currentButton = (Guna.UI2.WinForms.Guna2Button)sender;
+            currentButton.FillColor = Color.FromArgb(199, 161, 122); // Gold
+        }
+
+        private void btn_dashboard_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender);
+
+            dash.Visible = true;
+            orders.Visible = false;
+            menu.Visible = false;
+            products.Visible = false;
+            staff.Visible = false;
+            payment.Visible = false;
+            receiptprint.Visible = false;
+        }
 
         private void btn_orders_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
+
             orders.Visible = true;
             dash.Visible = false;
             menu.Visible = false;
+            products.Visible = false;
             staff.Visible = false;
             payment.Visible = false;
             receiptprint.Visible = false;
@@ -70,7 +90,10 @@ namespace RestaurantManagement
 
         private void btn_menu_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
+            btn_categories_menu.FillColor = Color.FromArgb(199, 161, 122); // Gold
             menu.Visible = true;
+            products.Visible = false;
             dash.Visible = false;
             orders.Visible = false;
             staff.Visible = false;
@@ -80,8 +103,11 @@ namespace RestaurantManagement
 
         private void btn_staff_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
+
             staff.Visible = true;
             menu.Visible = false;
+            products.Visible = false;
             orders.Visible = false;
             dash.Visible = false;
             payment.Visible = false;
@@ -90,9 +116,12 @@ namespace RestaurantManagement
 
         private void btn_payment_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
+
             payment.Visible = true;
             staff.Visible = false;
             menu.Visible = false;
+            products.Visible = false;
             orders.Visible = false;
             dash.Visible = false;
             receiptprint.Visible = false;
@@ -100,12 +129,31 @@ namespace RestaurantManagement
 
         private void btn_receiptprint_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
+
             receiptprint.Visible = true;
             payment.Visible = false;
             staff.Visible = false;
             menu.Visible = false;
+            products.Visible = false;
             orders.Visible = false;
             dash.Visible = false;
+        }
+
+        private void btn_products_menu_Click(object sender, EventArgs e)
+        {
+            btn_products_products.FillColor = Color.FromArgb(199, 161, 122); // Gold
+
+            products.Visible = true;
+            menu.Visible = false;
+        }
+
+        private void btn_categories_products_Click(object sender, EventArgs e)
+        {
+            btn_categories_menu.FillColor = Color.FromArgb(199, 161, 122); // Gold
+
+            products.Visible = false;
+            menu.Visible = true;
         }
     }
 }
