@@ -35,16 +35,16 @@ namespace RestaurantManagement
 
             dash.Visible = true;
             orders.Visible = false;
+            ordersbysite.Visible = false;
             menu.Visible = false;
             products.Visible = false;   
             staff.Visible = false;
             payment.Visible = false;
-            receiptprint.Visible = false;
         }
 
         private void btn_logout_Click_1(object sender, EventArgs e)
         {
-            Form1 auth = new Form1();
+            Auth auth = new Auth();
             auth.Show();
 
             this.Hide();
@@ -72,7 +72,6 @@ namespace RestaurantManagement
             products.Visible = false;
             staff.Visible = false;
             payment.Visible = false;
-            receiptprint.Visible = false;
         }
 
         private void btn_orders_Click(object sender, EventArgs e)
@@ -85,7 +84,6 @@ namespace RestaurantManagement
             products.Visible = false;
             staff.Visible = false;
             payment.Visible = false;
-            receiptprint.Visible = false;
         }
 
         private void btn_menu_Click(object sender, EventArgs e)
@@ -98,7 +96,6 @@ namespace RestaurantManagement
             orders.Visible = false;
             staff.Visible = false;
             payment.Visible = false;
-            receiptprint.Visible = false;
         }
 
         private void btn_staff_Click(object sender, EventArgs e)
@@ -111,7 +108,6 @@ namespace RestaurantManagement
             orders.Visible = false;
             dash.Visible = false;
             payment.Visible = false;
-            receiptprint.Visible = false;
         }
 
         private void btn_payment_Click(object sender, EventArgs e)
@@ -119,20 +115,6 @@ namespace RestaurantManagement
             ActivateButton(sender);
 
             payment.Visible = true;
-            staff.Visible = false;
-            menu.Visible = false;
-            products.Visible = false;
-            orders.Visible = false;
-            dash.Visible = false;
-            receiptprint.Visible = false;
-        }
-
-        private void btn_receiptprint_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender);
-
-            receiptprint.Visible = true;
-            payment.Visible = false;
             staff.Visible = false;
             menu.Visible = false;
             products.Visible = false;
@@ -154,6 +136,17 @@ namespace RestaurantManagement
 
             products.Visible = false;
             menu.Visible = true;
+        }
+
+        private void label13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_add_order_Click(object sender, EventArgs e)
+        {
+           PaymentForm paymentForm = new PaymentForm();
+            paymentForm.Show();
         }
     }
 }

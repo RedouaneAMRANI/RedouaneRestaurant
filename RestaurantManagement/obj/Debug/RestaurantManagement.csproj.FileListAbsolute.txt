@@ -5,7 +5,6 @@ C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\De
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\DevComponents.DotNetBar2.xml
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.csproj.AssemblyReference.cache
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.Dashboard.resources
-C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.Form1.resources
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.Properties.Resources.resources
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.csproj.GenerateResource.cache
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.csproj.CoreCompileInputs.cache
@@ -14,3 +13,5 @@ C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\De
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.pdb
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\MetroFramework.dll
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\Bunifu_UI_v1.52.dll
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.Auth.resources
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.PaymentForm.resources

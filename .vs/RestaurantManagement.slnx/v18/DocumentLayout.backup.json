@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|c:\\users\\redone1\\desktop\\projet\\restaurantmanagement\\restaurantmanagement\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|solutionrelative:restaurantmanagement\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|c:\\users\\redone1\\desktop\\projet\\restaurantmanagement\\restaurantmanagement\\paymentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|solutionrelative:restaurantmanagement\\paymentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|c:\\users\\redone1\\desktop\\projet\\restaurantmanagement\\restaurantmanagement\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|solutionrelative:restaurantmanagement\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|c:\\users\\redone1\\desktop\\projet\\restaurantmanagement\\restaurantmanagement\\paymentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|solutionrelative:restaurantmanagement\\paymentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|c:\\users\\redone1\\desktop\\projet\\restaurantmanagement\\restaurantmanagement\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|solutionrelative:restaurantmanagement\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\restaurantmanagement\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -27,32 +31,44 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\RestaurantManagement\\Form1.cs",
-              "RelativeDocumentMoniker": "RestaurantManagement\\Form1.cs",
-              "ToolTip": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\RestaurantManagement\\Form1.cs",
-              "RelativeToolTip": "RestaurantManagement\\Form1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAIAAAAAAAAAA==",
+              "Title": "PaymentForm.cs",
+              "DocumentMoniker": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\RestaurantManagement\\PaymentForm.cs",
+              "RelativeDocumentMoniker": "RestaurantManagement\\PaymentForm.cs",
+              "ToolTip": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\RestaurantManagement\\PaymentForm.cs",
+              "RelativeToolTip": "RestaurantManagement\\PaymentForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAYwBUAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-24T02:28:10.005Z",
+              "WhenOpened": "2026-03-24T20:44:03.936Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "PaymentForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\RestaurantManagement\\PaymentForm.cs",
+              "RelativeDocumentMoniker": "RestaurantManagement\\PaymentForm.cs",
+              "ToolTip": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\RestaurantManagement\\PaymentForm.cs [Design]",
+              "RelativeToolTip": "RestaurantManagement\\PaymentForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T20:43:27.754Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Dashboard.cs",
               "DocumentMoniker": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\RestaurantManagement\\Dashboard.cs",
               "RelativeDocumentMoniker": "RestaurantManagement\\Dashboard.cs",
               "ToolTip": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\RestaurantManagement\\Dashboard.cs",
               "RelativeToolTip": "RestaurantManagement\\Dashboard.cs",
-              "ViewState": "AgIAAFYAAAAAAAAAAAAUwD4AAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAI8AAAAAAAAAAAAAwKcAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-24T02:22:21.746Z",
+              "WhenOpened": "2026-03-24T20:42:08.868Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Dashboard.cs [Design]",
               "DocumentMoniker": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\RestaurantManagement\\Dashboard.cs",
               "RelativeDocumentMoniker": "RestaurantManagement\\Dashboard.cs",
