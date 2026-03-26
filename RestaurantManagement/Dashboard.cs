@@ -40,6 +40,7 @@ namespace RestaurantManagement
             products.Visible = false;   
             staff.Visible = false;
             payment.Visible = false;
+            history.Visible = false;    
         }
 
         private void btn_logout_Click_1(object sender, EventArgs e)
@@ -56,7 +57,7 @@ namespace RestaurantManagement
         {
             if (currentButton != null)
             {
-                currentButton.FillColor = Color.FromArgb(62, 39, 35); // Brown
+                currentButton.FillColor = Color.FromArgb(26, 43, 74); // Blue
             }
             currentButton = (Guna.UI2.WinForms.Guna2Button)sender;
             currentButton.FillColor = Color.FromArgb(199, 161, 122); // Gold
@@ -72,6 +73,7 @@ namespace RestaurantManagement
             products.Visible = false;
             staff.Visible = false;
             payment.Visible = false;
+            history.Visible = false;
         }
 
         private void btn_orders_Click(object sender, EventArgs e)
@@ -84,6 +86,7 @@ namespace RestaurantManagement
             products.Visible = false;
             staff.Visible = false;
             payment.Visible = false;
+            history.Visible = false;
         }
 
         private void btn_menu_Click(object sender, EventArgs e)
@@ -96,6 +99,7 @@ namespace RestaurantManagement
             orders.Visible = false;
             staff.Visible = false;
             payment.Visible = false;
+            history.Visible = false;
         }
 
         private void btn_staff_Click(object sender, EventArgs e)
@@ -108,6 +112,7 @@ namespace RestaurantManagement
             orders.Visible = false;
             dash.Visible = false;
             payment.Visible = false;
+            history.Visible = false;
         }
 
         private void btn_payment_Click(object sender, EventArgs e)
@@ -115,6 +120,20 @@ namespace RestaurantManagement
             ActivateButton(sender);
 
             payment.Visible = true;
+            staff.Visible = false;
+            menu.Visible = false;
+            products.Visible = false;
+            orders.Visible = false;
+            dash.Visible = false;
+            history.Visible = false;
+        }
+
+        private void btn_history_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender);
+
+            history.Visible = true;
+            payment.Visible = false;
             staff.Visible = false;
             menu.Visible = false;
             products.Visible = false;

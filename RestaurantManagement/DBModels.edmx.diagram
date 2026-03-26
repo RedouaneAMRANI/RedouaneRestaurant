@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="485c358a9d364b599dcf4ace4fd6eeef" Name="Diagram1">
+        <EntityTypeShape EntityType="RestaurantManagementDBModel.Category" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestaurantManagementDBModel.EmployeeActivity" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestaurantManagementDBModel.OrderItem" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestaurantManagementDBModel.Order" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestaurantManagementDBModel.Payment" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestaurantManagementDBModel.Product" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestaurantManagementDBModel.RestaurantTable" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestaurantManagementDBModel.User" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="RestaurantManagementDBModel.FK_Products_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="RestaurantManagementDBModel.FK_EmployeeActivities_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="RestaurantManagementDBModel.FK_OrderItems_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="RestaurantManagementDBModel.FK_OrderItems_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="RestaurantManagementDBModel.FK_Orders_Tables" ManuallyRouted="false" />
+        <AssociationConnector Association="RestaurantManagementDBModel.FK_Payments_Orders" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
