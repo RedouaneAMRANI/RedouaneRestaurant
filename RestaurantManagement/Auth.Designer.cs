@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Auth));
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.btn_exit_auth = new Guna.UI2.WinForms.Guna2CircleButton();
             this.remember_me = new Guna.UI2.WinForms.Guna2CheckBox();
             this.btnloginAuth = new Guna.UI2.WinForms.Guna2Button();
             this.password_auth = new Guna.UI2.WinForms.Guna2TextBox();
@@ -49,7 +49,7 @@
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.White;
-            this.guna2Panel1.Controls.Add(this.guna2CircleButton1);
+            this.guna2Panel1.Controls.Add(this.btn_exit_auth);
             this.guna2Panel1.Controls.Add(this.remember_me);
             this.guna2Panel1.Controls.Add(this.btnloginAuth);
             this.guna2Panel1.Controls.Add(this.password_auth);
@@ -66,24 +66,24 @@
             this.guna2Panel1.Size = new System.Drawing.Size(705, 1104);
             this.guna2Panel1.TabIndex = 0;
             // 
-            // guna2CircleButton1
+            // btn_exit_auth
             // 
-            this.guna2CircleButton1.CheckedState.Parent = this.guna2CircleButton1;
-            this.guna2CircleButton1.CustomImages.Parent = this.guna2CircleButton1;
-            this.guna2CircleButton1.FillColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2CircleButton1.ForeColor = System.Drawing.Color.White;
-            this.guna2CircleButton1.HoverState.Parent = this.guna2CircleButton1;
-            this.guna2CircleButton1.Image = ((System.Drawing.Image)(resources.GetObject("guna2CircleButton1.Image")));
-            this.guna2CircleButton1.ImageSize = new System.Drawing.Size(30, 30);
-            this.guna2CircleButton1.Location = new System.Drawing.Point(9, 10);
-            this.guna2CircleButton1.Margin = new System.Windows.Forms.Padding(2);
-            this.guna2CircleButton1.Name = "guna2CircleButton1";
-            this.guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CircleButton1.ShadowDecoration.Parent = this.guna2CircleButton1;
-            this.guna2CircleButton1.Size = new System.Drawing.Size(31, 28);
-            this.guna2CircleButton1.TabIndex = 5;
-            this.guna2CircleButton1.Click += new System.EventHandler(this.guna2CircleButton1_Click);
+            this.btn_exit_auth.CheckedState.Parent = this.btn_exit_auth;
+            this.btn_exit_auth.CustomImages.Parent = this.btn_exit_auth;
+            this.btn_exit_auth.FillColor = System.Drawing.Color.Transparent;
+            this.btn_exit_auth.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btn_exit_auth.ForeColor = System.Drawing.Color.White;
+            this.btn_exit_auth.HoverState.Parent = this.btn_exit_auth;
+            this.btn_exit_auth.Image = ((System.Drawing.Image)(resources.GetObject("btn_exit_auth.Image")));
+            this.btn_exit_auth.ImageSize = new System.Drawing.Size(30, 30);
+            this.btn_exit_auth.Location = new System.Drawing.Point(9, 10);
+            this.btn_exit_auth.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_exit_auth.Name = "btn_exit_auth";
+            this.btn_exit_auth.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.btn_exit_auth.ShadowDecoration.Parent = this.btn_exit_auth;
+            this.btn_exit_auth.Size = new System.Drawing.Size(31, 28);
+            this.btn_exit_auth.TabIndex = 5;
+            this.btn_exit_auth.Click += new System.EventHandler(this.btn_exit_auth_Click);
             // 
             // remember_me
             // 
@@ -279,7 +279,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox pictureBox2;
         private Guna.UI2.WinForms.Guna2CheckBox remember_me;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
+        private Guna.UI2.WinForms.Guna2CircleButton btn_exit_auth;
         private Guna.UI2.WinForms.Guna2Button btnloginAuth;
     }
 }

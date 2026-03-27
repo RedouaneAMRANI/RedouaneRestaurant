@@ -17,17 +17,17 @@ namespace RestaurantManagement
             InitializeComponent();
         }
 
-        private void guna2CircleButton1_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void btnloginAuth_Click(object sender, EventArgs e)
         {
             Dashboard Dashboard = new Dashboard();
             Dashboard.Show();
 
             this.Hide();
+        }
+
+        private void btn_exit_auth_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

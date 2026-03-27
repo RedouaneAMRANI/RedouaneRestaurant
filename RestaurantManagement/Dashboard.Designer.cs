@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.labelDate = new System.Windows.Forms.Label();
             this.btn_notifyon = new Guna.UI2.WinForms.Guna2CircleButton();
             this.btn_notifyoff = new Guna.UI2.WinForms.Guna2CircleButton();
@@ -72,11 +72,17 @@
             this.label27 = new System.Windows.Forms.Label();
             this.staff = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+            this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.guna2GroupBox4 = new Guna.UI2.WinForms.Guna2GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.guna2CirclePictureBox5 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.guna2GroupBox5 = new Guna.UI2.WinForms.Guna2GroupBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.guna2CirclePictureBox6 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2GroupBox2 = new Guna.UI2.WinForms.Guna2GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.guna2CirclePictureBox2 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
@@ -84,7 +90,32 @@
             this.label5 = new System.Windows.Forms.Label();
             this.guna2CirclePictureBox4 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.dash = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabControlPanel6 = new DevComponents.DotNetBar.TabControlPanel();
+            this.label45 = new System.Windows.Forms.Label();
+            this.btn_clear_history = new Guna.UI2.WinForms.Guna2Button();
+            this.btn_search_history = new Guna.UI2.WinForms.Guna2Button();
+            this.label43 = new System.Windows.Forms.Label();
+            this.guna2TextBox3 = new Guna.UI2.WinForms.Guna2TextBox();
+            this.guna2TextBox4 = new Guna.UI2.WinForms.Guna2TextBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.guna2ComboBox10 = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.dataGridView9 = new System.Windows.Forms.DataGridView();
+            this.dataGridView8 = new System.Windows.Forms.DataGridView();
+            this.history = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabControlPanel7 = new DevComponents.DotNetBar.TabControlPanel();
+            this.dataGridView6 = new System.Windows.Forms.DataGridView();
+            this.guna2DataGridView7 = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.ordersbysite = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabControlPanel5 = new DevComponents.DotNetBar.TabControlPanel();
+            this.dataGridView7 = new System.Windows.Forms.DataGridView();
+            this.payment = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel8 = new DevComponents.DotNetBar.TabControlPanel();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btn_clear_products = new Guna.UI2.WinForms.Guna2Button();
             this.guna2TextBox6 = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
@@ -105,6 +136,8 @@
             this.btn_categories_products = new Guna.UI2.WinForms.Guna2Button();
             this.products = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel3 = new DevComponents.DotNetBar.TabControlPanel();
+            this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.guna2TextBox5 = new Guna.UI2.WinForms.Guna2TextBox();
             this.btn_clear_categories = new Guna.UI2.WinForms.Guna2Button();
             this.btn_save_categories = new Guna.UI2.WinForms.Guna2Button();
@@ -115,10 +148,11 @@
             this.btn_products_menu = new Guna.UI2.WinForms.Guna2Button();
             this.btn_categories_menu = new Guna.UI2.WinForms.Guna2Button();
             this.menu = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabControlPanel7 = new DevComponents.DotNetBar.TabControlPanel();
-            this.guna2DataGridView7 = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.ordersbysite = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel2 = new DevComponents.DotNetBar.TabControlPanel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.guna2Button6 = new Guna.UI2.WinForms.Guna2Button();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
             this.label39 = new System.Windows.Forms.Label();
             this.btn_clear_order = new Guna.UI2.WinForms.Guna2Button();
             this.btn_add_order = new Guna.UI2.WinForms.Guna2Button();
@@ -135,8 +169,6 @@
             this.label36 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.orders = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabControlPanel5 = new DevComponents.DotNetBar.TabControlPanel();
-            this.payment = new DevComponents.DotNetBar.TabItem(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_history = new Guna.UI2.WinForms.Guna2Button();
             this.btn_payment = new Guna.UI2.WinForms.Guna2Button();
@@ -146,37 +178,7 @@
             this.btn_dashboard = new Guna.UI2.WinForms.Guna2Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.dataGridView5 = new System.Windows.Forms.DataGridView();
-            this.guna2GroupBox5 = new Guna.UI2.WinForms.Guna2GroupBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.guna2CirclePictureBox6 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.label41 = new System.Windows.Forms.Label();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.guna2Button6 = new Guna.UI2.WinForms.Guna2Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.dataGridView6 = new System.Windows.Forms.DataGridView();
-            this.history = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabControlPanel6 = new DevComponents.DotNetBar.TabControlPanel();
-            this.dataGridView7 = new System.Windows.Forms.DataGridView();
-            this.dataGridView8 = new System.Windows.Forms.DataGridView();
-            this.guna2TextBox3 = new Guna.UI2.WinForms.Guna2TextBox();
-            this.guna2TextBox4 = new Guna.UI2.WinForms.Guna2TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.guna2ComboBox10 = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.btn_clear_history = new Guna.UI2.WinForms.Guna2Button();
-            this.btn_search_history = new Guna.UI2.WinForms.Guna2Button();
-            this.label45 = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
@@ -185,33 +187,34 @@
             ((System.ComponentModel.ISupportInitialize)(this.grid_)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picture_user)).BeginInit();
             this.tabControlPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.guna2GroupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox5)).BeginInit();
+            this.guna2GroupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox6)).BeginInit();
             this.guna2GroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox2)).BeginInit();
             this.guna2GroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox4)).BeginInit();
+            this.tabControlPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).BeginInit();
+            this.tabControlPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView7)).BeginInit();
+            this.tabControlPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).BeginInit();
             this.tabControlPanel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControlPanel3.SuspendLayout();
-            this.tabControlPanel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabControlPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2NumericUpDown1)).BeginInit();
-            this.tabControlPanel5.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
-            this.guna2GroupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
-            this.tabControlPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -233,18 +236,6 @@
             this.panel2.Size = new System.Drawing.Size(1636, 90);
             this.panel2.TabIndex = 1;
             // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.Red;
-            this.label13.Location = new System.Drawing.Point(1369, 37);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(15, 16);
-            this.label13.TabIndex = 26;
-            this.label13.Text = "1";
-            this.label13.Click += new System.EventHandler(this.label13_Click);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -256,6 +247,18 @@
             this.label4.Size = new System.Drawing.Size(105, 24);
             this.label4.TabIndex = 7;
             this.label4.Text = "Welcome";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.Red;
+            this.label13.Location = new System.Drawing.Point(1369, 37);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(15, 16);
+            this.label13.TabIndex = 26;
+            this.label13.Text = "1";
+            this.label13.Click += new System.EventHandler(this.label13_Click);
             // 
             // labelDate
             // 
@@ -324,11 +327,12 @@
             this.btn_logout.ShadowDecoration.Parent = this.btn_logout;
             this.btn_logout.Size = new System.Drawing.Size(56, 45);
             this.btn_logout.TabIndex = 3;
-            this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click_1);
+            this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click);
             // 
             // guna2CirclePictureBox1
             // 
-            this.guna2CirclePictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2CirclePictureBox1.Image")));
+            this.guna2CirclePictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("guna2CirclePictureBox1.BackgroundImage")));
+            this.guna2CirclePictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.guna2CirclePictureBox1.Location = new System.Drawing.Point(897, 21);
             this.guna2CirclePictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
@@ -358,9 +362,9 @@
             this.label15.Location = new System.Drawing.Point(1012, 27);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(76, 21);
+            this.label15.Size = new System.Drawing.Size(53, 21);
             this.label15.TabIndex = 0;
-            this.label15.Text = "Admin";
+            this.label15.Text = "Role";
             // 
             // label1
             // 
@@ -370,9 +374,9 @@
             this.label1.Location = new System.Drawing.Point(1007, 65);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(166, 20);
+            this.label1.Size = new System.Drawing.Size(84, 20);
             this.label1.TabIndex = 0;
-            this.label1.Text = "AMRANI Redouane";
+            this.label1.Text = "FullName";
             // 
             // superTabItem1
             // 
@@ -427,14 +431,14 @@
             this.tabControl1.ColorScheme.TabPanelBackground = System.Drawing.Color.White;
             this.tabControl1.ColorScheme.TabPanelBackground2 = System.Drawing.Color.White;
             this.tabControl1.ColorScheme.TabPanelBorder = System.Drawing.Color.White;
-            this.tabControl1.Controls.Add(this.tabControlPanel6);
             this.tabControl1.Controls.Add(this.tabControlPanel4);
+            this.tabControl1.Controls.Add(this.tabControlPanel1);
+            this.tabControl1.Controls.Add(this.tabControlPanel6);
+            this.tabControl1.Controls.Add(this.tabControlPanel7);
+            this.tabControl1.Controls.Add(this.tabControlPanel5);
             this.tabControl1.Controls.Add(this.tabControlPanel8);
             this.tabControl1.Controls.Add(this.tabControlPanel3);
             this.tabControl1.Controls.Add(this.tabControlPanel2);
-            this.tabControl1.Controls.Add(this.tabControlPanel1);
-            this.tabControl1.Controls.Add(this.tabControlPanel7);
-            this.tabControl1.Controls.Add(this.tabControlPanel5);
             this.tabControl1.Location = new System.Drawing.Point(284, 91);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
@@ -704,6 +708,8 @@
             // 
             // picture_user
             // 
+            this.picture_user.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picture_user.BackgroundImage")));
+            this.picture_user.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picture_user.Location = new System.Drawing.Point(646, 210);
             this.picture_user.Name = "picture_user";
             this.picture_user.Size = new System.Drawing.Size(161, 150);
@@ -725,6 +731,7 @@
             this.browse_user.Size = new System.Drawing.Size(161, 43);
             this.browse_user.TabIndex = 30;
             this.browse_user.Text = "Browse";
+            this.browse_user.Click += new System.EventHandler(this.browse_user_Click);
             // 
             // label28
             // 
@@ -754,6 +761,7 @@
             this.clear_user.Size = new System.Drawing.Size(153, 49);
             this.clear_user.TabIndex = 28;
             this.clear_user.Text = "Clear";
+            this.clear_user.Click += new System.EventHandler(this.clear_user_Click);
             // 
             // search_user
             // 
@@ -770,6 +778,7 @@
             this.search_user.Size = new System.Drawing.Size(153, 49);
             this.search_user.TabIndex = 27;
             this.search_user.Text = "Search";
+            this.search_user.Click += new System.EventHandler(this.search_user_Click);
             // 
             // save_user
             // 
@@ -786,6 +795,7 @@
             this.save_user.Size = new System.Drawing.Size(153, 49);
             this.save_user.TabIndex = 27;
             this.save_user.Text = "Save";
+            this.save_user.Click += new System.EventHandler(this.save_user_Click);
             // 
             // label27
             // 
@@ -830,6 +840,22 @@
             this.tabControlPanel1.Style.GradientAngle = 90;
             this.tabControlPanel1.TabIndex = 1;
             this.tabControlPanel1.TabItem = this.dash;
+            // 
+            // dataGridView5
+            // 
+            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView5.Location = new System.Drawing.Point(859, 573);
+            this.dataGridView5.Name = "dataGridView5";
+            this.dataGridView5.Size = new System.Drawing.Size(673, 376);
+            this.dataGridView5.TabIndex = 41;
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Location = new System.Drawing.Point(97, 573);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.Size = new System.Drawing.Size(673, 376);
+            this.dataGridView4.TabIndex = 41;
             // 
             // guna2GroupBox4
             // 
@@ -900,6 +926,63 @@
             this.guna2CirclePictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.guna2CirclePictureBox5.TabIndex = 1;
             this.guna2CirclePictureBox5.TabStop = false;
+            // 
+            // guna2GroupBox5
+            // 
+            this.guna2GroupBox5.Controls.Add(this.label41);
+            this.guna2GroupBox5.Controls.Add(this.label16);
+            this.guna2GroupBox5.Controls.Add(this.guna2CirclePictureBox6);
+            this.guna2GroupBox5.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(74)))));
+            this.guna2GroupBox5.Font = new System.Drawing.Font("Cooper Black", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2GroupBox5.ForeColor = System.Drawing.Color.White;
+            this.guna2GroupBox5.Location = new System.Drawing.Point(614, 296);
+            this.guna2GroupBox5.Margin = new System.Windows.Forms.Padding(2);
+            this.guna2GroupBox5.Name = "guna2GroupBox5";
+            this.guna2GroupBox5.ShadowDecoration.Parent = this.guna2GroupBox5;
+            this.guna2GroupBox5.Size = new System.Drawing.Size(337, 198);
+            this.guna2GroupBox5.TabIndex = 0;
+            this.guna2GroupBox5.Text = "Tables Status";
+            this.guna2GroupBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.BackColor = System.Drawing.Color.Transparent;
+            this.label41.Font = new System.Drawing.Font("Cooper Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(160)))), ((int)(((byte)(23)))));
+            this.label41.Location = new System.Drawing.Point(180, 124);
+            this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(68, 21);
+            this.label41.TabIndex = 2;
+            this.label41.Text = "label5";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.Transparent;
+            this.label16.Font = new System.Drawing.Font("Cooper Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(160)))), ((int)(((byte)(23)))));
+            this.label16.Location = new System.Drawing.Point(179, 80);
+            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(68, 21);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "label5";
+            // 
+            // guna2CirclePictureBox6
+            // 
+            this.guna2CirclePictureBox6.BackColor = System.Drawing.Color.Transparent;
+            this.guna2CirclePictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("guna2CirclePictureBox6.Image")));
+            this.guna2CirclePictureBox6.Location = new System.Drawing.Point(32, 80);
+            this.guna2CirclePictureBox6.Margin = new System.Windows.Forms.Padding(2);
+            this.guna2CirclePictureBox6.Name = "guna2CirclePictureBox6";
+            this.guna2CirclePictureBox6.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2CirclePictureBox6.ShadowDecoration.Parent = this.guna2CirclePictureBox6;
+            this.guna2CirclePictureBox6.Size = new System.Drawing.Size(97, 75);
+            this.guna2CirclePictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.guna2CirclePictureBox6.TabIndex = 1;
+            this.guna2CirclePictureBox6.TabStop = false;
             // 
             // guna2GroupBox2
             // 
@@ -993,6 +1076,375 @@
             this.dash.Name = "dash";
             this.dash.Text = "dashboard";
             // 
+            // tabControlPanel6
+            // 
+            this.tabControlPanel6.Controls.Add(this.label45);
+            this.tabControlPanel6.Controls.Add(this.btn_clear_history);
+            this.tabControlPanel6.Controls.Add(this.btn_search_history);
+            this.tabControlPanel6.Controls.Add(this.label43);
+            this.tabControlPanel6.Controls.Add(this.guna2TextBox3);
+            this.tabControlPanel6.Controls.Add(this.guna2TextBox4);
+            this.tabControlPanel6.Controls.Add(this.label44);
+            this.tabControlPanel6.Controls.Add(this.label17);
+            this.tabControlPanel6.Controls.Add(this.guna2ComboBox10);
+            this.tabControlPanel6.Controls.Add(this.label35);
+            this.tabControlPanel6.Controls.Add(this.label40);
+            this.tabControlPanel6.Controls.Add(this.label42);
+            this.tabControlPanel6.Controls.Add(this.dataGridView9);
+            this.tabControlPanel6.Controls.Add(this.dataGridView8);
+            this.tabControlPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel6.Location = new System.Drawing.Point(0, 26);
+            this.tabControlPanel6.Name = "tabControlPanel6";
+            this.tabControlPanel6.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel6.Size = new System.Drawing.Size(1636, 983);
+            this.tabControlPanel6.Style.BackColor1.Color = System.Drawing.Color.White;
+            this.tabControlPanel6.Style.BackColor2.Color = System.Drawing.Color.White;
+            this.tabControlPanel6.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel6.Style.BorderColor.Color = System.Drawing.Color.White;
+            this.tabControlPanel6.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel6.Style.GradientAngle = 90;
+            this.tabControlPanel6.TabIndex = 11;
+            this.tabControlPanel6.TabItem = this.history;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.BackColor = System.Drawing.Color.Transparent;
+            this.label45.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label45.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
+            this.label45.Location = new System.Drawing.Point(1227, 207);
+            this.label45.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(92, 24);
+            this.label45.TabIndex = 71;
+            this.label45.Text = "Actions";
+            // 
+            // btn_clear_history
+            // 
+            this.btn_clear_history.CheckedState.Parent = this.btn_clear_history;
+            this.btn_clear_history.CustomImages.Parent = this.btn_clear_history;
+            this.btn_clear_history.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(204)))), ((int)(((byte)(200)))));
+            this.btn_clear_history.Font = new System.Drawing.Font("Cooper Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_clear_history.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(74)))));
+            this.btn_clear_history.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(170)))), ((int)(((byte)(160)))));
+            this.btn_clear_history.HoverState.Parent = this.btn_clear_history;
+            this.btn_clear_history.Location = new System.Drawing.Point(1304, 269);
+            this.btn_clear_history.Name = "btn_clear_history";
+            this.btn_clear_history.ShadowDecoration.Parent = this.btn_clear_history;
+            this.btn_clear_history.Size = new System.Drawing.Size(153, 49);
+            this.btn_clear_history.TabIndex = 70;
+            this.btn_clear_history.Text = "Clear";
+            // 
+            // btn_search_history
+            // 
+            this.btn_search_history.CheckedState.Parent = this.btn_search_history;
+            this.btn_search_history.CustomImages.Parent = this.btn_search_history;
+            this.btn_search_history.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(74)))));
+            this.btn_search_history.Font = new System.Drawing.Font("Cooper Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_search_history.ForeColor = System.Drawing.Color.White;
+            this.btn_search_history.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(74)))), ((int)(((byte)(122)))));
+            this.btn_search_history.HoverState.Parent = this.btn_search_history;
+            this.btn_search_history.Location = new System.Drawing.Point(1091, 269);
+            this.btn_search_history.Name = "btn_search_history";
+            this.btn_search_history.ShadowDecoration.Parent = this.btn_search_history;
+            this.btn_search_history.Size = new System.Drawing.Size(153, 49);
+            this.btn_search_history.TabIndex = 69;
+            this.btn_search_history.Text = "Search";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.BackColor = System.Drawing.Color.Transparent;
+            this.label43.Font = new System.Drawing.Font("Cooper Black", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label43.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(74)))));
+            this.label43.Location = new System.Drawing.Point(101, 33);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(186, 31);
+            this.label43.TabIndex = 68;
+            this.label43.Text = "Activity Log";
+            // 
+            // guna2TextBox3
+            // 
+            this.guna2TextBox3.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(64)))), ((int)(((byte)(55)))));
+            this.guna2TextBox3.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.guna2TextBox3.DefaultText = "";
+            this.guna2TextBox3.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.guna2TextBox3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.guna2TextBox3.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.guna2TextBox3.DisabledState.Parent = this.guna2TextBox3;
+            this.guna2TextBox3.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.guna2TextBox3.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
+            this.guna2TextBox3.FocusedState.Parent = this.guna2TextBox3;
+            this.guna2TextBox3.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2TextBox3.ForeColor = System.Drawing.Color.Black;
+            this.guna2TextBox3.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.guna2TextBox3.HoverState.Parent = this.guna2TextBox3;
+            this.guna2TextBox3.Location = new System.Drawing.Point(555, 192);
+            this.guna2TextBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.guna2TextBox3.Name = "guna2TextBox3";
+            this.guna2TextBox3.PasswordChar = '\0';
+            this.guna2TextBox3.PlaceholderText = "";
+            this.guna2TextBox3.SelectedText = "";
+            this.guna2TextBox3.ShadowDecoration.Parent = this.guna2TextBox3;
+            this.guna2TextBox3.Size = new System.Drawing.Size(254, 36);
+            this.guna2TextBox3.TabIndex = 66;
+            // 
+            // guna2TextBox4
+            // 
+            this.guna2TextBox4.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(64)))), ((int)(((byte)(55)))));
+            this.guna2TextBox4.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.guna2TextBox4.DefaultText = "";
+            this.guna2TextBox4.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.guna2TextBox4.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.guna2TextBox4.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.guna2TextBox4.DisabledState.Parent = this.guna2TextBox4;
+            this.guna2TextBox4.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.guna2TextBox4.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
+            this.guna2TextBox4.FocusedState.Parent = this.guna2TextBox4;
+            this.guna2TextBox4.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2TextBox4.ForeColor = System.Drawing.Color.Black;
+            this.guna2TextBox4.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.guna2TextBox4.HoverState.Parent = this.guna2TextBox4;
+            this.guna2TextBox4.Location = new System.Drawing.Point(165, 326);
+            this.guna2TextBox4.Margin = new System.Windows.Forms.Padding(4);
+            this.guna2TextBox4.Name = "guna2TextBox4";
+            this.guna2TextBox4.PasswordChar = '\0';
+            this.guna2TextBox4.PlaceholderText = "";
+            this.guna2TextBox4.SelectedText = "";
+            this.guna2TextBox4.ShadowDecoration.Parent = this.guna2TextBox4;
+            this.guna2TextBox4.Size = new System.Drawing.Size(254, 36);
+            this.guna2TextBox4.TabIndex = 67;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.BackColor = System.Drawing.Color.Transparent;
+            this.label44.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label44.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
+            this.label44.Location = new System.Drawing.Point(720, 338);
+            this.label44.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(60, 24);
+            this.label44.TabIndex = 60;
+            this.label44.Text = "Date";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.BackColor = System.Drawing.Color.Transparent;
+            this.label17.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
+            this.label17.Location = new System.Drawing.Point(574, 338);
+            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(60, 24);
+            this.label17.TabIndex = 60;
+            this.label17.Text = "Date";
+            // 
+            // guna2ComboBox10
+            // 
+            this.guna2ComboBox10.BackColor = System.Drawing.Color.Transparent;
+            this.guna2ComboBox10.BorderColor = System.Drawing.Color.Black;
+            this.guna2ComboBox10.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.guna2ComboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.guna2ComboBox10.FocusedColor = System.Drawing.Color.Empty;
+            this.guna2ComboBox10.FocusedState.Parent = this.guna2ComboBox10;
+            this.guna2ComboBox10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2ComboBox10.ForeColor = System.Drawing.Color.Black;
+            this.guna2ComboBox10.FormattingEnabled = true;
+            this.guna2ComboBox10.HoverState.Parent = this.guna2ComboBox10;
+            this.guna2ComboBox10.ItemHeight = 30;
+            this.guna2ComboBox10.ItemsAppearance.Parent = this.guna2ComboBox10;
+            this.guna2ComboBox10.Location = new System.Drawing.Point(165, 192);
+            this.guna2ComboBox10.Name = "guna2ComboBox10";
+            this.guna2ComboBox10.ShadowDecoration.Parent = this.guna2ComboBox10;
+            this.guna2ComboBox10.Size = new System.Drawing.Size(254, 36);
+            this.guna2ComboBox10.TabIndex = 64;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.BackColor = System.Drawing.Color.Transparent;
+            this.label35.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
+            this.label35.Location = new System.Drawing.Point(186, 285);
+            this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(82, 24);
+            this.label35.TabIndex = 61;
+            this.label35.Text = "Action";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.BackColor = System.Drawing.Color.Transparent;
+            this.label40.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
+            this.label40.Location = new System.Drawing.Point(572, 144);
+            this.label40.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(79, 24);
+            this.label40.TabIndex = 63;
+            this.label40.Text = "Entity";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.BackColor = System.Drawing.Color.Transparent;
+            this.label42.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
+            this.label42.Location = new System.Drawing.Point(186, 151);
+            this.label42.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(116, 24);
+            this.label42.TabIndex = 62;
+            this.label42.Text = "Username";
+            // 
+            // dataGridView9
+            // 
+            this.dataGridView9.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView9.Location = new System.Drawing.Point(131, 480);
+            this.dataGridView9.Name = "dataGridView9";
+            this.dataGridView9.Size = new System.Drawing.Size(602, 467);
+            this.dataGridView9.TabIndex = 59;
+            // 
+            // dataGridView8
+            // 
+            this.dataGridView8.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView8.Location = new System.Drawing.Point(897, 480);
+            this.dataGridView8.Name = "dataGridView8";
+            this.dataGridView8.Size = new System.Drawing.Size(602, 467);
+            this.dataGridView8.TabIndex = 59;
+            // 
+            // history
+            // 
+            this.history.AttachedControl = this.tabControlPanel6;
+            this.history.Name = "history";
+            this.history.Text = "history";
+            // 
+            // tabControlPanel7
+            // 
+            this.tabControlPanel7.Controls.Add(this.dataGridView6);
+            this.tabControlPanel7.Controls.Add(this.guna2DataGridView7);
+            this.tabControlPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel7.Location = new System.Drawing.Point(0, 26);
+            this.tabControlPanel7.Name = "tabControlPanel7";
+            this.tabControlPanel7.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel7.Size = new System.Drawing.Size(1636, 983);
+            this.tabControlPanel7.Style.BackColor1.Color = System.Drawing.Color.White;
+            this.tabControlPanel7.Style.BackColor2.Color = System.Drawing.Color.White;
+            this.tabControlPanel7.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel7.Style.BorderColor.Color = System.Drawing.Color.White;
+            this.tabControlPanel7.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel7.Style.GradientAngle = 90;
+            this.tabControlPanel7.TabIndex = 9;
+            this.tabControlPanel7.TabItem = this.ordersbysite;
+            // 
+            // dataGridView6
+            // 
+            this.dataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView6.Location = new System.Drawing.Point(79, 275);
+            this.dataGridView6.Name = "dataGridView6";
+            this.dataGridView6.Size = new System.Drawing.Size(1479, 433);
+            this.dataGridView6.TabIndex = 58;
+            // 
+            // guna2DataGridView7
+            // 
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            this.guna2DataGridView7.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            this.guna2DataGridView7.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.guna2DataGridView7.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(64)))), ((int)(((byte)(55)))));
+            this.guna2DataGridView7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.guna2DataGridView7.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.guna2DataGridView7.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.guna2DataGridView7.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            this.guna2DataGridView7.ColumnHeadersHeight = 4;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.guna2DataGridView7.DefaultCellStyle = dataGridViewCellStyle12;
+            this.guna2DataGridView7.EnableHeadersVisualStyles = false;
+            this.guna2DataGridView7.GridColor = System.Drawing.Color.White;
+            this.guna2DataGridView7.Location = new System.Drawing.Point(80, 777);
+            this.guna2DataGridView7.Name = "guna2DataGridView7";
+            this.guna2DataGridView7.RowHeadersVisible = false;
+            this.guna2DataGridView7.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.guna2DataGridView7.Size = new System.Drawing.Size(1489, 147);
+            this.guna2DataGridView7.TabIndex = 39;
+            this.guna2DataGridView7.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Default;
+            this.guna2DataGridView7.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
+            this.guna2DataGridView7.ThemeStyle.AlternatingRowsStyle.Font = null;
+            this.guna2DataGridView7.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
+            this.guna2DataGridView7.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
+            this.guna2DataGridView7.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
+            this.guna2DataGridView7.ThemeStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(64)))), ((int)(((byte)(55)))));
+            this.guna2DataGridView7.ThemeStyle.GridColor = System.Drawing.Color.White;
+            this.guna2DataGridView7.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.guna2DataGridView7.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.guna2DataGridView7.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.guna2DataGridView7.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
+            this.guna2DataGridView7.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            this.guna2DataGridView7.ThemeStyle.HeaderStyle.Height = 4;
+            this.guna2DataGridView7.ThemeStyle.ReadOnly = false;
+            this.guna2DataGridView7.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
+            this.guna2DataGridView7.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.guna2DataGridView7.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.guna2DataGridView7.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.guna2DataGridView7.ThemeStyle.RowsStyle.Height = 22;
+            this.guna2DataGridView7.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.guna2DataGridView7.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            // 
+            // ordersbysite
+            // 
+            this.ordersbysite.AttachedControl = this.tabControlPanel7;
+            this.ordersbysite.Name = "ordersbysite";
+            this.ordersbysite.Text = "orders by site";
+            // 
+            // tabControlPanel5
+            // 
+            this.tabControlPanel5.Controls.Add(this.dataGridView7);
+            this.tabControlPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel5.Location = new System.Drawing.Point(0, 26);
+            this.tabControlPanel5.Name = "tabControlPanel5";
+            this.tabControlPanel5.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel5.Size = new System.Drawing.Size(1636, 983);
+            this.tabControlPanel5.Style.BackColor1.Color = System.Drawing.Color.White;
+            this.tabControlPanel5.Style.BackColor2.Color = System.Drawing.Color.White;
+            this.tabControlPanel5.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel5.Style.BorderColor.Color = System.Drawing.Color.White;
+            this.tabControlPanel5.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel5.Style.GradientAngle = 90;
+            this.tabControlPanel5.TabIndex = 10;
+            this.tabControlPanel5.TabItem = this.payment;
+            // 
+            // dataGridView7
+            // 
+            this.dataGridView7.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView7.Location = new System.Drawing.Point(79, 275);
+            this.dataGridView7.Name = "dataGridView7";
+            this.dataGridView7.Size = new System.Drawing.Size(1479, 433);
+            this.dataGridView7.TabIndex = 59;
+            // 
+            // payment
+            // 
+            this.payment.AttachedControl = this.tabControlPanel5;
+            this.payment.Name = "payment";
+            this.payment.Text = "payment";
+            // 
             // tabControlPanel8
             // 
             this.tabControlPanel8.Controls.Add(this.guna2Button1);
@@ -1029,6 +1481,30 @@
             this.tabControlPanel8.Style.GradientAngle = 90;
             this.tabControlPanel8.TabIndex = 8;
             this.tabControlPanel8.TabItem = this.products;
+            // 
+            // guna2Button1
+            // 
+            this.guna2Button1.CheckedState.Parent = this.guna2Button1;
+            this.guna2Button1.CustomImages.Parent = this.guna2Button1;
+            this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(74)))));
+            this.guna2Button1.Font = new System.Drawing.Font("Cooper Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2Button1.ForeColor = System.Drawing.Color.White;
+            this.guna2Button1.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(74)))), ((int)(((byte)(122)))));
+            this.guna2Button1.HoverState.Parent = this.guna2Button1;
+            this.guna2Button1.Location = new System.Drawing.Point(1286, 382);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.ShadowDecoration.Parent = this.guna2Button1;
+            this.guna2Button1.Size = new System.Drawing.Size(153, 49);
+            this.guna2Button1.TabIndex = 41;
+            this.guna2Button1.Text = "Search";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(80, 497);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(1479, 452);
+            this.dataGridView1.TabIndex = 40;
             // 
             // btn_clear_products
             // 
@@ -1363,6 +1839,30 @@
             this.tabControlPanel3.TabIndex = 3;
             this.tabControlPanel3.TabItem = this.menu;
             // 
+            // guna2Button2
+            // 
+            this.guna2Button2.CheckedState.Parent = this.guna2Button2;
+            this.guna2Button2.CustomImages.Parent = this.guna2Button2;
+            this.guna2Button2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(74)))));
+            this.guna2Button2.Font = new System.Drawing.Font("Cooper Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2Button2.ForeColor = System.Drawing.Color.White;
+            this.guna2Button2.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(74)))), ((int)(((byte)(122)))));
+            this.guna2Button2.HoverState.Parent = this.guna2Button2;
+            this.guna2Button2.Location = new System.Drawing.Point(1218, 265);
+            this.guna2Button2.Name = "guna2Button2";
+            this.guna2Button2.ShadowDecoration.Parent = this.guna2Button2;
+            this.guna2Button2.Size = new System.Drawing.Size(153, 49);
+            this.guna2Button2.TabIndex = 42;
+            this.guna2Button2.Text = "Search";
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(80, 371);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(1479, 568);
+            this.dataGridView2.TabIndex = 41;
+            // 
             // guna2TextBox5
             // 
             this.guna2TextBox5.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(64)))), ((int)(((byte)(55)))));
@@ -1524,88 +2024,6 @@
             this.menu.Name = "menu";
             this.menu.Text = "menu";
             // 
-            // tabControlPanel7
-            // 
-            this.tabControlPanel7.Controls.Add(this.dataGridView6);
-            this.tabControlPanel7.Controls.Add(this.guna2DataGridView7);
-            this.tabControlPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel7.Location = new System.Drawing.Point(0, 26);
-            this.tabControlPanel7.Name = "tabControlPanel7";
-            this.tabControlPanel7.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel7.Size = new System.Drawing.Size(1636, 983);
-            this.tabControlPanel7.Style.BackColor1.Color = System.Drawing.Color.White;
-            this.tabControlPanel7.Style.BackColor2.Color = System.Drawing.Color.White;
-            this.tabControlPanel7.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel7.Style.BorderColor.Color = System.Drawing.Color.White;
-            this.tabControlPanel7.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
-            | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanel7.Style.GradientAngle = 90;
-            this.tabControlPanel7.TabIndex = 9;
-            this.tabControlPanel7.TabItem = this.ordersbysite;
-            // 
-            // guna2DataGridView7
-            // 
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.White;
-            this.guna2DataGridView7.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
-            this.guna2DataGridView7.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.guna2DataGridView7.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(64)))), ((int)(((byte)(55)))));
-            this.guna2DataGridView7.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.guna2DataGridView7.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.guna2DataGridView7.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.guna2DataGridView7.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
-            this.guna2DataGridView7.ColumnHeadersHeight = 4;
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.guna2DataGridView7.DefaultCellStyle = dataGridViewCellStyle21;
-            this.guna2DataGridView7.EnableHeadersVisualStyles = false;
-            this.guna2DataGridView7.GridColor = System.Drawing.Color.White;
-            this.guna2DataGridView7.Location = new System.Drawing.Point(80, 777);
-            this.guna2DataGridView7.Name = "guna2DataGridView7";
-            this.guna2DataGridView7.RowHeadersVisible = false;
-            this.guna2DataGridView7.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.guna2DataGridView7.Size = new System.Drawing.Size(1489, 147);
-            this.guna2DataGridView7.TabIndex = 39;
-            this.guna2DataGridView7.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Default;
-            this.guna2DataGridView7.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
-            this.guna2DataGridView7.ThemeStyle.AlternatingRowsStyle.Font = null;
-            this.guna2DataGridView7.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
-            this.guna2DataGridView7.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
-            this.guna2DataGridView7.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
-            this.guna2DataGridView7.ThemeStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(64)))), ((int)(((byte)(55)))));
-            this.guna2DataGridView7.ThemeStyle.GridColor = System.Drawing.Color.White;
-            this.guna2DataGridView7.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.guna2DataGridView7.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.guna2DataGridView7.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.guna2DataGridView7.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.guna2DataGridView7.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            this.guna2DataGridView7.ThemeStyle.HeaderStyle.Height = 4;
-            this.guna2DataGridView7.ThemeStyle.ReadOnly = false;
-            this.guna2DataGridView7.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
-            this.guna2DataGridView7.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.guna2DataGridView7.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.guna2DataGridView7.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.guna2DataGridView7.ThemeStyle.RowsStyle.Height = 22;
-            this.guna2DataGridView7.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.guna2DataGridView7.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            // 
-            // ordersbysite
-            // 
-            this.ordersbysite.AttachedControl = this.tabControlPanel7;
-            this.ordersbysite.Name = "ordersbysite";
-            this.ordersbysite.Text = "orders by site";
-            // 
             // tabControlPanel2
             // 
             this.tabControlPanel2.Controls.Add(this.label7);
@@ -1643,6 +2061,58 @@
             this.tabControlPanel2.Style.GradientAngle = 90;
             this.tabControlPanel2.TabIndex = 2;
             this.tabControlPanel2.TabItem = this.orders;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Blue;
+            this.label7.Location = new System.Drawing.Point(1281, 191);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(15, 16);
+            this.label7.TabIndex = 59;
+            this.label7.Text = "3";
+            // 
+            // guna2Button6
+            // 
+            this.guna2Button6.BackColor = System.Drawing.Color.White;
+            this.guna2Button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("guna2Button6.BackgroundImage")));
+            this.guna2Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.guna2Button6.CheckedState.Parent = this.guna2Button6;
+            this.guna2Button6.CustomImages.Parent = this.guna2Button6;
+            this.guna2Button6.FillColor = System.Drawing.Color.Transparent;
+            this.guna2Button6.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2Button6.ForeColor = System.Drawing.Color.White;
+            this.guna2Button6.HoverState.Parent = this.guna2Button6;
+            this.guna2Button6.Location = new System.Drawing.Point(1229, 191);
+            this.guna2Button6.Name = "guna2Button6";
+            this.guna2Button6.ShadowDecoration.Parent = this.guna2Button6;
+            this.guna2Button6.Size = new System.Drawing.Size(68, 50);
+            this.guna2Button6.TabIndex = 58;
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Location = new System.Drawing.Point(80, 522);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.Size = new System.Drawing.Size(1479, 433);
+            this.dataGridView3.TabIndex = 57;
+            // 
+            // guna2Button5
+            // 
+            this.guna2Button5.CheckedState.Parent = this.guna2Button5;
+            this.guna2Button5.CustomImages.Parent = this.guna2Button5;
+            this.guna2Button5.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(74)))));
+            this.guna2Button5.Font = new System.Drawing.Font("Cooper Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2Button5.ForeColor = System.Drawing.Color.White;
+            this.guna2Button5.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(74)))), ((int)(((byte)(122)))));
+            this.guna2Button5.HoverState.Parent = this.guna2Button5;
+            this.guna2Button5.Location = new System.Drawing.Point(1193, 417);
+            this.guna2Button5.Name = "guna2Button5";
+            this.guna2Button5.ShadowDecoration.Parent = this.guna2Button5;
+            this.guna2Button5.Size = new System.Drawing.Size(153, 49);
+            this.guna2Button5.TabIndex = 56;
+            this.guna2Button5.Text = "Search";
             // 
             // label39
             // 
@@ -1907,30 +2377,6 @@
             this.orders.Name = "orders";
             this.orders.Text = "orders";
             // 
-            // tabControlPanel5
-            // 
-            this.tabControlPanel5.Controls.Add(this.dataGridView7);
-            this.tabControlPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel5.Location = new System.Drawing.Point(0, 26);
-            this.tabControlPanel5.Name = "tabControlPanel5";
-            this.tabControlPanel5.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel5.Size = new System.Drawing.Size(1636, 983);
-            this.tabControlPanel5.Style.BackColor1.Color = System.Drawing.Color.White;
-            this.tabControlPanel5.Style.BackColor2.Color = System.Drawing.Color.White;
-            this.tabControlPanel5.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel5.Style.BorderColor.Color = System.Drawing.Color.White;
-            this.tabControlPanel5.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
-            | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanel5.Style.GradientAngle = 90;
-            this.tabControlPanel5.TabIndex = 10;
-            this.tabControlPanel5.TabItem = this.payment;
-            // 
-            // payment
-            // 
-            this.payment.AttachedControl = this.tabControlPanel5;
-            this.payment.Name = "payment";
-            this.payment.Text = "payment";
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
@@ -2099,432 +2545,9 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
             // 
-            // dataGridView1
+            // openFileDialog1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(80, 497);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1479, 452);
-            this.dataGridView1.TabIndex = 40;
-            // 
-            // guna2Button1
-            // 
-            this.guna2Button1.CheckedState.Parent = this.guna2Button1;
-            this.guna2Button1.CustomImages.Parent = this.guna2Button1;
-            this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(74)))));
-            this.guna2Button1.Font = new System.Drawing.Font("Cooper Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(74)))), ((int)(((byte)(122)))));
-            this.guna2Button1.HoverState.Parent = this.guna2Button1;
-            this.guna2Button1.Location = new System.Drawing.Point(1286, 382);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.ShadowDecoration.Parent = this.guna2Button1;
-            this.guna2Button1.Size = new System.Drawing.Size(153, 49);
-            this.guna2Button1.TabIndex = 41;
-            this.guna2Button1.Text = "Search";
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(80, 371);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(1479, 568);
-            this.dataGridView2.TabIndex = 41;
-            // 
-            // guna2Button2
-            // 
-            this.guna2Button2.CheckedState.Parent = this.guna2Button2;
-            this.guna2Button2.CustomImages.Parent = this.guna2Button2;
-            this.guna2Button2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(74)))));
-            this.guna2Button2.Font = new System.Drawing.Font("Cooper Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Button2.ForeColor = System.Drawing.Color.White;
-            this.guna2Button2.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(74)))), ((int)(((byte)(122)))));
-            this.guna2Button2.HoverState.Parent = this.guna2Button2;
-            this.guna2Button2.Location = new System.Drawing.Point(1218, 265);
-            this.guna2Button2.Name = "guna2Button2";
-            this.guna2Button2.ShadowDecoration.Parent = this.guna2Button2;
-            this.guna2Button2.Size = new System.Drawing.Size(153, 49);
-            this.guna2Button2.TabIndex = 42;
-            this.guna2Button2.Text = "Search";
-            // 
-            // guna2Button5
-            // 
-            this.guna2Button5.CheckedState.Parent = this.guna2Button5;
-            this.guna2Button5.CustomImages.Parent = this.guna2Button5;
-            this.guna2Button5.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(74)))));
-            this.guna2Button5.Font = new System.Drawing.Font("Cooper Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Button5.ForeColor = System.Drawing.Color.White;
-            this.guna2Button5.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(74)))), ((int)(((byte)(122)))));
-            this.guna2Button5.HoverState.Parent = this.guna2Button5;
-            this.guna2Button5.Location = new System.Drawing.Point(1193, 417);
-            this.guna2Button5.Name = "guna2Button5";
-            this.guna2Button5.ShadowDecoration.Parent = this.guna2Button5;
-            this.guna2Button5.Size = new System.Drawing.Size(153, 49);
-            this.guna2Button5.TabIndex = 56;
-            this.guna2Button5.Text = "Search";
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(80, 522);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(1479, 433);
-            this.dataGridView3.TabIndex = 57;
-            // 
-            // dataGridView5
-            // 
-            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView5.Location = new System.Drawing.Point(859, 573);
-            this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.Size = new System.Drawing.Size(673, 376);
-            this.dataGridView5.TabIndex = 41;
-            // 
-            // guna2GroupBox5
-            // 
-            this.guna2GroupBox5.Controls.Add(this.label41);
-            this.guna2GroupBox5.Controls.Add(this.label16);
-            this.guna2GroupBox5.Controls.Add(this.guna2CirclePictureBox6);
-            this.guna2GroupBox5.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(74)))));
-            this.guna2GroupBox5.Font = new System.Drawing.Font("Cooper Black", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2GroupBox5.ForeColor = System.Drawing.Color.White;
-            this.guna2GroupBox5.Location = new System.Drawing.Point(614, 296);
-            this.guna2GroupBox5.Margin = new System.Windows.Forms.Padding(2);
-            this.guna2GroupBox5.Name = "guna2GroupBox5";
-            this.guna2GroupBox5.ShadowDecoration.Parent = this.guna2GroupBox5;
-            this.guna2GroupBox5.Size = new System.Drawing.Size(337, 198);
-            this.guna2GroupBox5.TabIndex = 0;
-            this.guna2GroupBox5.Text = "Tables Status";
-            this.guna2GroupBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.BackColor = System.Drawing.Color.Transparent;
-            this.label16.Font = new System.Drawing.Font("Cooper Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(160)))), ((int)(((byte)(23)))));
-            this.label16.Location = new System.Drawing.Point(179, 80);
-            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(68, 21);
-            this.label16.TabIndex = 2;
-            this.label16.Text = "label5";
-            // 
-            // guna2CirclePictureBox6
-            // 
-            this.guna2CirclePictureBox6.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CirclePictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("guna2CirclePictureBox6.Image")));
-            this.guna2CirclePictureBox6.Location = new System.Drawing.Point(32, 80);
-            this.guna2CirclePictureBox6.Margin = new System.Windows.Forms.Padding(2);
-            this.guna2CirclePictureBox6.Name = "guna2CirclePictureBox6";
-            this.guna2CirclePictureBox6.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox6.ShadowDecoration.Parent = this.guna2CirclePictureBox6;
-            this.guna2CirclePictureBox6.Size = new System.Drawing.Size(97, 75);
-            this.guna2CirclePictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.guna2CirclePictureBox6.TabIndex = 1;
-            this.guna2CirclePictureBox6.TabStop = false;
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.BackColor = System.Drawing.Color.Transparent;
-            this.label41.Font = new System.Drawing.Font("Cooper Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(160)))), ((int)(((byte)(23)))));
-            this.label41.Location = new System.Drawing.Point(180, 124);
-            this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(68, 21);
-            this.label41.TabIndex = 2;
-            this.label41.Text = "label5";
-            // 
-            // dataGridView4
-            // 
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Location = new System.Drawing.Point(97, 573);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(673, 376);
-            this.dataGridView4.TabIndex = 41;
-            // 
-            // guna2Button6
-            // 
-            this.guna2Button6.BackColor = System.Drawing.Color.White;
-            this.guna2Button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("guna2Button6.BackgroundImage")));
-            this.guna2Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.guna2Button6.CheckedState.Parent = this.guna2Button6;
-            this.guna2Button6.CustomImages.Parent = this.guna2Button6;
-            this.guna2Button6.FillColor = System.Drawing.Color.Transparent;
-            this.guna2Button6.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button6.ForeColor = System.Drawing.Color.White;
-            this.guna2Button6.HoverState.Parent = this.guna2Button6;
-            this.guna2Button6.Location = new System.Drawing.Point(1229, 191);
-            this.guna2Button6.Name = "guna2Button6";
-            this.guna2Button6.ShadowDecoration.Parent = this.guna2Button6;
-            this.guna2Button6.Size = new System.Drawing.Size(68, 50);
-            this.guna2Button6.TabIndex = 58;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Blue;
-            this.label7.Location = new System.Drawing.Point(1281, 191);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(15, 16);
-            this.label7.TabIndex = 59;
-            this.label7.Text = "3";
-            // 
-            // dataGridView6
-            // 
-            this.dataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView6.Location = new System.Drawing.Point(79, 275);
-            this.dataGridView6.Name = "dataGridView6";
-            this.dataGridView6.Size = new System.Drawing.Size(1479, 433);
-            this.dataGridView6.TabIndex = 58;
-            // 
-            // history
-            // 
-            this.history.AttachedControl = this.tabControlPanel6;
-            this.history.Name = "history";
-            this.history.Text = "history";
-            // 
-            // tabControlPanel6
-            // 
-            this.tabControlPanel6.Controls.Add(this.label45);
-            this.tabControlPanel6.Controls.Add(this.btn_clear_history);
-            this.tabControlPanel6.Controls.Add(this.btn_search_history);
-            this.tabControlPanel6.Controls.Add(this.label43);
-            this.tabControlPanel6.Controls.Add(this.guna2TextBox3);
-            this.tabControlPanel6.Controls.Add(this.guna2TextBox4);
-            this.tabControlPanel6.Controls.Add(this.label44);
-            this.tabControlPanel6.Controls.Add(this.label17);
-            this.tabControlPanel6.Controls.Add(this.guna2ComboBox10);
-            this.tabControlPanel6.Controls.Add(this.label35);
-            this.tabControlPanel6.Controls.Add(this.label40);
-            this.tabControlPanel6.Controls.Add(this.label42);
-            this.tabControlPanel6.Controls.Add(this.dataGridView8);
-            this.tabControlPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel6.Location = new System.Drawing.Point(0, 26);
-            this.tabControlPanel6.Name = "tabControlPanel6";
-            this.tabControlPanel6.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel6.Size = new System.Drawing.Size(1636, 983);
-            this.tabControlPanel6.Style.BackColor1.Color = System.Drawing.Color.White;
-            this.tabControlPanel6.Style.BackColor2.Color = System.Drawing.Color.White;
-            this.tabControlPanel6.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel6.Style.BorderColor.Color = System.Drawing.Color.White;
-            this.tabControlPanel6.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
-            | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanel6.Style.GradientAngle = 90;
-            this.tabControlPanel6.TabIndex = 11;
-            this.tabControlPanel6.TabItem = this.history;
-            // 
-            // dataGridView7
-            // 
-            this.dataGridView7.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView7.Location = new System.Drawing.Point(79, 275);
-            this.dataGridView7.Name = "dataGridView7";
-            this.dataGridView7.Size = new System.Drawing.Size(1479, 433);
-            this.dataGridView7.TabIndex = 59;
-            // 
-            // dataGridView8
-            // 
-            this.dataGridView8.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView8.Location = new System.Drawing.Point(80, 491);
-            this.dataGridView8.Name = "dataGridView8";
-            this.dataGridView8.Size = new System.Drawing.Size(1471, 467);
-            this.dataGridView8.TabIndex = 59;
-            // 
-            // guna2TextBox3
-            // 
-            this.guna2TextBox3.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(64)))), ((int)(((byte)(55)))));
-            this.guna2TextBox3.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.guna2TextBox3.DefaultText = "";
-            this.guna2TextBox3.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.guna2TextBox3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.guna2TextBox3.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox3.DisabledState.Parent = this.guna2TextBox3;
-            this.guna2TextBox3.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox3.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
-            this.guna2TextBox3.FocusedState.Parent = this.guna2TextBox3;
-            this.guna2TextBox3.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2TextBox3.ForeColor = System.Drawing.Color.Black;
-            this.guna2TextBox3.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox3.HoverState.Parent = this.guna2TextBox3;
-            this.guna2TextBox3.Location = new System.Drawing.Point(555, 192);
-            this.guna2TextBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.guna2TextBox3.Name = "guna2TextBox3";
-            this.guna2TextBox3.PasswordChar = '\0';
-            this.guna2TextBox3.PlaceholderText = "";
-            this.guna2TextBox3.SelectedText = "";
-            this.guna2TextBox3.ShadowDecoration.Parent = this.guna2TextBox3;
-            this.guna2TextBox3.Size = new System.Drawing.Size(254, 36);
-            this.guna2TextBox3.TabIndex = 66;
-            // 
-            // guna2TextBox4
-            // 
-            this.guna2TextBox4.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(64)))), ((int)(((byte)(55)))));
-            this.guna2TextBox4.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.guna2TextBox4.DefaultText = "";
-            this.guna2TextBox4.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.guna2TextBox4.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.guna2TextBox4.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox4.DisabledState.Parent = this.guna2TextBox4;
-            this.guna2TextBox4.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox4.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
-            this.guna2TextBox4.FocusedState.Parent = this.guna2TextBox4;
-            this.guna2TextBox4.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2TextBox4.ForeColor = System.Drawing.Color.Black;
-            this.guna2TextBox4.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox4.HoverState.Parent = this.guna2TextBox4;
-            this.guna2TextBox4.Location = new System.Drawing.Point(165, 326);
-            this.guna2TextBox4.Margin = new System.Windows.Forms.Padding(4);
-            this.guna2TextBox4.Name = "guna2TextBox4";
-            this.guna2TextBox4.PasswordChar = '\0';
-            this.guna2TextBox4.PlaceholderText = "";
-            this.guna2TextBox4.SelectedText = "";
-            this.guna2TextBox4.ShadowDecoration.Parent = this.guna2TextBox4;
-            this.guna2TextBox4.Size = new System.Drawing.Size(254, 36);
-            this.guna2TextBox4.TabIndex = 67;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.BackColor = System.Drawing.Color.Transparent;
-            this.label17.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
-            this.label17.Location = new System.Drawing.Point(574, 338);
-            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(60, 24);
-            this.label17.TabIndex = 60;
-            this.label17.Text = "Date";
-            // 
-            // guna2ComboBox10
-            // 
-            this.guna2ComboBox10.BackColor = System.Drawing.Color.Transparent;
-            this.guna2ComboBox10.BorderColor = System.Drawing.Color.Black;
-            this.guna2ComboBox10.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.guna2ComboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.guna2ComboBox10.FocusedColor = System.Drawing.Color.Empty;
-            this.guna2ComboBox10.FocusedState.Parent = this.guna2ComboBox10;
-            this.guna2ComboBox10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2ComboBox10.ForeColor = System.Drawing.Color.Black;
-            this.guna2ComboBox10.FormattingEnabled = true;
-            this.guna2ComboBox10.HoverState.Parent = this.guna2ComboBox10;
-            this.guna2ComboBox10.ItemHeight = 30;
-            this.guna2ComboBox10.ItemsAppearance.Parent = this.guna2ComboBox10;
-            this.guna2ComboBox10.Location = new System.Drawing.Point(165, 192);
-            this.guna2ComboBox10.Name = "guna2ComboBox10";
-            this.guna2ComboBox10.ShadowDecoration.Parent = this.guna2ComboBox10;
-            this.guna2ComboBox10.Size = new System.Drawing.Size(254, 36);
-            this.guna2ComboBox10.TabIndex = 64;
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.BackColor = System.Drawing.Color.Transparent;
-            this.label35.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
-            this.label35.Location = new System.Drawing.Point(186, 285);
-            this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(82, 24);
-            this.label35.TabIndex = 61;
-            this.label35.Text = "Action";
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.BackColor = System.Drawing.Color.Transparent;
-            this.label40.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label40.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
-            this.label40.Location = new System.Drawing.Point(572, 144);
-            this.label40.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(79, 24);
-            this.label40.TabIndex = 63;
-            this.label40.Text = "Entity";
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.BackColor = System.Drawing.Color.Transparent;
-            this.label42.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
-            this.label42.Location = new System.Drawing.Point(186, 151);
-            this.label42.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(116, 24);
-            this.label42.TabIndex = 62;
-            this.label42.Text = "Username";
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.BackColor = System.Drawing.Color.Transparent;
-            this.label43.Font = new System.Drawing.Font("Cooper Black", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label43.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(74)))));
-            this.label43.Location = new System.Drawing.Point(101, 33);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(186, 31);
-            this.label43.TabIndex = 68;
-            this.label43.Text = "Activity Log";
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.BackColor = System.Drawing.Color.Transparent;
-            this.label44.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label44.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
-            this.label44.Location = new System.Drawing.Point(720, 338);
-            this.label44.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(60, 24);
-            this.label44.TabIndex = 60;
-            this.label44.Text = "Date";
-            // 
-            // btn_clear_history
-            // 
-            this.btn_clear_history.CheckedState.Parent = this.btn_clear_history;
-            this.btn_clear_history.CustomImages.Parent = this.btn_clear_history;
-            this.btn_clear_history.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(204)))), ((int)(((byte)(200)))));
-            this.btn_clear_history.Font = new System.Drawing.Font("Cooper Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_clear_history.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(74)))));
-            this.btn_clear_history.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(170)))), ((int)(((byte)(160)))));
-            this.btn_clear_history.HoverState.Parent = this.btn_clear_history;
-            this.btn_clear_history.Location = new System.Drawing.Point(1304, 269);
-            this.btn_clear_history.Name = "btn_clear_history";
-            this.btn_clear_history.ShadowDecoration.Parent = this.btn_clear_history;
-            this.btn_clear_history.Size = new System.Drawing.Size(153, 49);
-            this.btn_clear_history.TabIndex = 70;
-            this.btn_clear_history.Text = "Clear";
-            // 
-            // btn_search_history
-            // 
-            this.btn_search_history.CheckedState.Parent = this.btn_search_history;
-            this.btn_search_history.CustomImages.Parent = this.btn_search_history;
-            this.btn_search_history.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(74)))));
-            this.btn_search_history.Font = new System.Drawing.Font("Cooper Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_search_history.ForeColor = System.Drawing.Color.White;
-            this.btn_search_history.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(74)))), ((int)(((byte)(122)))));
-            this.btn_search_history.HoverState.Parent = this.btn_search_history;
-            this.btn_search_history.Location = new System.Drawing.Point(1091, 269);
-            this.btn_search_history.Name = "btn_search_history";
-            this.btn_search_history.ShadowDecoration.Parent = this.btn_search_history;
-            this.btn_search_history.Size = new System.Drawing.Size(153, 49);
-            this.btn_search_history.TabIndex = 69;
-            this.btn_search_history.Text = "Search";
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.BackColor = System.Drawing.Color.Transparent;
-            this.label45.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label45.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
-            this.label45.Location = new System.Drawing.Point(1227, 207);
-            this.label45.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(92, 24);
-            this.label45.TabIndex = 71;
-            this.label45.Text = "Actions";
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Dashboard
             // 
@@ -2551,41 +2574,42 @@
             ((System.ComponentModel.ISupportInitialize)(this.grid_)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picture_user)).EndInit();
             this.tabControlPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.guna2GroupBox4.ResumeLayout(false);
             this.guna2GroupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox5)).EndInit();
+            this.guna2GroupBox5.ResumeLayout(false);
+            this.guna2GroupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox6)).EndInit();
             this.guna2GroupBox2.ResumeLayout(false);
             this.guna2GroupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox2)).EndInit();
             this.guna2GroupBox1.ResumeLayout(false);
             this.guna2GroupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox4)).EndInit();
+            this.tabControlPanel6.ResumeLayout(false);
+            this.tabControlPanel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).EndInit();
+            this.tabControlPanel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView7)).EndInit();
+            this.tabControlPanel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).EndInit();
             this.tabControlPanel8.ResumeLayout(false);
             this.tabControlPanel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabControlPanel3.ResumeLayout(false);
             this.tabControlPanel3.PerformLayout();
-            this.tabControlPanel7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tabControlPanel2.ResumeLayout(false);
             this.tabControlPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2NumericUpDown1)).EndInit();
-            this.tabControlPanel5.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
-            this.guna2GroupBox5.ResumeLayout(false);
-            this.guna2GroupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).EndInit();
-            this.tabControlPanel6.ResumeLayout(false);
-            this.tabControlPanel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2629,7 +2653,6 @@
         private System.Windows.Forms.Label label8;
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox5;
         private System.Windows.Forms.Timer timer1;
-        protected Guna.UI2.WinForms.Guna2CircleButton btn_logout;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label3;
         private DevComponents.DotNetBar.TabControlPanel tabControlPanel8;
@@ -2735,5 +2758,8 @@
         private System.Windows.Forms.Label label45;
         private Guna.UI2.WinForms.Guna2Button btn_clear_history;
         private Guna.UI2.WinForms.Guna2Button btn_search_history;
+        private System.Windows.Forms.DataGridView dataGridView9;
+        public Guna.UI2.WinForms.Guna2CircleButton btn_logout;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
