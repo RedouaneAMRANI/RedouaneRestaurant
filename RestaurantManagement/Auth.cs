@@ -17,6 +17,11 @@ namespace RestaurantManagement
             InitializeComponent();
         }
 
+        private void Auth_Load(object sender, EventArgs e)
+        {
+            this.ActiveControl = cnie_auth;
+        }
+
         private void btnloginAuth_Click(object sender, EventArgs e)
         {
             Dashboard Dashboard = new Dashboard();

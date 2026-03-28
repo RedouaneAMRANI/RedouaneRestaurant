@@ -13,10 +13,10 @@ namespace RestaurantManagement
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class RestaurantManagementDBEntities : DbContext
+    public partial class EFDBEntities : DbContext
     {
-        public RestaurantManagementDBEntities()
-            : base("name=RestaurantManagementDBEntities")
+        public EFDBEntities()
+            : base("name=EFDBEntities")
         {
         }
     
@@ -25,13 +25,6 @@ namespace RestaurantManagement
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<EmployeeActivity> EmployeeActivities { get; set; }
-        public DbSet<OrderItem> OrderItems { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<Payment> Payments { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<RestaurantTable> RestaurantTables { get; set; }
         public DbSet<User> Users { get; set; }
     }
 }

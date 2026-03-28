@@ -14,19 +14,13 @@ namespace RestaurantManagement
     
     public partial class User
     {
-        public User()
-        {
-            this.EmployeeActivities = new HashSet<EmployeeActivity>();
-        }
-    
-        public int UserId { get; set; }
-        public string FullName { get; set; }
-        public string Username { get; set; }
+        public string CNIE { get; set; }
+        public string LastName { get; set; }
+        public string FIrstName { get; set; }
         public string PasswordHash { get; set; }
         public string Role { get; set; }
-        public Nullable<bool> IsActive { get; set; }
+        public string IsActive { get; set; }
+        public byte[] Image { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
-    
-        public virtual ICollection<EmployeeActivity> EmployeeActivities { get; set; }
     }
 }

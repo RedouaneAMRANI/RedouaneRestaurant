@@ -23,3 +23,13 @@ C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\De
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\DevComponents.Instrumentation.dll
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\DevComponents.DotNetBar.SuperGrid.xml
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\DevComponents.Instrumentation.xml
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\BCrypt.Net-Next.dll
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\System.Buffers.dll
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\System.Memory.dll
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\BCrypt.Net-Next.xml
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\System.Buffers.xml
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\System.Memory.xml
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml

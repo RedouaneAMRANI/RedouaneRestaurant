@@ -8,9 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using System.IO;
-using System.Drawing;
 using System.Drawing.Imaging;
 
 namespace RestaurantManagement
@@ -29,6 +27,8 @@ namespace RestaurantManagement
             picture_user.Image = picture_user.BackgroundImage;
             picture_user.BackgroundImageLayout = ImageLayout.Stretch;
 
+            LoadData();
+
             //Timer date and time
             timer1.Interval = 1000;
             timer1.Tick += Timer1_Tick;
@@ -36,7 +36,6 @@ namespace RestaurantManagement
 
             //Tabcontrol
             ActivateButton(btn_dashboard);
-
             dash.Visible = true;
             orders.Visible = false;
             ordersbysite.Visible = false;
@@ -44,8 +43,9 @@ namespace RestaurantManagement
             products.Visible = false;   
             staff.Visible = false;
             payment.Visible = false;
-            history.Visible = false;    
+            history.Visible = false;   
         }
+
         //////////////////// Timer date and time
         private void Timer1_Tick(object sender, EventArgs e)
         {
@@ -57,7 +57,6 @@ namespace RestaurantManagement
         {
             Auth auth = new Auth();
             auth.Show();
-
             this.Close();
         }
 
@@ -178,31 +177,120 @@ namespace RestaurantManagement
             return ms.ToArray();
         }
 
+        //////////////////// USER FORM
         void Clear()
-         {
-            fullname.Text = username.Text = password.Text = "";
+        {
+            cnie.Text = lastname.Text = firstname.Text = password.Text = "";
             role.SelectedIndex = -1;
             status_user.SelectedIndex = -1;
             picture_user.Image = picture_user.BackgroundImage;
             picture_user.BackgroundImageLayout = ImageLayout.Stretch;
-
             save_user.Text = "Save";
-            model.UserId = 0;
-         }
-
-        private void save_user_Click(object sender, EventArgs e)
-        {
-            Clear();
         }
-
         private void clear_user_Click(object sender, EventArgs e)
         {
             Clear();
         }
 
+        //////////////////// Load data to datagridview
+        void LoadData()
+        {
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                dgvUser.DataSource = db.Users.ToList<User>();
+            }
+        }
+
+        private void save_user_Click(object sender, EventArgs e)
+        {
+            if (cnie.Text != "" && lastname.Text != "" && firstname.Text != "" && password.Text != "" && role.Text != "" && status_user.Text != "")
+            {
+                model.CNIE = cnie.Text;
+                model.LastName = lastname.Text;
+                model.FIrstName = firstname.Text.Trim();
+                model.PasswordHash = password.Text.Trim();
+                model.Role = role.Text;
+                model.IsActive = status_user.Text;
+                model.CreatedAt = DateTime.Now;
+                if (!string.IsNullOrEmpty(picture_user.ImageLocation))
+                {
+                    model.Image = File.ReadAllBytes(picture_user.ImageLocation);
+                }
+                else
+                {
+                    MessageBox.Show("Please fill in all fields");
+                }
+
+                using (EFDBEntities db = new EFDBEntities())
+                {
+                    var existingUser = db.Users.Find(model.CNIE);
+                    if (existingUser == null)
+                    {
+                        db.Users.Add(model);
+                    }
+                    else
+                    {
+                        if (existingUser != null)
+                        {
+                            existingUser.LastName = model.LastName;
+                            existingUser.FIrstName = model.FIrstName;
+                            existingUser.PasswordHash = model.PasswordHash;
+                            existingUser.Role = model.Role;
+                            existingUser.IsActive = model.IsActive;
+                            if (!string.IsNullOrEmpty(picture_user.ImageLocation))
+                            {
+                                existingUser.Image = File.ReadAllBytes(picture_user.ImageLocation);
+                            }
+                        }
+                    }
+                    db.SaveChanges();
+                }
+                Clear();
+                LoadData();
+                MessageBox.Show("Submitted successfully!");
+            }
+            else
+            {
+                MessageBox.Show("Please fill in all fields");
+            }
+        }
+
         private void search_user_Click(object sender, EventArgs e)
         {
+            if (cnie.Text.Trim() != "")
+            {
+                using (var db = new EFDBEntities())
+                {
+                    model.CNIE = cnie.Text;
+                    var user = db.Users.Find(model.CNIE);
+                    if (user != null)
+                    {
+                        cnie.Text = user.CNIE;
+                        lastname.Text = user.LastName;
+                        firstname.Text = user.FIrstName;
+                        password.Text = user.PasswordHash;
+                        role.Text = user.Role;
+                        status_user.Text = user.IsActive;
 
+                        if (user.Image != null)
+                        {
+                            using (MemoryStream ms = new MemoryStream(user.Image))
+                            {
+                                picture_user.Image = Image.FromStream(ms);
+                            }
+                        }
+                        save_user.Text = "Update";
+                    }
+                    else
+                    {
+                        MessageBox.Show("No user found");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please enter a CNIE to search");
+            }
         }
 
         private void btn_add_order_Click(object sender, EventArgs e)

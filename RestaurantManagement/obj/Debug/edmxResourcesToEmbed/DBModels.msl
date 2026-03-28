@@ -1,92 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="RestaurantManagementDBModelStoreContainer" CdmEntityContainer="RestaurantManagementDBEntities">
-    <EntitySetMapping Name="Categories">
-      <EntityTypeMapping TypeName="RestaurantManagementDBModel.Category">
-        <MappingFragment StoreEntitySet="Categories">
-          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="EmployeeActivities">
-      <EntityTypeMapping TypeName="RestaurantManagementDBModel.EmployeeActivity">
-        <MappingFragment StoreEntitySet="EmployeeActivities">
-          <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="Action" ColumnName="Action" />
-          <ScalarProperty Name="Entity" ColumnName="Entity" />
-          <ScalarProperty Name="EntityId" ColumnName="EntityId" />
-          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="OrderItems">
-      <EntityTypeMapping TypeName="RestaurantManagementDBModel.OrderItem">
-        <MappingFragment StoreEntitySet="OrderItems">
-          <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
-          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Orders">
-      <EntityTypeMapping TypeName="RestaurantManagementDBModel.Order">
-        <MappingFragment StoreEntitySet="Orders">
-          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-          <ScalarProperty Name="TableId" ColumnName="TableId" />
-          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Payments">
-      <EntityTypeMapping TypeName="RestaurantManagementDBModel.Payment">
-        <MappingFragment StoreEntitySet="Payments">
-          <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
-          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-          <ScalarProperty Name="Method" ColumnName="Method" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="PaidAt" ColumnName="PaidAt" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Products">
-      <EntityTypeMapping TypeName="RestaurantManagementDBModel.Product">
-        <MappingFragment StoreEntitySet="Products">
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Image" ColumnName="Image" />
-          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-          <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="RestaurantTables">
-      <EntityTypeMapping TypeName="RestaurantManagementDBModel.RestaurantTable">
-        <MappingFragment StoreEntitySet="RestaurantTables">
-          <ScalarProperty Name="TableId" ColumnName="TableId" />
-          <ScalarProperty Name="TableNumber" ColumnName="TableNumber" />
-          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+  <EntityContainerMapping StorageEntityContainer="RestaurantManagementModelStoreContainer" CdmEntityContainer="EFDBEntities">
     <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="RestaurantManagementDBModel.User">
+      <EntityTypeMapping TypeName="RestaurantManagementModel.User">
         <MappingFragment StoreEntitySet="Users">
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="FullName" ColumnName="FullName" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="CNIE" ColumnName="CNIE" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FIrstName" ColumnName="FIrstName" />
           <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
           <ScalarProperty Name="Role" ColumnName="Role" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
         </MappingFragment>
       </EntityTypeMapping>

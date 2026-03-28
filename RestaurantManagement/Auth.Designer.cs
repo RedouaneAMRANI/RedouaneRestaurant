@@ -34,7 +34,7 @@
             this.remember_me = new Guna.UI2.WinForms.Guna2CheckBox();
             this.btnloginAuth = new Guna.UI2.WinForms.Guna2Button();
             this.password_auth = new Guna.UI2.WinForms.Guna2TextBox();
-            this.username_auth = new Guna.UI2.WinForms.Guna2TextBox();
+            this.cnie_auth = new Guna.UI2.WinForms.Guna2TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -53,7 +53,7 @@
             this.guna2Panel1.Controls.Add(this.remember_me);
             this.guna2Panel1.Controls.Add(this.btnloginAuth);
             this.guna2Panel1.Controls.Add(this.password_auth);
-            this.guna2Panel1.Controls.Add(this.username_auth);
+            this.guna2Panel1.Controls.Add(this.cnie_auth);
             this.guna2Panel1.Controls.Add(this.label4);
             this.guna2Panel1.Controls.Add(this.label3);
             this.guna2Panel1.Controls.Add(this.label5);
@@ -150,31 +150,31 @@
             this.password_auth.Size = new System.Drawing.Size(415, 56);
             this.password_auth.TabIndex = 2;
             // 
-            // username_auth
+            // cnie_auth
             // 
-            this.username_auth.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(74)))));
-            this.username_auth.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.username_auth.DefaultText = "";
-            this.username_auth.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.username_auth.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.username_auth.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.username_auth.DisabledState.Parent = this.username_auth;
-            this.username_auth.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.username_auth.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
-            this.username_auth.FocusedState.Parent = this.username_auth;
-            this.username_auth.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.username_auth.ForeColor = System.Drawing.Color.Black;
-            this.username_auth.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(160)))), ((int)(((byte)(23)))));
-            this.username_auth.HoverState.Parent = this.username_auth;
-            this.username_auth.Location = new System.Drawing.Point(149, 563);
-            this.username_auth.Margin = new System.Windows.Forms.Padding(4);
-            this.username_auth.Name = "username_auth";
-            this.username_auth.PasswordChar = '\0';
-            this.username_auth.PlaceholderText = "";
-            this.username_auth.SelectedText = "";
-            this.username_auth.ShadowDecoration.Parent = this.username_auth;
-            this.username_auth.Size = new System.Drawing.Size(415, 52);
-            this.username_auth.TabIndex = 2;
+            this.cnie_auth.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(74)))));
+            this.cnie_auth.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.cnie_auth.DefaultText = "";
+            this.cnie_auth.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.cnie_auth.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.cnie_auth.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.cnie_auth.DisabledState.Parent = this.cnie_auth;
+            this.cnie_auth.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.cnie_auth.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(161)))), ((int)(((byte)(122)))));
+            this.cnie_auth.FocusedState.Parent = this.cnie_auth;
+            this.cnie_auth.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cnie_auth.ForeColor = System.Drawing.Color.Black;
+            this.cnie_auth.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(160)))), ((int)(((byte)(23)))));
+            this.cnie_auth.HoverState.Parent = this.cnie_auth;
+            this.cnie_auth.Location = new System.Drawing.Point(149, 563);
+            this.cnie_auth.Margin = new System.Windows.Forms.Padding(4);
+            this.cnie_auth.Name = "cnie_auth";
+            this.cnie_auth.PasswordChar = '\0';
+            this.cnie_auth.PlaceholderText = "";
+            this.cnie_auth.SelectedText = "";
+            this.cnie_auth.ShadowDecoration.Parent = this.cnie_auth;
+            this.cnie_auth.Size = new System.Drawing.Size(415, 52);
+            this.cnie_auth.TabIndex = 2;
             // 
             // label4
             // 
@@ -196,9 +196,9 @@
             this.label3.Location = new System.Drawing.Point(145, 504);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(116, 24);
+            this.label3.Size = new System.Drawing.Size(66, 24);
             this.label3.TabIndex = 1;
-            this.label3.Text = "Username";
+            this.label3.Text = "CNIE";
             // 
             // label5
             // 
@@ -259,6 +259,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Auth_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -273,7 +274,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label2;
         private Guna.UI2.WinForms.Guna2TextBox password_auth;
-        private Guna.UI2.WinForms.Guna2TextBox username_auth;
+        private Guna.UI2.WinForms.Guna2TextBox cnie_auth;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
