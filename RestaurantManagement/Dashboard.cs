@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Drawing.Imaging;
 
 namespace RestaurantManagement
 {
@@ -181,11 +182,13 @@ namespace RestaurantManagement
         void Clear()
         {
             cnie.Text = lastname.Text = firstname.Text = password.Text = "";
+            password.Enabled = true;
             role.SelectedIndex = -1;
             status_user.SelectedIndex = -1;
             picture_user.Image = picture_user.BackgroundImage;
             picture_user.BackgroundImageLayout = ImageLayout.Stretch;
             save_user.Text = "Save";
+            LoadData();
         }
         private void clear_user_Click(object sender, EventArgs e)
         {
@@ -197,18 +200,46 @@ namespace RestaurantManagement
         {
             using (EFDBEntities db = new EFDBEntities())
             {
-                dgvUser.DataSource = db.Users.ToList<User>();
+                dgvUser.DataSource = db.Users
+                    .Select(u => new
+                    {
+                        u.CNIE,
+                        u.LastName,
+                        u.FIrstName,
+                        u.Role,
+                        u.Image,
+                        u.IsActive,
+                        u.CreatedAt
+                    })
+                    .ToList();
+            }
+        }
+
+        //////////////////// Hash password using SHA256
+        public static string ComputeHash(string input)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] hashbyte = sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
+                return BitConverter.ToString(hashbyte).Replace("-", "").ToLower();
             }
         }
 
         private void save_user_Click(object sender, EventArgs e)
         {
-            if (cnie.Text != "" && lastname.Text != "" && firstname.Text != "" && password.Text != "" && role.Text != "" && status_user.Text != "")
+            if (cnie.Text != "" && lastname.Text != "" && firstname.Text != "" && role.Text != "" && status_user.Text != "")
             {
-                model.CNIE = cnie.Text;
-                model.LastName = lastname.Text;
+                if (cnie.Text.Length == 8)
+                {
+                    model.CNIE = cnie.Text.Trim();
+                }
+                else
+                {
+                    MessageBox.Show("CNIE must be 8 characters long");
+                    return;
+                }
+                model.LastName = lastname.Text.Trim();
                 model.FIrstName = firstname.Text.Trim();
-                model.PasswordHash = password.Text.Trim();
                 model.Role = role.Text;
                 model.IsActive = status_user.Text;
                 model.CreatedAt = DateTime.Now;
@@ -219,30 +250,47 @@ namespace RestaurantManagement
                 else
                 {
                     MessageBox.Show("Please fill in all fields");
+                    return;
                 }
-
                 using (EFDBEntities db = new EFDBEntities())
                 {
                     var existingUser = db.Users.Find(model.CNIE);
                     if (existingUser == null)
                     {
-                        db.Users.Add(model);
+                        if (!password.Text.All(char.IsDigit))
+                        {
+                            MessageBox.Show("Password must contain only numbers");
+                            return;
+                        }
+                        if (password.Text.Length == 4)
+                        {
+                            model.PasswordHash = ComputeHash(password.Text.Trim());
+                            db.Users.Add(model);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Password must be 4 characters long");
+                            return;
+                        }
                     }
                     else
                     {
-                        if (existingUser != null)
+                        existingUser.LastName = model.LastName;
+                        existingUser.FIrstName = model.FIrstName;
+                        existingUser.Role = model.Role;
+                        existingUser.IsActive = model.IsActive;
+
+                        if (!string.IsNullOrEmpty(password.Text))
                         {
-                            existingUser.LastName = model.LastName;
-                            existingUser.FIrstName = model.FIrstName;
-                            existingUser.PasswordHash = model.PasswordHash;
-                            existingUser.Role = model.Role;
-                            existingUser.IsActive = model.IsActive;
-                            if (!string.IsNullOrEmpty(picture_user.ImageLocation))
-                            {
-                                existingUser.Image = File.ReadAllBytes(picture_user.ImageLocation);
-                            }
+                            existingUser.PasswordHash = ComputeHash(password.Text.Trim());
+                        }
+
+                        if (!string.IsNullOrEmpty(picture_user.ImageLocation))
+                        {
+                            existingUser.Image = File.ReadAllBytes(picture_user.ImageLocation);
                         }
                     }
+
                     db.SaveChanges();
                 }
                 Clear();
@@ -257,18 +305,21 @@ namespace RestaurantManagement
 
         private void search_user_Click(object sender, EventArgs e)
         {
-            if (cnie.Text.Trim() != "")
+            string cnieText = cnie.Text.Trim();
+            string firstNameText = firstname.Text.Trim();
+
+            using (var db = new EFDBEntities())
             {
-                using (var db = new EFDBEntities())
+                if (!string.IsNullOrEmpty(cnieText))
                 {
-                    model.CNIE = cnie.Text;
-                    var user = db.Users.Find(model.CNIE);
+                    var user = db.Users.Find(cnieText);
+
                     if (user != null)
                     {
                         cnie.Text = user.CNIE;
                         lastname.Text = user.LastName;
                         firstname.Text = user.FIrstName;
-                        password.Text = user.PasswordHash;
+                        password.Enabled = false;
                         role.Text = user.Role;
                         status_user.Text = user.IsActive;
 
@@ -279,17 +330,46 @@ namespace RestaurantManagement
                                 picture_user.Image = Image.FromStream(ms);
                             }
                         }
+
                         save_user.Text = "Update";
                     }
                     else
                     {
                         MessageBox.Show("No user found");
                     }
+
+                    return;
                 }
-            }
-            else
-            {
-                MessageBox.Show("Please enter a CNIE to search");
+
+                if (!string.IsNullOrEmpty(firstNameText))
+                {
+                    var filteredUsers = db.Users
+                        .Where(u => u.FIrstName.Contains(firstNameText))
+                        .Select(u => new
+                        {
+                            u.CNIE,
+                            u.LastName,
+                            u.FIrstName,
+                            u.Role,
+                            u.IsActive,
+                            u.CreatedAt
+                        })
+                        .ToList();
+
+                    if (filteredUsers.Count > 0)
+                    {
+                        dgvUser.DataSource = null;
+                        dgvUser.DataSource = filteredUsers;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No user found");
+                        dgvUser.DataSource = null;
+                    }
+
+                    return;
+                }
+                MessageBox.Show("Enter CNIE or First Name to search");
             }
         }
 
