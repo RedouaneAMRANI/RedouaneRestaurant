@@ -7,7 +7,7 @@
     <Property Name="CNIE" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="FIrstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="PasswordHash" Type="String" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
     <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="IsActive" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
@@ -15,5 +15,58 @@
   </EntityType>
   <EntityContainer Name="EFDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Products" EntityType="RestaurantManagementModel.Product" />
+    <EntitySet Name="RestaurantTables" EntityType="RestaurantManagementModel.RestaurantTable" />
+    <EntitySet Name="Reservations" EntityType="RestaurantManagementModel.Reservation" />
+    <AssociationSet Name="FK__Reservati__Table__236943A5" Association="RestaurantManagementModel.FK__Reservati__Table__236943A5">
+      <End Role="RestaurantTable" EntitySet="RestaurantTables" />
+      <End Role="Reservation" EntitySet="Reservations" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Category" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IsAvailable" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="RestaurantTable">
+    <Key>
+      <PropertyRef Name="TableId" />
+    </Key>
+    <Property Name="TableId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TableNumber" Type="Int32" Nullable="false" />
+    <Property Name="Capacity" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Reservations" Relationship="RestaurantManagementModel.FK__Reservati__Table__236943A5" FromRole="RestaurantTable" ToRole="Reservation" />
+  </EntityType>
+  <EntityType Name="Reservation">
+    <Key>
+      <PropertyRef Name="ReservationId" />
+    </Key>
+    <Property Name="ReservationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TableId" Type="Int32" Nullable="false" />
+    <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ReservationTime" Type="DateTime" Precision="3" />
+    <Property Name="Reserveat" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="RestaurantTable" Relationship="RestaurantManagementModel.FK__Reservati__Table__236943A5" FromRole="Reservation" ToRole="RestaurantTable" />
+  </EntityType>
+  <Association Name="FK__Reservati__Table__236943A5">
+    <End Type="RestaurantManagementModel.RestaurantTable" Role="RestaurantTable" Multiplicity="1" />
+    <End Type="RestaurantManagementModel.Reservation" Role="Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RestaurantTable">
+        <PropertyRef Name="TableId" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="TableId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

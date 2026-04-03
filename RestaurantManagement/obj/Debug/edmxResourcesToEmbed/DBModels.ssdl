@@ -1,5 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="RestaurantManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="Category" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsAvailable" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reservations">
+    <Key>
+      <PropertyRef Name="ReservationId" />
+    </Key>
+    <Property Name="ReservationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TableId" Type="int" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CustomerPhone" Type="nvarchar" MaxLength="20" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ReservationTime" Type="datetime" />
+    <Property Name="Reserveat" Type="datetime" />
+  </EntityType>
+  <EntityType Name="RestaurantTables">
+    <Key>
+      <PropertyRef Name="TableId" />
+    </Key>
+    <Property Name="TableId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TableNumber" Type="int" Nullable="false" />
+    <Property Name="Capacity" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="CNIE" />
@@ -7,13 +39,32 @@
     <Property Name="CNIE" Type="nvarchar" MaxLength="8" Nullable="false" />
     <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="FIrstName" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="PasswordHash" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="Role" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="IsActive" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Image" Type="varbinary(max)" />
     <Property Name="CreatedAt" Type="datetime" />
   </EntityType>
+  <Association Name="FK__Reservati__Table__236943A5">
+    <End Role="RestaurantTables" Type="Self.RestaurantTables" Multiplicity="1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RestaurantTables">
+        <PropertyRef Name="TableId" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="TableId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="RestaurantManagementModelStoreContainer">
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reservations" EntityType="Self.Reservations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RestaurantTables" EntityType="Self.RestaurantTables" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Reservati__Table__236943A5" Association="Self.FK__Reservati__Table__236943A5">
+      <End Role="RestaurantTables" EntitySet="RestaurantTables" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

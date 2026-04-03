@@ -6,6 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="7f96ae458c03400693ed069b56e27c43" Name="Diagram1">
         <EntityTypeShape EntityType="RestaurantManagementModel.User" Width="2.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestaurantManagementModel.Product" Width="1.5" PointX="4.375" PointY="0.75" />
+        <EntityTypeShape EntityType="RestaurantManagementModel.RestaurantTable" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="RestaurantManagementModel.Reservation" Width="1.5" PointX="3" PointY="4.5" />
+        <AssociationConnector Association="RestaurantManagementModel.FK__Reservati__Table__236943A5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
