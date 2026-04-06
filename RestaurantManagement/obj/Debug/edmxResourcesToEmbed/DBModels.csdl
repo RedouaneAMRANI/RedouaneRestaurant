@@ -22,6 +22,24 @@
       <End Role="RestaurantTable" EntitySet="RestaurantTables" />
       <End Role="Reservation" EntitySet="Reservations" />
     </AssociationSet>
+    <EntitySet Name="OrderItems" EntityType="RestaurantManagementModel.OrderItem" />
+    <EntitySet Name="Orders" EntityType="RestaurantManagementModel.Order" />
+    <AssociationSet Name="FK_OrderItems_Orders" Association="RestaurantManagementModel.FK_OrderItems_Orders">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderItem" EntitySet="OrderItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderItems_Products" Association="RestaurantManagementModel.FK_OrderItems_Products">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="OrderItem" EntitySet="OrderItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Reservat__40058253" Association="RestaurantManagementModel.FK__Orders__Reservat__40058253">
+      <End Role="Reservation" EntitySet="Reservations" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Tables" Association="RestaurantManagementModel.FK_Orders_Tables">
+      <End Role="RestaurantTable" EntitySet="RestaurantTables" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Product">
     <Key>
@@ -33,6 +51,7 @@
     <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="Category" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="IsAvailable" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="OrderItems" Relationship="RestaurantManagementModel.FK_OrderItems_Products" FromRole="Product" ToRole="OrderItem" />
   </EntityType>
   <EntityType Name="RestaurantTable">
     <Key>
@@ -43,6 +62,7 @@
     <Property Name="Capacity" Type="Int32" Nullable="false" />
     <Property Name="Status" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Reservations" Relationship="RestaurantManagementModel.FK__Reservati__Table__236943A5" FromRole="RestaurantTable" ToRole="Reservation" />
+    <NavigationProperty Name="Orders" Relationship="RestaurantManagementModel.FK_Orders_Tables" FromRole="RestaurantTable" ToRole="Order" />
   </EntityType>
   <EntityType Name="Reservation">
     <Key>
@@ -56,6 +76,7 @@
     <Property Name="ReservationTime" Type="DateTime" Precision="3" />
     <Property Name="Reserveat" Type="DateTime" Precision="3" />
     <NavigationProperty Name="RestaurantTable" Relationship="RestaurantManagementModel.FK__Reservati__Table__236943A5" FromRole="Reservation" ToRole="RestaurantTable" />
+    <NavigationProperty Name="Orders" Relationship="RestaurantManagementModel.FK__Orders__Reservat__40058253" FromRole="Reservation" ToRole="Order" />
   </EntityType>
   <Association Name="FK__Reservati__Table__236943A5">
     <End Type="RestaurantManagementModel.RestaurantTable" Role="RestaurantTable" Multiplicity="1" />
@@ -65,6 +86,83 @@
         <PropertyRef Name="TableId" />
       </Principal>
       <Dependent Role="Reservation">
+        <PropertyRef Name="TableId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="OrderItem">
+    <Key>
+      <PropertyRef Name="OrderItemId" />
+    </Key>
+    <Property Name="OrderItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="UnitPrice" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="RestaurantManagementModel.FK_OrderItems_Orders" FromRole="OrderItem" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="RestaurantManagementModel.FK_OrderItems_Products" FromRole="OrderItem" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TableId" Type="Int32" />
+    <Property Name="ReservationId" Type="Int32" />
+    <Property Name="OrderType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <NavigationProperty Name="OrderItems" Relationship="RestaurantManagementModel.FK_OrderItems_Orders" FromRole="Order" ToRole="OrderItem" />
+    <NavigationProperty Name="Reservation" Relationship="RestaurantManagementModel.FK__Orders__Reservat__40058253" FromRole="Order" ToRole="Reservation" />
+    <NavigationProperty Name="RestaurantTable" Relationship="RestaurantManagementModel.FK_Orders_Tables" FromRole="Order" ToRole="RestaurantTable" />
+  </EntityType>
+  <Association Name="FK_OrderItems_Orders">
+    <End Type="RestaurantManagementModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="RestaurantManagementModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="OrderItem">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderItems_Products">
+    <End Type="RestaurantManagementModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="RestaurantManagementModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="OrderItem">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Reservat__40058253">
+    <End Type="RestaurantManagementModel.Reservation" Role="Reservation" Multiplicity="0..1" />
+    <End Type="RestaurantManagementModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservation">
+        <PropertyRef Name="ReservationId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Tables">
+    <End Type="RestaurantManagementModel.RestaurantTable" Role="RestaurantTable" Multiplicity="0..1" />
+    <End Type="RestaurantManagementModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RestaurantTable">
+        <PropertyRef Name="TableId" />
+      </Principal>
+      <Dependent Role="Order">
         <PropertyRef Name="TableId" />
       </Dependent>
     </ReferentialConstraint>

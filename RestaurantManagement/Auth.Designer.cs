@@ -142,7 +142,6 @@
             this.password_auth.HoverState.Parent = this.password_auth;
             this.password_auth.Location = new System.Drawing.Point(149, 729);
             this.password_auth.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.password_auth.MaxLength = 4;
             this.password_auth.Name = "password_auth";
             this.password_auth.PasswordChar = '*';
             this.password_auth.PlaceholderText = "";
@@ -169,7 +168,6 @@
             this.cnie_auth.HoverState.Parent = this.cnie_auth;
             this.cnie_auth.Location = new System.Drawing.Point(149, 563);
             this.cnie_auth.Margin = new System.Windows.Forms.Padding(4);
-            this.cnie_auth.MaxLength = 8;
             this.cnie_auth.Name = "cnie_auth";
             this.cnie_auth.PasswordChar = '\0';
             this.cnie_auth.PlaceholderText = "";
@@ -242,7 +240,7 @@
             this.pictureBox2.Location = new System.Drawing.Point(701, 0);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(1221, 1084);
+            this.pictureBox2.Size = new System.Drawing.Size(1221, 1096);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;

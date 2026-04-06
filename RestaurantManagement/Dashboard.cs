@@ -1,4 +1,5 @@
 ﻿using DevComponents.DotNetBar;
+using Guna.UI2.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,6 +23,8 @@ namespace RestaurantManagement
         Product model_Products = new Product();
         RestaurantTable model_Table = new RestaurantTable();
         Reservation model_Reservation = new Reservation();
+        Order model_Order = new Order();
+        OrderItem model_OrderItem = new OrderItem();
 
         public Dashboard()
         {
@@ -38,11 +42,14 @@ namespace RestaurantManagement
             LoadUser();
             LoadProducts();
             LoadTables();
+            LoadOrders();
 
             //Timer date and time
             timer1.Interval = 1000;
             timer1.Tick += Timer1_Tick;
             timer1.Start();
+            // Set current date and time to datepicker
+            datereservation.MinDate = DateTime.Now;
 
             //Tabcontrol
             ActivateButton(btn_dashboard);
@@ -54,6 +61,18 @@ namespace RestaurantManagement
             staff.Visible = false;
             payment.Visible = false;
             history.Visible = false;
+
+            // Reservations tables double click event
+            table1.DoubleClick += Panel_DoubleClick;
+            table2.DoubleClick += Panel_DoubleClick;
+            table3.DoubleClick += Panel_DoubleClick;
+            table4.DoubleClick += Panel_DoubleClick;
+            table5.DoubleClick += Panel_DoubleClick;
+            table6.DoubleClick += Panel_DoubleClick;
+            table7.DoubleClick += Panel_DoubleClick;
+            table8.DoubleClick += Panel_DoubleClick;
+            table9.DoubleClick += Panel_DoubleClick;
+            table10.DoubleClick += Panel_DoubleClick;
         }
 
         //////////////////// Timer date and time
@@ -76,7 +95,7 @@ namespace RestaurantManagement
         {
             if (currentButton != null)
             {
-                currentButton.FillColor = Color.FromArgb(26, 43, 74); // Blue
+                currentButton.FillColor = Color.White;
             }
             currentButton = (Guna.UI2.WinForms.Guna2Button)sender;
             currentButton.FillColor = Color.FromArgb(199, 161, 122); // Gold
@@ -561,8 +580,8 @@ namespace RestaurantManagement
             statusreservation.SelectedIndex = -1;
             datereservation.Value = DateTime.Now;
             model_Table = new RestaurantTable();
+            model_Reservation = new Reservation();
             btn_save_restable.Text = "Save";
-            LoadTables();
         }
 
         private void btn_clear_restable_Click(object sender, EventArgs e)
@@ -578,23 +597,23 @@ namespace RestaurantManagement
 
                 foreach (var table in tables)
                 {
-                    Panel pnl = this.Controls.Find("Table" + table.TableNumber, true)
-                                             .FirstOrDefault() as Panel;
+                    Guna.UI2.WinForms.Guna2Panel pnl = this.Controls.Find("Table" + table.TableNumber, true)
+                                             .FirstOrDefault() as Guna2Panel;
 
                     if (pnl != null)
                     {
                         switch (table.Status)
                         {
                             case "Free":
-                                pnl.BackColor = Color.Green;
+                                pnl.FillColor = Color.Green;
                                 break;
 
                             case "Occupied":
-                                pnl.BackColor = Color.Red;
+                                pnl.FillColor = Color.Red;
                                 break;
 
                             case "Reserved":
-                                pnl.BackColor = Color.Orange;
+                                pnl.FillColor = Color.Orange;
                                 break;
                         }
 
@@ -602,11 +621,7 @@ namespace RestaurantManagement
                         {
                             if (ctrl is Label lbl)
                             {
-                                if (lbl.Text.Contains("Capacity"))
-                                {
-                                    lbl.Text = "Capacity : " + table.Capacity;
-                                }
-                                else if (lbl.Text.Contains("Status") || lbl.Text.Contains("label20"))
+                                if (lbl.Tag?.ToString() == "status")
                                 {
                                     lbl.Text = table.Status;
                                 }
@@ -659,12 +674,18 @@ namespace RestaurantManagement
                         existingReservation.Status = statusreservation.Text;
                         existingReservation.Reserveat = datereservation.Value;
 
-                        // 🔥 تحديث حالة الطاولة
-                        table.Status = statusreservation.Text == "Reserved" ? "Occupied" : "Free";
+                        if (statusreservation.Text == "Completed")
+                            table.Status = "Occupied";
+                        else if (statusreservation.Text == "Cancelled" || statusreservation.Text == "NoShow")
+                            table.Status = "Free";
+                        else
+                            table.Status = "Reserved";
+
                     }
                     db.SaveChanges();
+                    LoadTables();
+                    LoadOrders();
                 }
-
                 ClearTables();
                 MessageBox.Show("Submitted successfully!");
             }
@@ -674,15 +695,152 @@ namespace RestaurantManagement
             }
         }
 
-        private void btn_search_restable_Click(object sender, EventArgs e)
+        private void Panel_DoubleClick(object sender, EventArgs e)
         {
+            Panel pnl = sender as Panel;
 
+            if (pnl == null) return;
+
+            int tableNumber = int.Parse(pnl.Name.Replace("table", ""));
+
+            using (var db = new EFDBEntities())
+            {
+                var table = db.RestaurantTables
+                              .FirstOrDefault(t => t.TableNumber == tableNumber);
+
+                if (table == null) return;
+
+                var reservation = db.Reservations
+                                    .Where(r => r.TableId == table.TableId)
+                                    .OrderByDescending(r => r.ReservationId)
+                                    .FirstOrDefault();
+
+                if (reservation != null)
+                {
+                    model_Reservation = reservation;
+
+                    customername.Text = reservation.CustomerName;
+                    customerphone.Text = reservation.CustomerPhone;
+                    tablenumber.Text = table.TableNumber.ToString();
+                    statusreservation.Text = reservation.Status;
+
+                    if (reservation.Reserveat != null)
+                        datereservation.Value = reservation.Reserveat.Value;
+                }
+                else
+                {
+                    MessageBox.Show("No reservation found for this table");
+                }
+            }
         }
 
         private void btn_add_order_Click(object sender, EventArgs e)
         {
             PaymentForm paymentForm = new PaymentForm();
             paymentForm.Show();
+        }
+
+        //////////////////// Orders
+
+        void ClearOrders()
+        {
+            customername_orders.Text = customerphone_orders.Text = "";
+            categories_orders.SelectedIndex = -1;
+            ordertype_orders.SelectedIndex = -1;
+            table_orders.SelectedIndex = -1;
+            tablereserved_orders.SelectedIndex = -1;
+            product_orders.SelectedIndex = -1;
+            status_orders.SelectedIndex = -1;
+            quantite_product.Value = 1;
+            model_Order = new Order();
+            model_OrderItem = new OrderItem();
+            btn_save_order.Text = "Save";
+            LoadOrders();
+        }
+
+        private void btn_clear_order_Click(object sender, EventArgs e)
+        {
+            ClearOrders();
+        }
+
+        void LoadOrders()
+        {
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                    var freeTables = db.RestaurantTables
+                                       .Where(t => t.Status == "Free")
+                                       .ToList()
+                                       .Select(t => new
+                                       {
+                                           t.TableId,
+                                           Display = "Table " + t.TableNumber + " Capacity " + t.Capacity
+                                       })
+                                       .ToList();
+
+                    table_orders.DataSource = freeTables;
+                    table_orders.DisplayMember = "Display";
+                    table_orders.ValueMember = "TableId";
+
+                var reservedTables = db.Reservations
+                       .Where(r => r.Status == "Reserved")
+                       .Join(db.RestaurantTables,
+                             r => r.TableId,
+                             t => t.TableId,
+                             (r, t) => new
+                             {
+                                 t.TableId,
+                                 t.TableNumber,
+                                 t.Capacity
+                             })
+                       .ToList()
+                       .Select(x => new
+                       {
+                           x.TableId,
+                           Display = "Table " + x.TableNumber + " Capacity " + x.Capacity
+                       })
+                       .ToList();
+
+                tablereserved_orders.DataSource = reservedTables;
+                tablereserved_orders.DisplayMember = "Display";
+                tablereserved_orders.ValueMember = "TableId";
+            }
+        }
+
+        private void categories_orders_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (categories_orders.SelectedIndex == -1) return;
+
+            string selectedCategory = categories_orders.Text;
+
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                var products = db.Products
+                                 .Where(p => p.Category == selectedCategory && p.IsAvailable == "Available")
+                                 .Select(p => p.Name)
+                                 .ToList();
+
+                product_orders.DataSource = null;
+                product_orders.DataSource = products;
+            }
+        }
+
+        private void ordertype_orders_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(ordertype_orders.Text == "TakeAway")
+            {
+                table_orders.Enabled = false;
+                tablereserved_orders.Enabled = false;
+            }
+            else
+            {
+                table_orders.Enabled = true;
+                tablereserved_orders.Enabled = true;
+            }
+        }
+
+        private void btn_save_order_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

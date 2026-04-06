@@ -14,11 +14,18 @@ namespace RestaurantManagement
     
     public partial class Product
     {
+        public Product()
+        {
+            this.OrderItems = new HashSet<OrderItem>();
+        }
+    
         public int ProductId { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
         public byte[] Image { get; set; }
         public string Category { get; set; }
         public string IsAvailable { get; set; }
+    
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }

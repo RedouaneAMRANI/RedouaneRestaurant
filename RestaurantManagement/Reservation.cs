@@ -14,6 +14,11 @@ namespace RestaurantManagement
     
     public partial class Reservation
     {
+        public Reservation()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
         public int ReservationId { get; set; }
         public int TableId { get; set; }
         public string CustomerName { get; set; }
@@ -23,5 +28,6 @@ namespace RestaurantManagement
         public Nullable<System.DateTime> Reserveat { get; set; }
     
         public virtual RestaurantTable RestaurantTable { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

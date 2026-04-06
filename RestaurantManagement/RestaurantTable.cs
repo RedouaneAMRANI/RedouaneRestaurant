@@ -17,6 +17,7 @@ namespace RestaurantManagement
         public RestaurantTable()
         {
             this.Reservations = new HashSet<Reservation>();
+            this.Orders = new HashSet<Order>();
         }
     
         public int TableId { get; set; }
@@ -25,5 +26,6 @@ namespace RestaurantManagement
         public string Status { get; set; }
     
         public virtual ICollection<Reservation> Reservations { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

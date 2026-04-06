@@ -29,5 +29,7 @@ namespace RestaurantManagement
         public DbSet<Product> Products { get; set; }
         public DbSet<RestaurantTable> RestaurantTables { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }
