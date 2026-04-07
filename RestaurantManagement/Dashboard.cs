@@ -634,7 +634,7 @@ namespace RestaurantManagement
 
         private void btn_save_restable_Click(object sender, EventArgs e)
         {
-            if (tablenumber.Text != "" && customername.Text != "" && customerphone.Text != "" && statusreservation.Text != "")
+            if (tablenumber.Text != "" && statusreservation.Text != "")
             {
                 int tableNumber = Convert.ToInt32(tablenumber.Text);
 
@@ -780,6 +780,7 @@ namespace RestaurantManagement
                     table_orders.DataSource = freeTables;
                     table_orders.DisplayMember = "Display";
                     table_orders.ValueMember = "TableId";
+                    table_orders.SelectedIndex = -1;
 
                 var reservedTables = db.Reservations
                        .Where(r => r.Status == "Reserved")
@@ -803,6 +804,7 @@ namespace RestaurantManagement
                 tablereserved_orders.DataSource = reservedTables;
                 tablereserved_orders.DisplayMember = "Display";
                 tablereserved_orders.ValueMember = "TableId";
+                tablereserved_orders.SelectedIndex = -1;
             }
         }
 
@@ -830,6 +832,8 @@ namespace RestaurantManagement
             {
                 table_orders.Enabled = false;
                 tablereserved_orders.Enabled = false;
+                tablereserved_orders.SelectedIndex = -1;
+                table_orders.SelectedIndex = -1;
             }
             else
             {
@@ -838,9 +842,172 @@ namespace RestaurantManagement
             }
         }
 
+        private void table_orders_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (table_orders.Text != "")
+            {
+                tablereserved_orders.SelectedIndex = -1;
+            }
+        }
+
+        private void tablereserved_orders_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tablereserved_orders.Text != "")
+            {
+                table_orders.SelectedIndex = -1;
+            }
+        }
+
         private void btn_save_order_Click(object sender, EventArgs e)
         {
+            if (ordertype_orders.Text != "" && product_orders.Text != "" && status_orders.Text != "")
+            {
+                using (EFDBEntities db = new EFDBEntities())
+                {
+                    if (model_Order.OrderId == 0)
+                    {
+                        Order newOrder = new Order();
 
+                        newOrder.OrderType = ordertype_orders.Text;
+                        newOrder.Status = status_orders.Text;
+                        newOrder.CustomerName = customername_orders.Text.Trim();
+                        newOrder.CustomerPhone = customerphone_orders.Text.Trim();
+
+                        if (ordertype_orders.Text == "DineIn")
+                        {
+                            if (table_orders.SelectedValue != null)
+                            {
+                                int tableId = Convert.ToInt32(table_orders.SelectedValue);
+                                newOrder.TableId = tableId;
+
+                                var table = db.RestaurantTables.Find(tableId);
+                                if (table != null)
+                                {
+                                    table.Status = "Occupied";
+                                }
+                            }
+                            else if (tablereserved_orders.SelectedValue != null)
+                            {
+                                int tableId = Convert.ToInt32(tablereserved_orders.SelectedValue);
+                                newOrder.TableId = tableId;
+
+                                var reservation = db.Reservations
+                                                    .FirstOrDefault(r => r.TableId == tableId && r.Status == "Reserved");
+
+                                if (reservation != null)
+                                {
+                                    newOrder.CustomerName = reservation.CustomerName;
+                                    newOrder.CustomerPhone = reservation.CustomerPhone;
+
+                                    reservation.Status = "Completed";
+
+                                    var table = db.RestaurantTables.Find(tableId);
+                                    if (table != null)
+                                    {
+                                        table.Status = "Occupied";
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Please select a table for Dine-In orders.");
+                                return;
+                            }
+                        }
+                        else if (ordertype_orders.Text == "TakeAway" || ordertype_orders.Text == "Online")
+                        {
+                            if (customername_orders.Text == "" || customerphone_orders.Text == "")
+                            {
+                                MessageBox.Show("Please enter customer name and phone.");
+                                return;
+                            }
+
+                            newOrder.CustomerName = customername_orders.Text.Trim();
+                            newOrder.CustomerPhone = customerphone_orders.Text.Trim();
+                            newOrder.TableId = null;
+                        }
+
+                        db.Orders.Add(newOrder);
+                    }
+                    else
+                    {
+                        var existingOrder = db.Orders.Find(model_Order.OrderId);
+
+                        if (existingOrder == null) return;
+
+                        if (MessageBox.Show("Are you sure to update?", "Message", MessageBoxButtons.YesNo) == DialogResult.No)
+                            return;
+
+                        existingOrder.OrderType = ordertype_orders.Text;
+                        existingOrder.Status = status_orders.Text;
+                        existingOrder.CustomerName = customername_orders.Text.Trim();
+                        existingOrder.CustomerPhone = customerphone_orders.Text.Trim();
+
+                        if (ordertype_orders.Text == "DineIn")
+                        {
+                            if (table_orders.SelectedValue != null)
+                            {
+                                int tableId = Convert.ToInt32(table_orders.SelectedValue);
+                                existingOrder.TableId = tableId;
+
+                                var table = db.RestaurantTables.Find(tableId);
+                                if (table != null)
+                                {
+                                    table.Status = "Occupied";
+                                }
+                            }
+                            else if (tablereserved_orders.SelectedValue != null)
+                            {
+                                int tableId = Convert.ToInt32(tablereserved_orders.SelectedValue);
+                                existingOrder.TableId = tableId;
+
+                                var reservation = db.Reservations
+                                                    .FirstOrDefault(r => r.TableId == tableId && r.Status == "Reserved");
+
+                                if (reservation != null)
+                                {
+                                    existingOrder.CustomerName = reservation.CustomerName;
+                                    existingOrder.CustomerPhone = reservation.CustomerPhone;
+
+                                    reservation.Status = "Completed";
+
+                                    var table = db.RestaurantTables.Find(tableId);
+                                    if (table != null)
+                                    {
+                                        table.Status = "Occupied";
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Please select a table for Dine-In orders.");
+                                return;
+                            }
+                        }
+                        else if (ordertype_orders.Text == "TakeAway" || ordertype_orders.Text == "Online")
+                        {
+                            if (customername_orders.Text == "" || customerphone_orders.Text == "")
+                            {
+                                MessageBox.Show("Please enter customer name and phone.");
+                                return;
+                            }
+
+                            existingOrder.CustomerName = customername_orders.Text.Trim();
+                            existingOrder.CustomerPhone = customerphone_orders.Text.Trim();
+                            existingOrder.TableId = null;
+                        }
+                    }
+
+                    db.SaveChanges();
+                }
+
+                ClearOrders();
+                MessageBox.Show("Submitted successfully!");
+            }
+            else
+            {
+                MessageBox.Show("Please fill in all required fields");
+            }
         }
     }
 }
