@@ -14,6 +14,8 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace RestaurantManagement
 {
@@ -25,6 +27,13 @@ namespace RestaurantManagement
         Reservation model_Reservation = new Reservation();
         Order model_Order = new Order();
         OrderItem model_OrderItem = new OrderItem();
+        private List<CartItemModel> cartItems = new List<CartItemModel>();
+        private int selectedProductId = 0;
+        private float selectedProductPrice = 0;
+        private byte[] selectedProductImage = null;
+        private string selectedProductName = "";
+        private CartProducts cartForm;
+        private bool isLoadingOrderData = false;
 
         public Dashboard()
         {
@@ -42,7 +51,7 @@ namespace RestaurantManagement
             LoadUser();
             LoadProducts();
             LoadTables();
-            LoadOrders();
+            LoadOrders_Products();
 
             //Timer date and time
             timer1.Interval = 1000;
@@ -543,7 +552,7 @@ namespace RestaurantManagement
 
                     if (product != null)
                     {
-                        model_Products = product; // ⭐ مهم بزاف
+                        model_Products = product;
 
                         name_products.Text = product.Name;
                         price_products.Text = product.Price.ToString();
@@ -684,7 +693,7 @@ namespace RestaurantManagement
                     }
                     db.SaveChanges();
                     LoadTables();
-                    LoadOrders();
+                    //LoadOrders();
                 }
                 ClearTables();
                 MessageBox.Show("Submitted successfully!");
@@ -744,18 +753,35 @@ namespace RestaurantManagement
 
         void ClearOrders()
         {
-            customername_orders.Text = customerphone_orders.Text = "";
+            isLoadingOrderData = true;
+
+            customername_orders.Text = "";
+            customerphone_orders.Text = "";
             categories_orders.SelectedIndex = -1;
             ordertype_orders.SelectedIndex = -1;
-            table_orders.SelectedIndex = -1;
-            tablereserved_orders.SelectedIndex = -1;
             product_orders.SelectedIndex = -1;
             status_orders.SelectedIndex = -1;
-            quantite_product.Value = 1;
+            quantity_orders.Value = 1;
+
+            table_orders.DataSource = null;
+            tablereserved_orders.DataSource = null;
+            table_orders.Enabled = true;
+            tablereserved_orders.Enabled = true;
+
+            selectedProductId = 0;
+            selectedProductPrice = 0;
+            selectedProductImage = null;
+            selectedProductName = "";
+
+            cartItems.Clear();
+            RefreshCartForm();
+            lbl_cart_count.Text = "0";
+
             model_Order = new Order();
             model_OrderItem = new OrderItem();
-            btn_save_order.Text = "Save";
-            LoadOrders();
+            btn_save_order.Text = "Add Order";
+
+            isLoadingOrderData = false;
         }
 
         private void btn_clear_order_Click(object sender, EventArgs e)
@@ -763,48 +789,22 @@ namespace RestaurantManagement
             ClearOrders();
         }
 
-        void LoadOrders()
+        void LoadOrders_Products()
         {
             using (EFDBEntities db = new EFDBEntities())
             {
-                    var freeTables = db.RestaurantTables
-                                       .Where(t => t.Status == "Free")
-                                       .ToList()
-                                       .Select(t => new
-                                       {
-                                           t.TableId,
-                                           Display = "Table " + t.TableNumber + " Capacity " + t.Capacity
-                                       })
-                                       .ToList();
-
-                    table_orders.DataSource = freeTables;
-                    table_orders.DisplayMember = "Display";
-                    table_orders.ValueMember = "TableId";
-                    table_orders.SelectedIndex = -1;
-
-                var reservedTables = db.Reservations
-                       .Where(r => r.Status == "Reserved")
-                       .Join(db.RestaurantTables,
-                             r => r.TableId,
-                             t => t.TableId,
-                             (r, t) => new
-                             {
-                                 t.TableId,
-                                 t.TableNumber,
-                                 t.Capacity
-                             })
-                       .ToList()
-                       .Select(x => new
-                       {
-                           x.TableId,
-                           Display = "Table " + x.TableNumber + " Capacity " + x.Capacity
-                       })
-                       .ToList();
-
-                tablereserved_orders.DataSource = reservedTables;
-                tablereserved_orders.DisplayMember = "Display";
-                tablereserved_orders.ValueMember = "TableId";
-                tablereserved_orders.SelectedIndex = -1;
+                dgv_orders.DataSource = db.Orders
+                        .Select(o => new
+                        {
+                            o.OrderId,
+                            o.OrderType,
+                            o.Status,
+                            o.CustomerName,
+                            o.CustomerPhone,
+                            o.TableId,
+                            o.CreatedAt
+                        })
+                        .ToList();
             }
         }
 
@@ -823,22 +823,28 @@ namespace RestaurantManagement
 
                 product_orders.DataSource = null;
                 product_orders.DataSource = products;
+                product_orders.SelectedIndex = -1;
             }
         }
 
         private void ordertype_orders_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(ordertype_orders.Text == "TakeAway")
+            if (isLoadingOrderData)
+                return;
+
+            if (ordertype_orders.Text == "TakeAway" || ordertype_orders.Text == "Online")
             {
                 table_orders.Enabled = false;
                 tablereserved_orders.Enabled = false;
-                tablereserved_orders.SelectedIndex = -1;
                 table_orders.SelectedIndex = -1;
+                tablereserved_orders.SelectedIndex = -1;
             }
-            else
+            else if (ordertype_orders.Text == "DineIn")
             {
                 table_orders.Enabled = true;
                 tablereserved_orders.Enabled = true;
+
+                LoadOrderTableCombos();
             }
         }
 
@@ -858,10 +864,143 @@ namespace RestaurantManagement
             }
         }
 
+        private void product_orders_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (product_orders.SelectedIndex == -1 || string.IsNullOrWhiteSpace(product_orders.Text))
+                return;
+
+            string productName = product_orders.Text.Trim();
+
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                var product = db.Products.FirstOrDefault(p => p.Name == productName && p.IsAvailable == "Available");
+
+                if (product != null)
+                {
+                    selectedProductId = product.ProductId;
+                    selectedProductPrice = (float)product.Price;
+                    selectedProductName = product.Name;
+                    selectedProductImage = product.Image;
+                }
+            }
+        }
+
+        private void UpdateCartCount()
+        {
+            lbl_cart_count.Text = cartItems.Count.ToString();
+        }
+
+        private void Uc_OnDelete(object sender, int productId)
+        {
+            var item = cartItems.FirstOrDefault(x => x.ProductId == productId);
+
+            if (item != null)
+            {
+                cartItems.Remove(item);
+            }
+
+            RefreshCartForm();
+            UpdateCartCount();
+        }
+
+        private void Uc_OnQuantityChanged(object sender, (int ProductId, int Quantity) data)
+        {
+            var item = cartItems.FirstOrDefault(x => x.ProductId == data.ProductId);
+
+            if (item != null)
+            {
+                item.Quantity = data.Quantity;
+            }
+
+            RefreshCartForm();
+            UpdateCartCount();
+        }
+
+        private void add_product_Click(object sender, EventArgs e)
+        {
+            if (product_orders.Text == "")
+            {
+                MessageBox.Show("Please select a product");
+                return;
+            }
+
+            if (selectedProductId == 0)
+            {
+                MessageBox.Show("Invalid product selected");
+                return;
+            }
+
+            int qty = Convert.ToInt32(quantity_orders.Value);
+
+            if (qty <= 0)
+            {
+                MessageBox.Show("Quantity must be greater than 0");
+                return;
+            }
+
+            var existingItem = cartItems.FirstOrDefault(x => x.ProductId == selectedProductId);
+
+            if (existingItem != null)
+            {
+                existingItem.Quantity += qty;
+            }
+            else
+            {
+                CartItemModel item = new CartItemModel();
+                item.ProductId = selectedProductId;
+                item.ProductName = selectedProductName;
+                item.UnitPrice = selectedProductPrice;
+                item.Quantity = qty;
+                item.Image = selectedProductImage;
+
+                cartItems.Add(item);
+            }
+
+            RefreshCartForm();
+            UpdateCartCount();
+
+            product_orders.SelectedIndex = -1;
+            product_orders.Text = "";
+            quantity_orders.Value = 1;
+
+            selectedProductId = 0;
+            selectedProductPrice = 0;
+            selectedProductImage = null;
+            selectedProductName = "";
+        }
+
+        private void btn_cart_product_Click(object sender, EventArgs e)
+        {
+            if (cartForm == null || cartForm.IsDisposed)
+            {
+                cartForm = new CartProducts();
+                cartForm.OnDeleteProduct += Uc_OnDelete;
+                cartForm.OnQuantityChangedProduct += Uc_OnQuantityChanged;
+            }
+
+            cartForm.LoadCartProducts(cartItems);
+            cartForm.Show();
+            cartForm.BringToFront();
+        }
+
+        private void RefreshCartForm()
+        {
+            if (cartForm != null && !cartForm.IsDisposed)
+            {
+                cartForm.LoadCartProducts(cartItems);
+            }
+        }
+
         private void btn_save_order_Click(object sender, EventArgs e)
         {
-            if (ordertype_orders.Text != "" && product_orders.Text != "" && status_orders.Text != "")
+            if (ordertype_orders.Text != "" && status_orders.Text != "")
             {
+                if (cartItems.Count == 0)
+                {
+                    MessageBox.Show("Please add at least one product");
+                    return;
+                }
+
                 using (EFDBEntities db = new EFDBEntities())
                 {
                     if (model_Order.OrderId == 0)
@@ -872,6 +1011,7 @@ namespace RestaurantManagement
                         newOrder.Status = status_orders.Text;
                         newOrder.CustomerName = customername_orders.Text.Trim();
                         newOrder.CustomerPhone = customerphone_orders.Text.Trim();
+                        newOrder.CreatedAt = DateTime.Now;
 
                         if (ordertype_orders.Text == "DineIn")
                         {
@@ -898,7 +1038,6 @@ namespace RestaurantManagement
                                 {
                                     newOrder.CustomerName = reservation.CustomerName;
                                     newOrder.CustomerPhone = reservation.CustomerPhone;
-
                                     reservation.Status = "Completed";
 
                                     var table = db.RestaurantTables.Find(tableId);
@@ -928,12 +1067,27 @@ namespace RestaurantManagement
                         }
 
                         db.Orders.Add(newOrder);
+                        db.SaveChanges();
+
+                        foreach (var item in cartItems)
+                        {
+                            OrderItem orderItem = new OrderItem();
+                            orderItem.OrderId = newOrder.OrderId;
+                            orderItem.ProductId = item.ProductId;
+                            orderItem.Quantity = item.Quantity;
+                            orderItem.UnitPrice = item.UnitPrice;
+
+                            db.OrderItems.Add(orderItem);
+                        }
+
+                        db.SaveChanges();
                     }
                     else
                     {
                         var existingOrder = db.Orders.Find(model_Order.OrderId);
 
-                        if (existingOrder == null) return;
+                        if (existingOrder == null)
+                            return;
 
                         if (MessageBox.Show("Are you sure to update?", "Message", MessageBoxButtons.YesNo) == DialogResult.No)
                             return;
@@ -968,7 +1122,6 @@ namespace RestaurantManagement
                                 {
                                     existingOrder.CustomerName = reservation.CustomerName;
                                     existingOrder.CustomerPhone = reservation.CustomerPhone;
-
                                     reservation.Status = "Completed";
 
                                     var table = db.RestaurantTables.Find(tableId);
@@ -996,9 +1149,28 @@ namespace RestaurantManagement
                             existingOrder.CustomerPhone = customerphone_orders.Text.Trim();
                             existingOrder.TableId = null;
                         }
-                    }
 
-                    db.SaveChanges();
+                        var oldItems = db.OrderItems.Where(x => x.OrderId == existingOrder.OrderId).ToList();
+                        foreach (var oi in oldItems)
+                        {
+                            db.OrderItems.Remove(oi);
+                        }
+
+                        db.SaveChanges();
+
+                        foreach (var item in cartItems)
+                        {
+                            OrderItem orderItem = new OrderItem();
+                            orderItem.OrderId = existingOrder.OrderId;
+                            orderItem.ProductId = item.ProductId;
+                            orderItem.Quantity = item.Quantity;
+                            orderItem.UnitPrice = item.UnitPrice;
+
+                            db.OrderItems.Add(orderItem);
+                        }
+
+                        db.SaveChanges();
+                    }
                 }
 
                 ClearOrders();
@@ -1007,6 +1179,176 @@ namespace RestaurantManagement
             else
             {
                 MessageBox.Show("Please fill in all required fields");
+            }
+        }
+
+        private void quantite_product_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgv_orders_DoubleClick(object sender, EventArgs e)
+        {
+            if (dgv_orders.CurrentRow == null || dgv_orders.CurrentRow.Index == -1)
+                return;
+
+            int orderId = Convert.ToInt32(dgv_orders.CurrentRow.Cells["OrderId"].Value);
+
+            using (var db = new EFDBEntities())
+            {
+                var order = db.Orders.Find(orderId);
+
+                if (order == null)
+                {
+                    MessageBox.Show("No order found");
+                    return;
+                }
+
+                isLoadingOrderData = true;
+
+                model_Order = order;
+
+                ordertype_orders.Text = order.OrderType;
+                status_orders.Text = order.Status;
+                customername_orders.Text = order.CustomerName;
+                customerphone_orders.Text = order.CustomerPhone;
+
+                if (order.OrderType == "DineIn")
+                {
+                    table_orders.Enabled = true;
+                    tablereserved_orders.Enabled = true;
+
+                    LoadOrderTableCombos(order.TableId);
+
+                    if (order.TableId != null)
+                    {
+                        bool isReservedTable = db.Reservations
+                                                 .Any(r => r.TableId == order.TableId.Value && r.Status == "Reserved");
+
+                        if (isReservedTable)
+                        {
+                            tablereserved_orders.SelectedValue = order.TableId.Value;
+                            table_orders.SelectedIndex = -1;
+                        }
+                        else
+                        {
+                            table_orders.SelectedValue = order.TableId.Value;
+                            tablereserved_orders.SelectedIndex = -1;
+                        }
+                    }
+                    else
+                    {
+                        table_orders.SelectedIndex = -1;
+                        tablereserved_orders.SelectedIndex = -1;
+                    }
+                }
+                else
+                {
+                    table_orders.Enabled = false;
+                    tablereserved_orders.Enabled = false;
+                    table_orders.SelectedIndex = -1;
+                    tablereserved_orders.SelectedIndex = -1;
+                }
+
+                cartItems.Clear();
+
+                var orderItems = db.OrderItems
+                                   .Where(x => x.OrderId == order.OrderId)
+                                   .ToList();
+
+                foreach (var oi in orderItems)
+                {
+                    var product = db.Products.FirstOrDefault(p => p.ProductId == oi.ProductId);
+
+                    if (product != null)
+                    {
+                        CartItemModel item = new CartItemModel();
+                        item.ProductId = product.ProductId;
+                        item.ProductName = product.Name;
+                        item.UnitPrice = (float)oi.UnitPrice;
+                        item.Quantity = oi.Quantity;
+                        item.Image = product.Image;
+
+                        cartItems.Add(item);
+                    }
+                }
+
+                isLoadingOrderData = false;
+            }
+
+            RefreshCartForm();
+            UpdateCartCount();
+            btn_save_order.Text = "Update";
+        }
+
+        void LoadOrderTableCombos(int? selectedTableId = null)
+        {
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                var freeTables = db.RestaurantTables
+                                   .Where(t => t.Status == "Free")
+                                   .ToList()
+                                   .Select(t => new
+                                   {
+                                       t.TableId,
+                                       Display = "Table " + t.TableNumber.ToString() + " Capacity " + t.Capacity.ToString()
+                                   })
+                                   .ToList();
+
+                var reservedTables = db.Reservations
+                                       .Where(r => r.Status == "Reserved")
+                                       .Join(db.RestaurantTables,
+                                             r => r.TableId,
+                                             t => t.TableId,
+                                             (r, t) => new
+                                             {
+                                                 t.TableId,
+                                                 t.TableNumber,
+                                                 t.Capacity
+                                             })
+                                       .ToList()
+                                       .Select(x => new
+                                       {
+                                           x.TableId,
+                                           Display = "Table " + x.TableNumber.ToString() + " Capacity " + x.Capacity.ToString()
+                                       })
+                                       .ToList();
+
+                if (selectedTableId != null)
+                {
+                    bool existsInFree = freeTables.Any(x => x.TableId == selectedTableId.Value);
+                    bool existsInReserved = reservedTables.Any(x => x.TableId == selectedTableId.Value);
+
+                    if (!existsInFree && !existsInReserved)
+                    {
+                        var currentTable = db.RestaurantTables
+                                             .Where(t => t.TableId == selectedTableId.Value)
+                                             .ToList()
+                                             .Select(t => new
+                                             {
+                                                 t.TableId,
+                                                 Display = "Table " + t.TableNumber.ToString() + " Capacity " + t.Capacity.ToString()
+                                             })
+                                             .FirstOrDefault();
+
+                        if (currentTable != null)
+                        {
+                            freeTables.Add(currentTable);
+                        }
+                    }
+                }
+
+                table_orders.DataSource = null;
+                table_orders.DataSource = freeTables;
+                table_orders.DisplayMember = "Display";
+                table_orders.ValueMember = "TableId";
+                table_orders.SelectedIndex = -1;
+
+                tablereserved_orders.DataSource = null;
+                tablereserved_orders.DataSource = reservedTables;
+                tablereserved_orders.DisplayMember = "Display";
+                tablereserved_orders.ValueMember = "TableId";
+                tablereserved_orders.SelectedIndex = -1;
             }
         }
     }

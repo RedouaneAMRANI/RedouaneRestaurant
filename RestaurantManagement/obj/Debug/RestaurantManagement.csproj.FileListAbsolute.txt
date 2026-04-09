@@ -7,7 +7,6 @@ C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\De
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\MetroFramework.dll
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\DevComponents.DotNetBar2.xml
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.csproj.AssemblyReference.cache
-C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.Cart.resources
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.Dashboard.resources
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.Auth.resources
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.PaymentForm.resources
@@ -33,3 +32,5 @@ C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\De
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\System.Memory.xml
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.CartProducts.resources
+C:\Users\REDONE1\Desktop\Projet\RestaurantManagement\RestaurantManagement\obj\Debug\RestaurantManagement.UC_CartProduct.resources

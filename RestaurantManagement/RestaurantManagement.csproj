@@ -89,11 +89,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cart.cs">
+    <Compile Include="UC_CartProduct.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Cart.Designer.cs">
-      <DependentUpon>Cart.cs</DependentUpon>
+    <Compile Include="UC_CartProduct.Designer.cs">
+      <DependentUpon>UC_CartProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CartItemModel.cs" />
+    <Compile Include="CartProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CartProducts.Designer.cs">
+      <DependentUpon>CartProducts.cs</DependentUpon>
     </Compile>
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
@@ -148,8 +155,11 @@
     <Compile Include="User.cs">
       <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Cart.resx">
-      <DependentUpon>Cart.cs</DependentUpon>
+    <EmbeddedResource Include="UC_CartProduct.resx">
+      <DependentUpon>UC_CartProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CartProducts.resx">
+      <DependentUpon>CartProducts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
