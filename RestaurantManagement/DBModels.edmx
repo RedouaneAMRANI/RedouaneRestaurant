@@ -29,6 +29,16 @@
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="Price" Type="float" Nullable="false" />
         </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="Method" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="PaidAt" Type="datetime" />
+        </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="ProductId" />
@@ -134,9 +144,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Payments_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="RestaurantManagementModelStoreContainer">
           <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reservations" EntityType="Self.Reservations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RestaurantTables" EntityType="Self.RestaurantTables" Schema="dbo" store:Type="Tables" />
@@ -160,6 +183,10 @@
           <AssociationSet Name="FK_Orders_Tables" Association="Self.FK_Orders_Tables">
             <End Role="RestaurantTables" EntitySet="RestaurantTables" />
             <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Orders" Association="Self.FK_Payments_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Payments" EntitySet="Payments" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -205,6 +232,11 @@
           <AssociationSet Name="FK_Orders_Tables" Association="RestaurantManagementModel.FK_Orders_Tables">
             <End Role="RestaurantTable" EntitySet="RestaurantTables" />
             <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="Payments" EntityType="RestaurantManagementModel.Payment" />
+          <AssociationSet Name="FK_Payments_Orders" Association="RestaurantManagementModel.FK_Payments_Orders">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Product">
@@ -284,6 +316,7 @@
           <NavigationProperty Name="OrderItems" Relationship="RestaurantManagementModel.FK_OrderItems_Orders" FromRole="Order" ToRole="OrderItem" />
           <NavigationProperty Name="Reservation" Relationship="RestaurantManagementModel.FK__Orders__Reservat__40058253" FromRole="Order" ToRole="Reservation" />
           <NavigationProperty Name="RestaurantTable" Relationship="RestaurantManagementModel.FK_Orders_Tables" FromRole="Order" ToRole="RestaurantTable" />
+          <NavigationProperty Name="Payments" Relationship="RestaurantManagementModel.FK_Payments_Orders" FromRole="Order" ToRole="Payment" />
         </EntityType>
         <Association Name="FK_OrderItems_Orders">
           <End Type="RestaurantManagementModel.Order" Role="Order" Multiplicity="1" />
@@ -330,6 +363,29 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="TableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="Method" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="PaidAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Order" Relationship="RestaurantManagementModel.FK_Payments_Orders" FromRole="Payment" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_Payments_Orders">
+          <End Type="RestaurantManagementModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="RestaurantManagementModel.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -411,6 +467,17 @@
                 <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
                 <ScalarProperty Name="TableId" ColumnName="TableId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="RestaurantManagementModel.Payment">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="PaidAt" ColumnName="PaidAt" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

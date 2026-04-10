@@ -12,10 +12,13 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Text.RegularExpressions;
+using Padding = System.Windows.Forms.Padding;
 
 namespace RestaurantManagement
 {
@@ -34,6 +37,7 @@ namespace RestaurantManagement
         private string selectedProductName = "";
         private CartProducts cartForm;
         private bool isLoadingOrderData = false;
+        private int selectedPaymentOrderId = 0;
 
         public Dashboard()
         {
@@ -52,6 +56,14 @@ namespace RestaurantManagement
             LoadProducts();
             LoadTables();
             LoadOrders_Products();
+            LoadPaymentSearchBy();
+            LoadPaymentHistory();
+
+            dgv_payment_history.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_payment_history.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_payment_history.MultiSelect = false;
+            dgv_payment_history.ReadOnly = true;
+            dgv_payment_history.AllowUserToAddRows = false;
 
             //Timer date and time
             timer1.Interval = 1000;
@@ -264,6 +276,22 @@ namespace RestaurantManagement
             }
         }
 
+        private void lastname_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void firstname_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
         private void save_user_Click(object sender, EventArgs e)
         {
             if (cnie.Text != "" && lastname.Text != "" && firstname.Text != "" && role.Text != "" && status_user.Text != "")
@@ -271,14 +299,30 @@ namespace RestaurantManagement
                 if (cnie.Text.Length == 8)
                 {
                     model_User.CNIE = cnie.Text.Trim();
+                } 
+                else
+                { 
+                    MessageBox.Show("CNIE must be 8 characters long");
+                    return; 
+                }
+                if (Regex.IsMatch(lastname.Text, @"^[a-zA-Z0-9]+$"))
+                {
+                    model_User.LastName = lastname.Text.Trim();
                 }
                 else
                 {
-                    MessageBox.Show("CNIE must be 8 characters long");
+                    MessageBox.Show("LastName must contain only letters");
                     return;
                 }
-                model_User.LastName = lastname.Text.Trim();
-                model_User.FIrstName = firstname.Text.Trim();
+                if (Regex.IsMatch(firstname.Text, @"^[a-zA-Z0-9]+$"))
+                {
+                    model_User.FIrstName = firstname.Text.Trim();
+                }
+                else
+                {
+                    MessageBox.Show("FirstName must contain only letters");
+                    return;
+                }
                 model_User.Role = role.Text;
                 model_User.IsActive = status_user.Text;
                 model_User.CreatedAt = DateTime.Now;
@@ -470,11 +514,27 @@ namespace RestaurantManagement
             }
         }
 
+        private void name_products_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
         private void btn_save_products_Click(object sender, EventArgs e)
         {
             if (name_products.Text != "" && price_products.Text != "" && categories_products.Text != "" && status_products.Text != "")
             {
-                model_Products.Name = name_products.Text.Trim();
+                if (Regex.IsMatch(name_products.Text, @"^[a-zA-Z0-9]+$"))
+                {
+                    model_Products.Name = name_products.Text.Trim();
+                }
+                else
+                {
+                    MessageBox.Show("name_products must contain only letters");
+                    return;
+                }
                 if (decimal.TryParse(price_products.Text.Trim(), out decimal price))
                 {
                     model_Products.Price = (double)price;
@@ -641,6 +701,22 @@ namespace RestaurantManagement
             }
         }
 
+        private void customername_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void customerphone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
         private void btn_save_restable_Click(object sender, EventArgs e)
         {
             if (tablenumber.Text != "" && statusreservation.Text != "")
@@ -657,8 +733,24 @@ namespace RestaurantManagement
                         Reservation newReservation = new Reservation();
 
                         newReservation.TableId = table.TableId;
-                        newReservation.CustomerName = customername.Text.Trim();
-                        newReservation.CustomerPhone = customerphone.Text.Trim();
+                        if (Regex.IsMatch(customername.Text, @"^[a-zA-Z0-9]+$"))
+                        {
+                            newReservation.CustomerName = customername.Text.Trim();
+                        }
+                        else
+                        {
+                            MessageBox.Show("customername must contain only letters");
+                            return;
+                        }
+                        if (Regex.IsMatch(customerphone.Text, @"^\d+$"))
+                        {
+                            newReservation.CustomerPhone = customerphone.Text.Trim();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Phone must contain only numbers");
+                            return;
+                        }
                         newReservation.Status = statusreservation.Text;
                         newReservation.ReservationTime = DateTime.Now;
                         newReservation.Reserveat = datereservation.Value;
@@ -745,7 +837,13 @@ namespace RestaurantManagement
 
         private void btn_add_order_Click(object sender, EventArgs e)
         {
-            PaymentForm paymentForm = new PaymentForm();
+            PaymentForm paymentForm = new PaymentForm(cartItems,
+                    ordertype_orders.Text,
+                    status_orders.Text,
+                    customername_orders.Text,
+                    customerphone_orders.Text,
+                    table_orders.SelectedValue,
+                    tablereserved_orders.SelectedValue);
             paymentForm.Show();
         }
 
@@ -794,6 +892,7 @@ namespace RestaurantManagement
             using (EFDBEntities db = new EFDBEntities())
             {
                 dgv_orders.DataSource = db.Orders
+                        .OrderByDescending(o => o.OrderId)
                         .Select(o => new
                         {
                             o.OrderId,
@@ -1001,180 +1100,23 @@ namespace RestaurantManagement
                     return;
                 }
 
-                using (EFDBEntities db = new EFDBEntities())
+                PaymentForm frm = new PaymentForm(
+                   cartItems,
+                   ordertype_orders.Text,
+                   status_orders.Text,
+                   customername_orders.Text,
+                   customerphone_orders.Text,
+                   table_orders.SelectedValue,
+                   tablereserved_orders.SelectedValue
+                );
+
+                DialogResult result = frm.ShowDialog();
+
+                if (result == DialogResult.OK && frm.PaymentCompleted)
                 {
-                    if (model_Order.OrderId == 0)
-                    {
-                        Order newOrder = new Order();
-
-                        newOrder.OrderType = ordertype_orders.Text;
-                        newOrder.Status = status_orders.Text;
-                        newOrder.CustomerName = customername_orders.Text.Trim();
-                        newOrder.CustomerPhone = customerphone_orders.Text.Trim();
-                        newOrder.CreatedAt = DateTime.Now;
-
-                        if (ordertype_orders.Text == "DineIn")
-                        {
-                            if (table_orders.SelectedValue != null)
-                            {
-                                int tableId = Convert.ToInt32(table_orders.SelectedValue);
-                                newOrder.TableId = tableId;
-
-                                var table = db.RestaurantTables.Find(tableId);
-                                if (table != null)
-                                {
-                                    table.Status = "Occupied";
-                                }
-                            }
-                            else if (tablereserved_orders.SelectedValue != null)
-                            {
-                                int tableId = Convert.ToInt32(tablereserved_orders.SelectedValue);
-                                newOrder.TableId = tableId;
-
-                                var reservation = db.Reservations
-                                                    .FirstOrDefault(r => r.TableId == tableId && r.Status == "Reserved");
-
-                                if (reservation != null)
-                                {
-                                    newOrder.CustomerName = reservation.CustomerName;
-                                    newOrder.CustomerPhone = reservation.CustomerPhone;
-                                    reservation.Status = "Completed";
-
-                                    var table = db.RestaurantTables.Find(tableId);
-                                    if (table != null)
-                                    {
-                                        table.Status = "Occupied";
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                MessageBox.Show("Please select a table for Dine-In orders.");
-                                return;
-                            }
-                        }
-                        else if (ordertype_orders.Text == "TakeAway" || ordertype_orders.Text == "Online")
-                        {
-                            if (customername_orders.Text == "" || customerphone_orders.Text == "")
-                            {
-                                MessageBox.Show("Please enter customer name and phone.");
-                                return;
-                            }
-
-                            newOrder.CustomerName = customername_orders.Text.Trim();
-                            newOrder.CustomerPhone = customerphone_orders.Text.Trim();
-                            newOrder.TableId = null;
-                        }
-
-                        db.Orders.Add(newOrder);
-                        db.SaveChanges();
-
-                        foreach (var item in cartItems)
-                        {
-                            OrderItem orderItem = new OrderItem();
-                            orderItem.OrderId = newOrder.OrderId;
-                            orderItem.ProductId = item.ProductId;
-                            orderItem.Quantity = item.Quantity;
-                            orderItem.UnitPrice = item.UnitPrice;
-
-                            db.OrderItems.Add(orderItem);
-                        }
-
-                        db.SaveChanges();
-                    }
-                    else
-                    {
-                        var existingOrder = db.Orders.Find(model_Order.OrderId);
-
-                        if (existingOrder == null)
-                            return;
-
-                        if (MessageBox.Show("Are you sure to update?", "Message", MessageBoxButtons.YesNo) == DialogResult.No)
-                            return;
-
-                        existingOrder.OrderType = ordertype_orders.Text;
-                        existingOrder.Status = status_orders.Text;
-                        existingOrder.CustomerName = customername_orders.Text.Trim();
-                        existingOrder.CustomerPhone = customerphone_orders.Text.Trim();
-
-                        if (ordertype_orders.Text == "DineIn")
-                        {
-                            if (table_orders.SelectedValue != null)
-                            {
-                                int tableId = Convert.ToInt32(table_orders.SelectedValue);
-                                existingOrder.TableId = tableId;
-
-                                var table = db.RestaurantTables.Find(tableId);
-                                if (table != null)
-                                {
-                                    table.Status = "Occupied";
-                                }
-                            }
-                            else if (tablereserved_orders.SelectedValue != null)
-                            {
-                                int tableId = Convert.ToInt32(tablereserved_orders.SelectedValue);
-                                existingOrder.TableId = tableId;
-
-                                var reservation = db.Reservations
-                                                    .FirstOrDefault(r => r.TableId == tableId && r.Status == "Reserved");
-
-                                if (reservation != null)
-                                {
-                                    existingOrder.CustomerName = reservation.CustomerName;
-                                    existingOrder.CustomerPhone = reservation.CustomerPhone;
-                                    reservation.Status = "Completed";
-
-                                    var table = db.RestaurantTables.Find(tableId);
-                                    if (table != null)
-                                    {
-                                        table.Status = "Occupied";
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                MessageBox.Show("Please select a table for Dine-In orders.");
-                                return;
-                            }
-                        }
-                        else if (ordertype_orders.Text == "TakeAway" || ordertype_orders.Text == "Online")
-                        {
-                            if (customername_orders.Text == "" || customerphone_orders.Text == "")
-                            {
-                                MessageBox.Show("Please enter customer name and phone.");
-                                return;
-                            }
-
-                            existingOrder.CustomerName = customername_orders.Text.Trim();
-                            existingOrder.CustomerPhone = customerphone_orders.Text.Trim();
-                            existingOrder.TableId = null;
-                        }
-
-                        var oldItems = db.OrderItems.Where(x => x.OrderId == existingOrder.OrderId).ToList();
-                        foreach (var oi in oldItems)
-                        {
-                            db.OrderItems.Remove(oi);
-                        }
-
-                        db.SaveChanges();
-
-                        foreach (var item in cartItems)
-                        {
-                            OrderItem orderItem = new OrderItem();
-                            orderItem.OrderId = existingOrder.OrderId;
-                            orderItem.ProductId = item.ProductId;
-                            orderItem.Quantity = item.Quantity;
-                            orderItem.UnitPrice = item.UnitPrice;
-
-                            db.OrderItems.Add(orderItem);
-                        }
-
-                        db.SaveChanges();
-                    }
+                    ClearOrders();
+                    LoadOrders_Products();
                 }
-
-                ClearOrders();
-                MessageBox.Show("Submitted successfully!");
             }
             else
             {
@@ -1350,6 +1292,279 @@ namespace RestaurantManagement
                 tablereserved_orders.ValueMember = "TableId";
                 tablereserved_orders.SelectedIndex = -1;
             }
+        }
+
+        //////////////////// Payment
+
+        void LoadPaymentHistory()
+        {
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                var result = db.Orders
+                    .GroupJoin(
+                        db.Payments,
+                        o => o.OrderId,
+                        p => p.OrderId,
+                        (o, payments) => new { o, payments }
+                    )
+                    .SelectMany(
+                        x => x.payments.DefaultIfEmpty(),
+                        (x, p) => new
+                        {
+                            x.o.OrderId,
+                            x.o.CustomerName,
+                            x.o.CustomerPhone,
+                            x.o.OrderType,
+                            x.o.Status,
+                            x.o.TableId,
+                            x.o.Price,
+                            PaymentMethod = p != null ? p.Method : "Not Paid",
+                            PaidAt = p != null ? p.PaidAt : null
+                        }
+                    )
+                    .OrderByDescending(x => x.OrderId)
+                    .ToList();
+
+                dgv_payment_history.DataSource = result;
+            }
+
+            dgv_payment_history.ClearSelection();
+        }
+
+        void LoadPaymentSearchBy()
+        {
+            searchby_payment.Items.Clear();
+            searchby_payment.Items.Add("Order ID");
+            searchby_payment.Items.Add("Customer Name");
+            searchby_payment.Items.Add("Customer Phone");
+            searchby_payment.Items.Add("Payment Method");
+            searchby_payment.Items.Add("Order Type");
+            searchby_payment.Items.Add("Status");
+            searchby_payment.SelectedIndex = -1;
+        }
+
+        void LoadPaymentOrderItems(int orderId)
+        {
+            flowLayoutPanel_payment_items.Controls.Clear();
+
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                var items = db.OrderItems
+                    .Where(oi => oi.OrderId == orderId)
+                    .Join(
+                        db.Products,
+                        oi => oi.ProductId,
+                        p => p.ProductId,
+                        (oi, p) => new
+                        {
+                            p.Name,
+                            oi.Quantity,
+                            oi.UnitPrice,
+                            Total = oi.Quantity * oi.UnitPrice
+                        }
+                    )
+                    .ToList();
+
+                if (items.Count == 0)
+                {
+                    Label lblEmpty = new Label();
+                    lblEmpty.Text = "No order items found";
+                    lblEmpty.AutoSize = true;
+                    flowLayoutPanel_payment_items.Controls.Add(lblEmpty);
+                    return;
+                }
+
+                foreach (var item in items)
+                {
+                    Panel pnl = new Panel();
+                    pnl.Width = flowLayoutPanel_payment_items.Width - 25;
+                    pnl.Height = 35;
+                    pnl.BorderStyle = BorderStyle.FixedSingle;
+                    pnl.Margin = new Padding(3);
+
+                    Label lbl = new Label();
+                    lbl.AutoSize = false;
+                    lbl.Width = pnl.Width - 10;
+                    lbl.Height = 25;
+                    lbl.Left = 5;
+                    lbl.Top = 5;
+                    lbl.Text = item.Name + "   x" + item.Quantity +
+                               "   " + Convert.ToDouble(item.UnitPrice).ToString("0,00") +
+                               " MAD   =   " + Convert.ToDouble(item.Total).ToString("0,00") + " MAD";
+
+                    pnl.Controls.Add(lbl);
+                    flowLayoutPanel_payment_items.Controls.Add(pnl);
+                }
+            }
+        }
+
+        private void btn_search_payment_Click(object sender, EventArgs e)
+        {
+            string searchBy = searchby_payment.Text.Trim();
+            string value = search_payment.Text.Trim();
+
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                var query = db.Orders
+                    .GroupJoin(
+                        db.Payments,
+                        o => o.OrderId,
+                        p => p.OrderId,
+                        (o, payments) => new { o, payments }
+                    )
+                    .SelectMany(
+                        x => x.payments.DefaultIfEmpty(),
+                        (x, p) => new
+                        {
+                            x.o.OrderId,
+                            x.o.CustomerName,
+                            x.o.CustomerPhone,
+                            x.o.OrderType,
+                            x.o.Status,
+                            x.o.TableId,
+                            x.o.Price,
+                            PaymentMethod = p != null ? p.Method : "Not Paid",
+                            PaidAt = p != null ? p.PaidAt : null
+                        }
+                    );
+
+                if (searchBy == "Order ID")
+                {
+                    if (value == "")
+                    {
+                        MessageBox.Show("Enter Order ID");
+                        return;
+                    }
+
+                    int orderId;
+                    if (!int.TryParse(value, out orderId))
+                    {
+                        MessageBox.Show("Order ID must be a number");
+                        return;
+                    }
+
+                    query = query.Where(x => x.OrderId == orderId);
+                }
+                else if (searchBy == "Customer Name")
+                {
+                    if (value == "")
+                    {
+                        MessageBox.Show("Enter Customer Name");
+                        return;
+                    }
+
+                    query = query.Where(x => x.CustomerName.Contains(value));
+                }
+                else if (searchBy == "Customer Phone")
+                {
+                    if (value == "")
+                    {
+                        MessageBox.Show("Enter Customer Phone");
+                        return;
+                    }
+
+                    query = query.Where(x => x.CustomerPhone.Contains(value));
+                }
+                else if (searchBy == "Payment Method")
+                {
+                    if (value == "")
+                    {
+                        MessageBox.Show("Enter Payment Method");
+                        return;
+                    }
+
+                    query = query.Where(x => x.PaymentMethod.Contains(value));
+                }
+                else if (searchBy == "Order Type")
+                {
+                    if (value == "")
+                    {
+                        MessageBox.Show("Enter Order Type");
+                        return;
+                    }
+
+                    query = query.Where(x => x.OrderType.Contains(value));
+                }
+                else if (searchBy == "Status")
+                {
+                    if (value == "")
+                    {
+                        MessageBox.Show("Enter Status");
+                        return;
+                    }
+
+                    query = query.Where(x => x.Status.Contains(value));
+                }
+                else
+                {
+                    MessageBox.Show("Please select Search By");
+                    return;
+                }
+
+                dgv_payment_history.DataSource = query
+                    .OrderByDescending(x => x.OrderId)
+                    .ToList();
+            }
+
+            dgv_payment_history.ClearSelection();
+            flowLayoutPanel_payment_items.Controls.Clear();
+            selectedPaymentOrderId = 0;
+        }
+
+        private void btn_clear_payment_Click(object sender, EventArgs e)
+        {
+            searchby_payment.SelectedIndex = -1;
+            search_payment.Clear();
+            selectedPaymentOrderId = 0;
+
+            flowLayoutPanel_payment_items.Controls.Clear();
+            LoadPaymentHistory();
+        }
+
+        private void btn_print_payment_Click(object sender, EventArgs e)
+        {
+            if (selectedPaymentOrderId == 0)
+            {
+                MessageBox.Show("Please double click an order first");
+                return;
+            }
+
+            try
+            {
+                string folder = Path.Combine(Application.StartupPath, "Invoices");
+
+                if (!Directory.Exists(folder))
+                    Directory.CreateDirectory(folder);
+
+                string filePath = Path.Combine(
+                    folder,
+                    "Invoice_Order_" + selectedPaymentOrderId + "_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf"
+                );
+
+                InvoicePdfHelper.CreateInvoicePdf(filePath, selectedPaymentOrderId);
+
+                MessageBox.Show("PDF invoice created successfully!");
+
+                Process.Start(filePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Message: " + ex.Message +
+                    "\n\nType: " + ex.GetType().FullName +
+                    "\n\nInner: " + (ex.InnerException != null ? ex.InnerException.Message : "No inner exception")
+                );
+            }
+        }
+
+        private void dgv_payment_history_DoubleClick(object sender, EventArgs e)
+        {
+            if (dgv_payment_history.CurrentRow == null || dgv_payment_history.CurrentRow.Index == -1)
+                return;
+
+            selectedPaymentOrderId = Convert.ToInt32(dgv_payment_history.CurrentRow.Cells["OrderId"].Value);
+
+            LoadPaymentOrderItems(selectedPaymentOrderId);
         }
     }
 }

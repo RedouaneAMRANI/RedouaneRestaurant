@@ -40,6 +40,11 @@
       <End Role="RestaurantTable" EntitySet="RestaurantTables" />
       <End Role="Order" EntitySet="Orders" />
     </AssociationSet>
+    <EntitySet Name="Payments" EntityType="RestaurantManagementModel.Payment" />
+    <AssociationSet Name="FK_Payments_Orders" Association="RestaurantManagementModel.FK_Payments_Orders">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Product">
     <Key>
@@ -118,6 +123,7 @@
     <NavigationProperty Name="OrderItems" Relationship="RestaurantManagementModel.FK_OrderItems_Orders" FromRole="Order" ToRole="OrderItem" />
     <NavigationProperty Name="Reservation" Relationship="RestaurantManagementModel.FK__Orders__Reservat__40058253" FromRole="Order" ToRole="Reservation" />
     <NavigationProperty Name="RestaurantTable" Relationship="RestaurantManagementModel.FK_Orders_Tables" FromRole="Order" ToRole="RestaurantTable" />
+    <NavigationProperty Name="Payments" Relationship="RestaurantManagementModel.FK_Payments_Orders" FromRole="Order" ToRole="Payment" />
   </EntityType>
   <Association Name="FK_OrderItems_Orders">
     <End Type="RestaurantManagementModel.Order" Role="Order" Multiplicity="1" />
@@ -164,6 +170,29 @@
       </Principal>
       <Dependent Role="Order">
         <PropertyRef Name="TableId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="PaymentId" />
+    </Key>
+    <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="Method" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <Property Name="PaidAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Order" Relationship="RestaurantManagementModel.FK_Payments_Orders" FromRole="Payment" ToRole="Order" />
+  </EntityType>
+  <Association Name="FK_Payments_Orders">
+    <End Type="RestaurantManagementModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="RestaurantManagementModel.Payment" Role="Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="OrderId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

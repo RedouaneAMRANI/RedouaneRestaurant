@@ -17,6 +17,7 @@ namespace RestaurantManagement
         public Order()
         {
             this.OrderItems = new HashSet<OrderItem>();
+            this.Payments = new HashSet<Payment>();
         }
     
         public int OrderId { get; set; }
@@ -32,5 +33,6 @@ namespace RestaurantManagement
         public virtual ICollection<OrderItem> OrderItems { get; set; }
         public virtual Reservation Reservation { get; set; }
         public virtual RestaurantTable RestaurantTable { get; set; }
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }
