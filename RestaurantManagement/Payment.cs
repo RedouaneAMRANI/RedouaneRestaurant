@@ -17,7 +17,7 @@ namespace RestaurantManagement
         public int PaymentId { get; set; }
         public int OrderId { get; set; }
         public string Method { get; set; }
-        public double Amount { get; set; }
+        public Nullable<decimal> Amount { get; set; }
         public Nullable<System.DateTime> PaidAt { get; set; }
     
         public virtual Order Order { get; set; }

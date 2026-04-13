@@ -30,6 +30,7 @@ namespace RestaurantManagement
         private object _reservedTableId;
 
         public bool PaymentCompleted { get; private set; } = false;
+        private int _editingOrderId = 0;
 
         public PaymentForm(
             List<CartItemModel> cartItems,
@@ -38,7 +39,8 @@ namespace RestaurantManagement
             string customerName,
             string customerPhone,
             object tableId,
-            object reservedTableId)
+            object reservedTableId,
+            int orderId = 0)
         {
             InitializeComponent();
 
@@ -57,6 +59,7 @@ namespace RestaurantManagement
             _customerPhone = customerPhone;
             _tableId = tableId;
             _reservedTableId = reservedTableId;
+            _editingOrderId = orderId;
         }
 
         private void PaymentForm_Load(object sender, EventArgs e)
@@ -128,30 +131,56 @@ namespace RestaurantManagement
 
             using (EFDBEntities db = new EFDBEntities())
             {
-                Order newOrder = new Order();
+                Order order;
+                bool isNewOrder = (_editingOrderId == 0);
 
-                newOrder.OrderType = _orderType;
-                newOrder.Status = _status;
-                if (Regex.IsMatch(_customerName, @"^[a-zA-Z0-9]+$"))
+                // 1) ORDER
+                if (isNewOrder)
                 {
-                    newOrder.CustomerName = _customerName;
+                    order = new Order();
+                    db.Orders.Add(order);
                 }
                 else
                 {
-                    MessageBox.Show("customername must contain only letters");
-                    return;
+                    order = db.Orders.Find(_editingOrderId);
+
+                    if (order == null)
+                    {
+                        MessageBox.Show("Order not found");
+                        return;
+                    }
                 }
-                newOrder.CustomerName = _customerName;
-                newOrder.CustomerPhone = _customerPhone;
-                newOrder.CreatedAt = DateTime.Now;
-                newOrder.Price = _cartItems.Sum(x => x.Total);
+
+                order.OrderType = _orderType;
+                order.Status = _status;
+
+                if (!string.IsNullOrWhiteSpace(_customerName))
+                {
+                    if (Regex.IsMatch(_customerName, @"^[a-zA-Z0-9]+$"))
+                    {
+                        order.CustomerName = _customerName.Trim();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Customer name must contain only letters and numbers");
+                        return;
+                    }
+                }
+                else
+                {
+                    order.CustomerName = _customerName;
+                }
+
+                order.CustomerPhone = _customerPhone;
+                order.CreatedAt = order.CreatedAt ?? DateTime.Now;
+                order.Price = (decimal)_cartItems.Sum(x => x.Total);
 
                 if (_orderType == "DineIn")
                 {
                     if (_tableId != null)
                     {
                         int tableId = Convert.ToInt32(_tableId);
-                        newOrder.TableId = tableId;
+                        order.TableId = tableId;
 
                         var table = db.RestaurantTables.Find(tableId);
                         if (table != null)
@@ -162,15 +191,15 @@ namespace RestaurantManagement
                     else if (_reservedTableId != null)
                     {
                         int tableId = Convert.ToInt32(_reservedTableId);
-                        newOrder.TableId = tableId;
+                        order.TableId = tableId;
 
                         var reservation = db.Reservations
                             .FirstOrDefault(r => r.TableId == tableId && r.Status == "Reserved");
 
                         if (reservation != null)
                         {
-                            newOrder.CustomerName = reservation.CustomerName;
-                            newOrder.CustomerPhone = reservation.CustomerPhone;
+                            order.CustomerName = reservation.CustomerName;
+                            order.CustomerPhone = reservation.CustomerPhone;
                             reservation.Status = "Completed";
 
                             var table = db.RestaurantTables.Find(tableId);
@@ -194,41 +223,79 @@ namespace RestaurantManagement
                         return;
                     }
 
-                    newOrder.TableId = null;
+                    order.TableId = null;
                 }
 
-                db.Orders.Add(newOrder);
                 db.SaveChanges();
+
+                if (isNewOrder)
+                    ActivityLogger.Log("Insert", "Orders", order.OrderId);
+                else
+                    ActivityLogger.Log("Update", "Orders", order.OrderId);
+
+                if (!isNewOrder)
+                {
+                    var oldItems = db.OrderItems.Where(x => x.OrderId == order.OrderId).ToList();
+                    foreach (var oldItem in oldItems)
+                    {
+                        db.OrderItems.Remove(oldItem);
+                    }
+                    db.SaveChanges();
+                }
 
                 foreach (var item in _cartItems)
                 {
                     OrderItem oi = new OrderItem();
-                    oi.OrderId = newOrder.OrderId;
+                    oi.OrderId = order.OrderId;
                     oi.ProductId = item.ProductId;
                     oi.Quantity = item.Quantity;
-                    oi.UnitPrice = item.UnitPrice;
+                    oi.UnitPrice = (decimal)item.UnitPrice;
 
                     db.OrderItems.Add(oi);
                 }
 
                 db.SaveChanges();
 
-                Payment pay = new Payment();
-                pay.OrderId = newOrder.OrderId;
-                pay.Method = method;
-                pay.Amount = _cartItems.Sum(x => x.Total);
-                pay.PaidAt = DateTime.Now;
+                var existingPayment = db.Payments.FirstOrDefault(p => p.OrderId == order.OrderId);
+                int? paymentIdForLog = null;
 
-                db.Payments.Add(pay);
-                db.SaveChanges();
+                if (existingPayment == null)
+                {
+                    Payment pay = new Payment();
+                    pay.OrderId = order.OrderId;
+                    pay.Method = method;
+                    pay.Amount = (decimal)_cartItems.Sum(x => x.Total);
+                    pay.PaidAt = DateTime.Now;
 
-                _savedOrderId = newOrder.OrderId;
+                    db.Payments.Add(pay);
+                    db.SaveChanges();
+
+                    paymentIdForLog = pay.PaymentId;
+
+                    ActivityLogger.Log("Add Payment", "Payments", pay.PaymentId);
+                }
+                else
+                {
+                    existingPayment.Method = method;
+                    existingPayment.Amount = (decimal)_cartItems.Sum(x => x.Total);
+                    existingPayment.PaidAt = DateTime.Now;
+
+                    db.SaveChanges();
+
+                    paymentIdForLog = existingPayment.PaymentId;
+
+                    ActivityLogger.Log("Update Payment", "Payments", existingPayment.PaymentId);
+                }
+
+                _savedOrderId = order.OrderId;
                 _isPaid = true;
                 PaymentCompleted = true;
 
                 lbl_orderid.Text = _savedOrderId.ToString();
 
-                MessageBox.Show("Order + Payment saved successfully!");
+                MessageBox.Show(isNewOrder
+                    ? "Order + Payment saved successfully!"
+                    : "Order + Payment updated successfully!");
 
                 string folder = Path.Combine(Application.StartupPath, "Invoices");
                 if (!Directory.Exists(folder))
@@ -242,6 +309,8 @@ namespace RestaurantManagement
                 InvoicePdfHelper.CreateInvoicePdf(filePath, _savedOrderId);
 
                 Process.Start(filePath);
+
+                ActivityLogger.Log("Print Invoice", "Orders", _savedOrderId);
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();

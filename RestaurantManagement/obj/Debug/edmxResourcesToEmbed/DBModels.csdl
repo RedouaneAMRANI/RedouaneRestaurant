@@ -12,6 +12,7 @@
     <Property Name="IsActive" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="EmployeeActivities" Relationship="RestaurantManagementModel.FK_EmployeeActivities_Users" FromRole="User" ToRole="EmployeeActivity" />
   </EntityType>
   <EntityContainer Name="EFDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Users" EntityType="Self.User" />
@@ -45,6 +46,11 @@
       <End Role="Order" EntitySet="Orders" />
       <End Role="Payment" EntitySet="Payments" />
     </AssociationSet>
+    <EntitySet Name="EmployeeActivities" EntityType="RestaurantManagementModel.EmployeeActivity" />
+    <AssociationSet Name="FK_EmployeeActivities_Users" Association="RestaurantManagementModel.FK_EmployeeActivities_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="EmployeeActivity" EntitySet="EmployeeActivities" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Product">
     <Key>
@@ -52,7 +58,7 @@
     </Key>
     <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Price" Type="Decimal" />
     <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="Category" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="IsAvailable" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -103,7 +109,7 @@
     <Property Name="OrderId" Type="Int32" Nullable="false" />
     <Property Name="ProductId" Type="Int32" Nullable="false" />
     <Property Name="Quantity" Type="Int32" Nullable="false" />
-    <Property Name="UnitPrice" Type="Double" Nullable="false" />
+    <Property Name="UnitPrice" Type="Decimal" />
     <NavigationProperty Name="Order" Relationship="RestaurantManagementModel.FK_OrderItems_Orders" FromRole="OrderItem" ToRole="Order" />
     <NavigationProperty Name="Product" Relationship="RestaurantManagementModel.FK_OrderItems_Products" FromRole="OrderItem" ToRole="Product" />
   </EntityType>
@@ -119,7 +125,7 @@
     <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="CustomerPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="CreatedAt" Type="DateTime" Precision="3" />
-    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Price" Type="Decimal" />
     <NavigationProperty Name="OrderItems" Relationship="RestaurantManagementModel.FK_OrderItems_Orders" FromRole="Order" ToRole="OrderItem" />
     <NavigationProperty Name="Reservation" Relationship="RestaurantManagementModel.FK__Orders__Reservat__40058253" FromRole="Order" ToRole="Reservation" />
     <NavigationProperty Name="RestaurantTable" Relationship="RestaurantManagementModel.FK_Orders_Tables" FromRole="Order" ToRole="RestaurantTable" />
@@ -180,7 +186,7 @@
     <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="OrderId" Type="Int32" Nullable="false" />
     <Property Name="Method" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Amount" Type="Double" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" />
     <Property Name="PaidAt" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Order" Relationship="RestaurantManagementModel.FK_Payments_Orders" FromRole="Payment" ToRole="Order" />
   </EntityType>
@@ -193,6 +199,30 @@
       </Principal>
       <Dependent Role="Payment">
         <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="EmployeeActivity">
+    <Key>
+      <PropertyRef Name="ActivityId" />
+    </Key>
+    <Property Name="ActivityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CNIE" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="Action" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Entity" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntityId" Type="Int32" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="User" Relationship="RestaurantManagementModel.FK_EmployeeActivities_Users" FromRole="EmployeeActivity" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_EmployeeActivities_Users">
+    <End Type="RestaurantManagementModel.User" Role="User" Multiplicity="1" />
+    <End Type="RestaurantManagementModel.EmployeeActivity" Role="EmployeeActivity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="CNIE" />
+      </Principal>
+      <Dependent Role="EmployeeActivity">
+        <PropertyRef Name="CNIE" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

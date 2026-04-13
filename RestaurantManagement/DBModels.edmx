@@ -5,6 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="RestaurantManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EmployeeActivities">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CNIE" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="Action" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Entity" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EntityId" Type="int" />
+          <Property Name="CreatedAt" Type="datetime" />
+        </EntityType>
         <EntityType Name="OrderItems">
           <Key>
             <PropertyRef Name="OrderItemId" />
@@ -13,7 +24,7 @@
           <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
-          <Property Name="UnitPrice" Type="float" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -27,7 +38,7 @@
           <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
           <Property Name="CustomerPhone" Type="nvarchar" MaxLength="20" />
           <Property Name="CreatedAt" Type="datetime" />
-          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Payments">
           <Key>
@@ -36,7 +47,7 @@
           <Property Name="PaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="Method" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
           <Property Name="PaidAt" Type="datetime" />
         </EntityType>
         <EntityType Name="Products">
@@ -45,7 +56,7 @@
           </Key>
           <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Image" Type="varbinary(max)" />
           <Property Name="Category" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="IsAvailable" Type="nvarchar" MaxLength="20" Nullable="false" />
@@ -108,6 +119,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_EmployeeActivities_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="EmployeeActivities" Type="Self.EmployeeActivities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="CNIE" />
+            </Principal>
+            <Dependent Role="EmployeeActivities">
+              <PropertyRef Name="CNIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderItems_Orders">
           <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
           <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
@@ -157,6 +180,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="RestaurantManagementModelStoreContainer">
+          <EntitySet Name="EmployeeActivities" EntityType="Self.EmployeeActivities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
@@ -171,6 +195,10 @@
           <AssociationSet Name="FK__Reservati__Table__503BEA1C" Association="Self.FK__Reservati__Table__503BEA1C">
             <End Role="RestaurantTables" EntitySet="RestaurantTables" />
             <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeActivities_Users" Association="Self.FK_EmployeeActivities_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="EmployeeActivities" EntitySet="EmployeeActivities" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderItems_Orders" Association="Self.FK_OrderItems_Orders">
             <End Role="Orders" EntitySet="Orders" />
@@ -205,6 +233,7 @@
           <Property Name="IsActive" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EmployeeActivities" Relationship="RestaurantManagementModel.FK_EmployeeActivities_Users" FromRole="User" ToRole="EmployeeActivity" />
         </EntityType>
         <EntityContainer Name="EFDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Self.User" />
@@ -238,6 +267,11 @@
             <End Role="Order" EntitySet="Orders" />
             <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
+          <EntitySet Name="EmployeeActivities" EntityType="RestaurantManagementModel.EmployeeActivity" />
+          <AssociationSet Name="FK_EmployeeActivities_Users" Association="RestaurantManagementModel.FK_EmployeeActivities_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="EmployeeActivity" EntitySet="EmployeeActivities" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Product">
           <Key>
@@ -245,7 +279,7 @@
           </Key>
           <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Price" Type="Decimal" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Category" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="IsAvailable" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -296,7 +330,7 @@
           <Property Name="OrderId" Type="Int32" Nullable="false" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="UnitPrice" Type="Double" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" />
           <NavigationProperty Name="Order" Relationship="RestaurantManagementModel.FK_OrderItems_Orders" FromRole="OrderItem" ToRole="Order" />
           <NavigationProperty Name="Product" Relationship="RestaurantManagementModel.FK_OrderItems_Products" FromRole="OrderItem" ToRole="Product" />
         </EntityType>
@@ -312,7 +346,7 @@
           <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CustomerPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
-          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Price" Type="Decimal" />
           <NavigationProperty Name="OrderItems" Relationship="RestaurantManagementModel.FK_OrderItems_Orders" FromRole="Order" ToRole="OrderItem" />
           <NavigationProperty Name="Reservation" Relationship="RestaurantManagementModel.FK__Orders__Reservat__40058253" FromRole="Order" ToRole="Reservation" />
           <NavigationProperty Name="RestaurantTable" Relationship="RestaurantManagementModel.FK_Orders_Tables" FromRole="Order" ToRole="RestaurantTable" />
@@ -373,7 +407,7 @@
           <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OrderId" Type="Int32" Nullable="false" />
           <Property Name="Method" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" />
           <Property Name="PaidAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Order" Relationship="RestaurantManagementModel.FK_Payments_Orders" FromRole="Payment" ToRole="Order" />
         </EntityType>
@@ -386,6 +420,30 @@
             </Principal>
             <Dependent Role="Payment">
               <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EmployeeActivity">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CNIE" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Action" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Entity" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EntityId" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="RestaurantManagementModel.FK_EmployeeActivities_Users" FromRole="EmployeeActivity" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_EmployeeActivities_Users">
+          <End Type="RestaurantManagementModel.User" Role="User" Multiplicity="1" />
+          <End Type="RestaurantManagementModel.EmployeeActivity" Role="EmployeeActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="CNIE" />
+            </Principal>
+            <Dependent Role="EmployeeActivity">
+              <PropertyRef Name="CNIE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -478,6 +536,18 @@
                 <ScalarProperty Name="Method" ColumnName="Method" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeActivities">
+            <EntityTypeMapping TypeName="RestaurantManagementModel.EmployeeActivity">
+              <MappingFragment StoreEntitySet="EmployeeActivities">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="EntityId" ColumnName="EntityId" />
+                <ScalarProperty Name="Entity" ColumnName="Entity" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="CNIE" ColumnName="CNIE" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

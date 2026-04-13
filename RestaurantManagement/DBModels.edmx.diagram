@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7f96ae458c03400693ed069b56e27c43" Name="Diagram1">
-        <EntityTypeShape EntityType="RestaurantManagementModel.User" Width="2.5" PointX="14.375" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestaurantManagementModel.User" Width="2.5" PointX="14.125" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="RestaurantManagementModel.Product" Width="1.5" PointX="10.25" PointY="2.125" />
         <EntityTypeShape EntityType="RestaurantManagementModel.RestaurantTable" Width="1.5" PointX="1.375" PointY="2.5" />
         <EntityTypeShape EntityType="RestaurantManagementModel.Reservation" Width="1.5" PointX="6.125" PointY="2" />
@@ -18,6 +18,8 @@
         <AssociationConnector Association="RestaurantManagementModel.FK_Orders_Tables" />
         <EntityTypeShape EntityType="RestaurantManagementModel.Payment" Width="1.5" PointX="1.625" PointY="7" />
         <AssociationConnector Association="RestaurantManagementModel.FK_Payments_Orders" />
+        <EntityTypeShape EntityType="RestaurantManagementModel.EmployeeActivity" Width="1.5" PointX="14.625" PointY="6.5" />
+        <AssociationConnector Association="RestaurantManagementModel.FK_EmployeeActivities_Users" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -174,7 +174,7 @@
             this.lbl_orderid.BackColor = System.Drawing.Color.Transparent;
             this.lbl_orderid.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_orderid.ForeColor = System.Drawing.Color.Black;
-            this.lbl_orderid.Location = new System.Drawing.Point(213, 139);
+            this.lbl_orderid.Location = new System.Drawing.Point(196, 139);
             this.lbl_orderid.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_orderid.Name = "lbl_orderid";
             this.lbl_orderid.Size = new System.Drawing.Size(49, 19);
@@ -187,7 +187,7 @@
             this.lbl_table_type.BackColor = System.Drawing.Color.Transparent;
             this.lbl_table_type.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_table_type.ForeColor = System.Drawing.Color.Black;
-            this.lbl_table_type.Location = new System.Drawing.Point(213, 191);
+            this.lbl_table_type.Location = new System.Drawing.Point(202, 191);
             this.lbl_table_type.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_table_type.Name = "lbl_table_type";
             this.lbl_table_type.Size = new System.Drawing.Size(49, 19);
@@ -200,7 +200,7 @@
             this.lbl_status.BackColor = System.Drawing.Color.Transparent;
             this.lbl_status.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_status.ForeColor = System.Drawing.Color.Black;
-            this.lbl_status.Location = new System.Drawing.Point(213, 246);
+            this.lbl_status.Location = new System.Drawing.Point(202, 246);
             this.lbl_status.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_status.Name = "lbl_status";
             this.lbl_status.Size = new System.Drawing.Size(49, 19);
@@ -213,7 +213,7 @@
             this.lbl_source.BackColor = System.Drawing.Color.Transparent;
             this.lbl_source.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_source.ForeColor = System.Drawing.Color.Black;
-            this.lbl_source.Location = new System.Drawing.Point(213, 301);
+            this.lbl_source.Location = new System.Drawing.Point(202, 301);
             this.lbl_source.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_source.Name = "lbl_source";
             this.lbl_source.Size = new System.Drawing.Size(49, 19);

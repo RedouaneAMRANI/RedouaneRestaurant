@@ -32,5 +32,6 @@ namespace RestaurantManagement
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<EmployeeActivity> EmployeeActivities { get; set; }
     }
 }

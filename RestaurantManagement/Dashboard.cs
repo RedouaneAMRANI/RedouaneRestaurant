@@ -52,18 +52,57 @@ namespace RestaurantManagement
             picture_products.Image = picture_products.BackgroundImage;
             picture_products.BackgroundImageLayout = ImageLayout.Stretch;
 
+            lbl_fullname.Text = CurrentUser.Username;
+            lbl_role.Text = CurrentUser.Role;
+
+            if (CurrentUser.Image != null && CurrentUser.Image.Length > 0)
+            {
+                using (MemoryStream ms = new MemoryStream(CurrentUser.Image))
+                {
+                    picture_auth.BackgroundImage = Image.FromStream(ms);
+                }
+            }
+            else
+            {
+                picture_user.BackgroundImage = picture_auth.BackgroundImage;
+            }
+
             LoadUser();
             LoadProducts();
             LoadTables();
             LoadOrders_Products();
             LoadPaymentSearchBy();
             LoadPaymentHistory();
+            LoadActivityCNIE();
+            LoadActivityLog();
+
+            dgv_activity_log.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_activity_log.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_activity_log.MultiSelect = false;
+            dgv_activity_log.ReadOnly = true;
+            dgv_activity_log.AllowUserToAddRows = false;
 
             dgv_payment_history.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_payment_history.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_payment_history.MultiSelect = false;
             dgv_payment_history.ReadOnly = true;
             dgv_payment_history.AllowUserToAddRows = false;
+
+            LoadDashboardStats();
+            LoadRecentOrdersDashboard();
+            LoadRecentActivitiesDashboard();
+
+            dgv_recent_orders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_recent_orders.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_recent_orders.MultiSelect = false;
+            dgv_recent_orders.ReadOnly = true;
+            dgv_recent_orders.AllowUserToAddRows = false;
+
+            dgv_recent_activity.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_recent_activity.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_recent_activity.MultiSelect = false;
+            dgv_recent_activity.ReadOnly = true;
+            dgv_recent_activity.AllowUserToAddRows = false;
 
             //Timer date and time
             timer1.Interval = 1000;
@@ -105,6 +144,13 @@ namespace RestaurantManagement
         //////////////////// Logout button
         private void btn_logout_Click(object sender, EventArgs e)
         {
+            ActivityLogger.Log("Logout", "Auth", null);
+
+            CurrentUser.CNIE = null;
+            CurrentUser.Username = null;
+            CurrentUser.Role = null;
+            CurrentUser.Image = null;
+
             Auth auth = new Auth();
             auth.Show();
             this.Close();
@@ -342,7 +388,7 @@ namespace RestaurantManagement
                         }
                         if (password.Text.Length == 4)
                         {
-                            model_User.PasswordHash = ComputeHash(password.Text.Trim());
+                            model_User.PasswordHash = PasswordHelper.ComputeHash(password.Text.Trim());
                             db.Users.Add(model_User);
                         }
                         else
@@ -537,7 +583,7 @@ namespace RestaurantManagement
                 }
                 if (decimal.TryParse(price_products.Text.Trim(), out decimal price))
                 {
-                    model_Products.Price = (double)price;
+                    model_Products.Price = (decimal)price;
                 }
                 else
                 {
@@ -555,6 +601,8 @@ namespace RestaurantManagement
                     if (model_Products.ProductId == 0)
                     {
                         db.Products.Add(model_Products);
+                        db.SaveChanges();
+                        ActivityLogger.Log("Insert", "Products", model_Products.ProductId);
                     }
                     else
                     {
@@ -574,9 +622,14 @@ namespace RestaurantManagement
                         {
                             existingProduct.Image = File.ReadAllBytes(picture_products.ImageLocation);
                         }
+                        db.SaveChanges();
+                        ActivityLogger.Log("Update", "Products", existingProduct.ProductId);
                     }
-                    db.SaveChanges();
                 }
+                LoadDashboardStats();
+                LoadRecentOrdersDashboard();
+                LoadRecentActivitiesDashboard();
+
                 ClearProducts();
                 MessageBox.Show("Submitted successfully!");
             }
@@ -756,8 +809,12 @@ namespace RestaurantManagement
                         newReservation.Reserveat = datereservation.Value;
 
                         db.Reservations.Add(newReservation);
-
                         table.Status = "Reserved";
+
+                        db.SaveChanges();
+
+                        ActivityLogger.Log("Insert", "Reservations", newReservation.ReservationId);
+
                     }
                     else
                     {
@@ -781,12 +838,15 @@ namespace RestaurantManagement
                             table.Status = "Free";
                         else
                             table.Status = "Reserved";
-
+                        db.SaveChanges();
+                        ActivityLogger.Log("Update", "Reservations", existingReservation.ReservationId);
                     }
-                    db.SaveChanges();
                     LoadTables();
-                    //LoadOrders();
                 }
+                LoadDashboardStats();
+                LoadRecentOrdersDashboard();
+                LoadRecentActivitiesDashboard();
+
                 ClearTables();
                 MessageBox.Show("Submitted successfully!");
             }
@@ -848,7 +908,6 @@ namespace RestaurantManagement
         }
 
         //////////////////// Orders
-
         void ClearOrders()
         {
             isLoadingOrderData = true;
@@ -1107,7 +1166,8 @@ namespace RestaurantManagement
                    customername_orders.Text,
                    customerphone_orders.Text,
                    table_orders.SelectedValue,
-                   tablereserved_orders.SelectedValue
+                   tablereserved_orders.SelectedValue,
+                   model_Order.OrderId
                 );
 
                 DialogResult result = frm.ShowDialog();
@@ -1116,6 +1176,10 @@ namespace RestaurantManagement
                 {
                     ClearOrders();
                     LoadOrders_Products();
+
+                    LoadDashboardStats();
+                    LoadRecentOrdersDashboard();
+                    LoadRecentActivitiesDashboard();
                 }
             }
             else
@@ -1295,7 +1359,6 @@ namespace RestaurantManagement
         }
 
         //////////////////// Payment
-
         void LoadPaymentHistory()
         {
             using (EFDBEntities db = new EFDBEntities())
@@ -1565,6 +1628,265 @@ namespace RestaurantManagement
             selectedPaymentOrderId = Convert.ToInt32(dgv_payment_history.CurrentRow.Cells["OrderId"].Value);
 
             LoadPaymentOrderItems(selectedPaymentOrderId);
+        }
+
+        //////////////////// Activity Log
+        void LoadActivityCNIE()
+        {
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                var users = db.Users
+                    .Select(u => new
+                    {
+                        u.CNIE
+                    })
+                    .OrderBy(u => u.CNIE)
+                    .ToList();
+
+                cnie_activity.DataSource = users;
+                cnie_activity.DisplayMember = "CNIE";
+                cnie_activity.ValueMember = "CNIE";
+                cnie_activity.SelectedIndex = -1;
+                cnie_activity.Text = "";
+            }
+        }
+
+        void LoadActivityLog()
+        {
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                var result = db.EmployeeActivities
+                    .Join(
+                        db.Users,
+                        a => a.CNIE,
+                        u => u.CNIE,
+                        (a, u) => new
+                        {
+                            a.ActivityId,
+                            a.CNIE,
+                            FullName = u.LastName + " " + u.FIrstName,
+                            a.Action,
+                            a.Entity,
+                            a.EntityId,
+                            a.CreatedAt
+                        }
+                    )
+                    .OrderByDescending(x => x.ActivityId)
+                    .ToList();
+
+                dgv_activity_log.DataSource = result;
+            }
+        }
+
+        private void btn_search_activity_Click(object sender, EventArgs e)
+        {
+            string entityText = entity_activity.Text.Trim();
+
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                var query = db.EmployeeActivities
+                    .Join(
+                        db.Users,
+                        a => a.CNIE,
+                        u => u.CNIE,
+                        (a, u) => new
+                        {
+                            a.ActivityId,
+                            a.CNIE,
+                            FullName = u.LastName + " " + u.FIrstName,
+                            a.Action,
+                            a.Entity,
+                            a.EntityId,
+                            a.CreatedAt
+                        }
+                    );
+
+                if (cnie_activity.SelectedIndex != -1 && cnie_activity.SelectedValue != null)
+                {
+                    string cnie = cnie_activity.SelectedValue.ToString();
+                    query = query.Where(x => x.CNIE == cnie);
+                }
+
+                if (!string.IsNullOrWhiteSpace(entityText))
+                {
+                    query = query.Where(x => x.Entity.Contains(entityText));
+                }
+
+                dgv_activity_log.DataSource = query
+                    .OrderByDescending(x => x.ActivityId)
+                    .ToList();
+            }
+        }
+
+        private void btn_clear_activity_Click(object sender, EventArgs e)
+        {
+            cnie_activity.SelectedIndex = -1;
+            cnie_activity.Text = "";
+            entity_activity.SelectedIndex = -1;
+
+            LoadActivityLog();
+        }
+
+        private void dgv_activity_log_DoubleClick(object sender, EventArgs e)
+        {
+            if (dgv_activity_log.CurrentRow == null || dgv_activity_log.CurrentRow.Index == -1)
+                return;
+
+            string cnie = dgv_activity_log.CurrentRow.Cells["CNIE"].Value.ToString();
+        }
+
+        //////////////////// Statistics
+        void LoadDashboardStats()
+        {
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                DateTime today = DateTime.Today;
+                DateTime tomorrow = today.AddDays(1);
+
+                // Total Orders Today
+                int totalOrdersToday = db.Orders
+                    .Count(o => o.CreatedAt >= today && o.CreatedAt < tomorrow);
+
+                lbl_total_orders_today.ForeColor = Color.FromArgb(52, 152, 219); // Blue
+                lbl_total_orders_today.Text = totalOrdersToday.ToString();
+
+                // Total Revenue Today
+                double totalRevenueToday = db.Payments
+                    .Where(p => p.PaidAt >= today && p.PaidAt < tomorrow)
+                    .Select(p => (double?)p.Amount)
+                    .Sum() ?? 0;
+
+                lbl_total_revenue_today.ForeColor = Color.FromArgb(46, 204, 113); // Green
+                lbl_total_revenue_today.Text = totalRevenueToday.ToString("0.00") + " MAD";
+
+                // Tables Status
+                int freeTables = db.RestaurantTables.Count(t => t.Status == "Free");
+                int occupiedTables = db.RestaurantTables.Count(t => t.Status == "Occupied");
+                int reservedTables = db.RestaurantTables.Count(t => t.Status == "Reserved");
+
+                lbl_tables_free.ForeColor = Color.FromArgb(46, 204, 113);
+                lbl_tables_free.Text = "Free : " + freeTables;
+                lbl_tables_occupied.ForeColor = Color.FromArgb(231, 76, 60);
+                lbl_tables_occupied.Text = "Occupied : " + occupiedTables;
+                lbl_tables_reserved.ForeColor = Color.FromArgb(241, 196, 15);
+                lbl_tables_reserved.Text = "Reserved : " + reservedTables;
+
+                // DineIn vs TakeAway Today
+                int dineInToday = db.Orders.Count(o =>
+                    o.CreatedAt >= today && o.CreatedAt < tomorrow && o.OrderType == "DineIn");
+
+                int takeAwayToday = db.Orders.Count(o =>
+                    o.CreatedAt >= today && o.CreatedAt < tomorrow && o.OrderType == "TakeAway");
+
+                lbl_dinein_today.ForeColor = Color.FromArgb(39, 174, 96);
+                lbl_dinein_today.Text = dineInToday.ToString();
+                lbl_takeaway_today.ForeColor = Color.FromArgb(230, 126, 34);
+                lbl_takeaway_today.Text = takeAwayToday.ToString();
+
+                // Notifications count
+                lbl_notifications_count.ForeColor = Color.FromArgb(231, 76, 60); // Red
+                int notificationsCount = db.Orders.Count(o => o.Status == "WaitList");
+                lbl_notifications_count.Text = notificationsCount.ToString();
+            }
+        }
+
+        void LoadRecentOrdersDashboard()
+        {
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                var recentOrders = db.Orders
+                    .OrderByDescending(o => o.OrderId)
+                    .Take(10)
+                    .Select(o => new
+                    {
+                        o.OrderId,
+                        o.CustomerName,
+                        o.CustomerPhone,
+                        o.OrderType,
+                        o.Status,
+                        o.Price,
+                        o.CreatedAt
+                    })
+                    .ToList();
+
+                dgv_recent_orders.DataSource = recentOrders;
+            }
+
+            dgv_recent_orders.ClearSelection();
+        }
+
+        void LoadRecentActivitiesDashboard()
+        {
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                var recentActivities = db.EmployeeActivities
+                    .Join(
+                        db.Users,
+                        a => a.CNIE,
+                        u => u.CNIE,
+                        (a, u) => new
+                        {
+                            a.ActivityId,
+                            a.CNIE,
+                            FullName = u.LastName + " " + u.FIrstName,
+                            a.Action,
+                            a.Entity,
+                            a.EntityId,
+                            a.CreatedAt
+                        }
+                    )
+                    .OrderByDescending(x => x.ActivityId)
+                    .Take(10)
+                    .ToList();
+
+                dgv_recent_activity.DataSource = recentActivities;
+            }
+
+            dgv_recent_activity.ClearSelection();
+        }
+
+        private void btn_search_dashboard_Click(object sender, EventArgs e)
+        {
+            string value = search_dashboard.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                MessageBox.Show("Enter something to search");
+                return;
+            }
+
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                int orderId;
+                bool isNumber = int.TryParse(value, out orderId);
+
+                var orders = db.Orders
+                    .Where(o =>
+                        (isNumber && o.OrderId == orderId) || // OrderId
+                        o.CustomerName.Contains(value) ||     // Name
+                        o.CustomerPhone.Contains(value) ||    // Phone
+                        o.OrderType.Contains(value) ||        // Type
+                        o.Status.Contains(value)              // Status
+                    )
+                    .Select(o => new
+                    {
+                        o.OrderId,
+                        o.CustomerName,
+                        o.CustomerPhone,
+                        o.OrderType,
+                        o.Status,
+                        o.Price,
+                        o.CreatedAt
+                    })
+                    .ToList();
+
+                dgv_recent_orders.DataSource = orders;
+            }
+        }
+
+        private void search_dashboard_TextChanged(object sender, EventArgs e)
+        {
+            btn_search_dashboard.PerformClick();
         }
     }
 }

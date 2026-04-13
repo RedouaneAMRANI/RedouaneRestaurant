@@ -28,7 +28,7 @@ namespace RestaurantManagement
         public string CustomerName { get; set; }
         public string CustomerPhone { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
-        public double Price { get; set; }
+        public Nullable<decimal> Price { get; set; }
     
         public virtual ICollection<OrderItem> OrderItems { get; set; }
         public virtual Reservation Reservation { get; set; }

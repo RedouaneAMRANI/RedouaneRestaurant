@@ -87,5 +87,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeActivities">
+      <EntityTypeMapping TypeName="RestaurantManagementModel.EmployeeActivity">
+        <MappingFragment StoreEntitySet="EmployeeActivities">
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="EntityId" ColumnName="EntityId" />
+          <ScalarProperty Name="Entity" ColumnName="Entity" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="CNIE" ColumnName="CNIE" />
+          <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

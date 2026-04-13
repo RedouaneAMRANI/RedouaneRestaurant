@@ -14,6 +14,11 @@ namespace RestaurantManagement
     
     public partial class User
     {
+        public User()
+        {
+            this.EmployeeActivities = new HashSet<EmployeeActivity>();
+        }
+    
         public string CNIE { get; set; }
         public string LastName { get; set; }
         public string FIrstName { get; set; }
@@ -22,5 +27,7 @@ namespace RestaurantManagement
         public string IsActive { get; set; }
         public byte[] Image { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
+    
+        public virtual ICollection<EmployeeActivity> EmployeeActivities { get; set; }
     }
 }
