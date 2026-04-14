@@ -3,11 +3,11 @@
   "WorkspaceRootPath": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\restaurantmanagement\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|c:\\users\\redone1\\desktop\\projet\\restaurantmanagement\\restaurantmanagement\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|solutionrelative:restaurantmanagement\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|c:\\users\\redone1\\desktop\\projet\\restaurantmanagement\\restaurantmanagement\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\restaurantmanagement\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|solutionrelative:restaurantmanagement\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -28,7 +28,7 @@
               "RelativeDocumentMoniker": "RestaurantManagement\\Dashboard.cs",
               "ToolTip": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\RestaurantManagement\\Dashboard.cs",
               "RelativeToolTip": "RestaurantManagement\\Dashboard.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGMHAAABAAAAAAAAAA==",
+              "ViewState": "AgIAABgIAAAAAAAAAAAuwDQIAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-26T16:36:21.979Z",
               "EditorCaption": ""

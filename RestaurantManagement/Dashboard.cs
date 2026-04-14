@@ -104,6 +104,22 @@ namespace RestaurantManagement
             dgv_recent_activity.ReadOnly = true;
             dgv_recent_activity.AllowUserToAddRows = false;
 
+            LoadReportTypes();
+
+            dgv_reports.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_reports.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_reports.MultiSelect = false;
+            dgv_reports.ReadOnly = true;
+            dgv_reports.AllowUserToAddRows = false;
+
+            lbl_report_title.Text = "";
+            lbl_report_total.Text = "";
+
+            datefrom_report.Value = DateTime.Today;
+            dateto_report.Value = DateTime.Today;
+
+            dateto_report.MinDate = datefrom_report.Value;
+
             //Timer date and time
             timer1.Interval = 1000;
             timer1.Tick += Timer1_Tick;
@@ -115,7 +131,7 @@ namespace RestaurantManagement
             ActivateButton(btn_dashboard);
             dash.Visible = true;
             orders.Visible = false;
-            ordersbysite.Visible = false;
+            reports.Visible = false;
             products.Visible = false;
             table.Visible = false;
             staff.Visible = false;
@@ -180,6 +196,7 @@ namespace RestaurantManagement
             staff.Visible = false;
             payment.Visible = false;
             history.Visible = false;
+            reports.Visible = false;
         }
 
         private void btn_orders_Click(object sender, EventArgs e)
@@ -193,6 +210,7 @@ namespace RestaurantManagement
             staff.Visible = false;
             payment.Visible = false;
             history.Visible = false;
+            reports.Visible = false;
         }
 
         private void btn_menu_Click(object sender, EventArgs e)
@@ -206,6 +224,7 @@ namespace RestaurantManagement
             staff.Visible = false;
             payment.Visible = false;
             history.Visible = false;
+            reports.Visible = false;
         }
 
         private void btn_staff_Click(object sender, EventArgs e)
@@ -219,6 +238,8 @@ namespace RestaurantManagement
             dash.Visible = false;
             payment.Visible = false;
             history.Visible = false;
+            reports.Visible = false;
+
         }
 
         private void btn_payment_Click(object sender, EventArgs e)
@@ -232,6 +253,8 @@ namespace RestaurantManagement
             orders.Visible = false;
             dash.Visible = false;
             history.Visible = false;
+            reports.Visible = false;
+
         }
 
         private void btn_history_Click(object sender, EventArgs e)
@@ -245,6 +268,8 @@ namespace RestaurantManagement
             products.Visible = false;
             orders.Visible = false;
             dash.Visible = false;
+            reports.Visible = false;
+
         }
 
         private void btn_tables_Click(object sender, EventArgs e)
@@ -252,6 +277,21 @@ namespace RestaurantManagement
             ActivateButton(sender);
 
             table.Visible = true;
+            history.Visible = false;
+            payment.Visible = false;
+            staff.Visible = false;
+            products.Visible = false;
+            orders.Visible = false;
+            dash.Visible = false;
+            reports.Visible = false;
+        }
+
+        private void btn_reports_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender);
+
+            reports.Visible = true;
+            table.Visible = false;
             history.Visible = false;
             payment.Visible = false;
             staff.Visible = false;
@@ -627,6 +667,7 @@ namespace RestaurantManagement
                     }
                 }
                 LoadDashboardStats();
+                LoadReportsStats();
                 LoadRecentOrdersDashboard();
                 LoadRecentActivitiesDashboard();
 
@@ -844,6 +885,7 @@ namespace RestaurantManagement
                     LoadTables();
                 }
                 LoadDashboardStats();
+                LoadReportsStats();
                 LoadRecentOrdersDashboard();
                 LoadRecentActivitiesDashboard();
 
@@ -1178,6 +1220,7 @@ namespace RestaurantManagement
                     LoadOrders_Products();
 
                     LoadDashboardStats();
+                    LoadReportsStats();
                     LoadRecentOrdersDashboard();
                     LoadRecentActivitiesDashboard();
                 }
@@ -1887,6 +1930,321 @@ namespace RestaurantManagement
         private void search_dashboard_TextChanged(object sender, EventArgs e)
         {
             btn_search_dashboard.PerformClick();
+        }
+
+        //////////////////// Reports
+
+        void LoadReportsStats()
+        {
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                // Total Orders All Time
+                int totalOrders = db.Orders.Count();
+                lbl_total_orders_today.Text = totalOrders.ToString();
+
+                // Total Revenue All Time
+                decimal totalRevenue = db.Payments
+                    .Select(p => (decimal?)p.Amount)
+                    .Sum() ?? 0;
+
+                lbl_total_revenue_today.Text = totalRevenue.ToString("0.00") + " MAD";
+
+                // Tables Status
+                int freeTables = db.RestaurantTables.Count(t => t.Status == "Free");
+                int occupiedTables = db.RestaurantTables.Count(t => t.Status == "Occupied");
+                int reservedTables = db.RestaurantTables.Count(t => t.Status == "Reserved");
+
+                lbl_tables_free.Text = "Free : " + freeTables;
+                lbl_tables_occupied.Text = "Occupied : " + occupiedTables;
+                lbl_tables_reserved.Text = "Reserved : " + reservedTables;
+
+                // DineIn vs TakeAway All Time
+                int dineInCount = db.Orders.Count(o => o.OrderType == "DineIn");
+                int takeAwayCount = db.Orders.Count(o => o.OrderType == "TakeAway");
+
+                lbl_dinein_today.Text = dineInCount.ToString();
+                lbl_takeaway_today.Text = takeAwayCount.ToString();
+
+                // Notifications
+                int notificationsCount = db.Orders.Count(o => o.Status == "WaitList");
+                lbl_notifications_count.Text = notificationsCount.ToString();
+            }
+        }
+
+        void LoadReportTypes()
+        {
+            report_type.Items.Clear();
+
+            report_type.Items.Add("Sales by Day");
+            report_type.Items.Add("Sales by Month");
+            report_type.Items.Add("Total Revenue");
+            report_type.Items.Add("Most Sold Products");
+            report_type.Items.Add("Orders by Employee");
+            report_type.Items.Add("Tables Usage");
+            report_type.Items.Add("DineIn vs TakeAway");
+
+            report_type.SelectedIndex = -1;
+        }
+
+        private void datefrom_report_ValueChanged(object sender, EventArgs e)
+        {
+            dateto_report.MinDate = datefrom_report.Value;
+
+            if (dateto_report.Value < datefrom_report.Value)
+            {
+                dateto_report.Value = datefrom_report.Value;
+            }
+        }
+
+        private void btn_generate_report_Click(object sender, EventArgs e)
+        {
+            if (report_type.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a report type");
+                return;
+            }
+
+            string selectedReport = report_type.Text;
+            DateTime fromDate = datefrom_report.Value.Date;
+            DateTime toDate = dateto_report.Value.Date.AddDays(1);
+
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                // 1) Sales by Day
+                if (selectedReport == "Sales by Day")
+                {
+                    var rawData = db.Payments
+                        .Where(p => p.PaidAt.HasValue &&
+                                    p.PaidAt.Value >= fromDate &&
+                                    p.PaidAt.Value < toDate)
+                        .GroupBy(p => new
+                        {
+                            Year = p.PaidAt.Value.Year,
+                            Month = p.PaidAt.Value.Month,
+                            Day = p.PaidAt.Value.Day
+                        })
+                        .Select(g => new
+                        {
+                            g.Key.Year,
+                            g.Key.Month,
+                            g.Key.Day,
+                            TotalSales = g.Sum(x => x.Amount),
+                            PaymentsCount = g.Count()
+                        })
+                        .ToList();
+
+                    var data = rawData
+                        .Select(x => new
+                        {
+                            Date = new DateTime(x.Year, x.Month, x.Day),
+                            x.TotalSales,
+                            x.PaymentsCount
+                        })
+                        .OrderBy(x => x.Date)
+                        .ToList();
+
+                    dgv_reports.DataSource = data;
+                    lbl_report_title.Text = "Sales by Day";
+                    lbl_report_total.Text = "Total: " + data.Sum(x => x.TotalSales).GetValueOrDefault().ToString("0.00") + " MAD";
+                }
+
+                // 2) Sales by Month
+                else if (selectedReport == "Sales by Month")
+                {
+                    var data = db.Payments
+                        .Where(p => p.PaidAt.HasValue && p.PaidAt.Value >= fromDate && p.PaidAt.Value < toDate)
+                        .GroupBy(p => new
+                        {
+                            Year = p.PaidAt.Value.Year,
+                            Month = p.PaidAt.Value.Month
+                        })
+                        .Select(g => new
+                        {
+                            g.Key.Year,
+                            g.Key.Month,
+                            TotalSales = g.Sum(x => x.Amount),
+                            PaymentsCount = g.Count()
+                        })
+                        .OrderBy(x => x.Year)
+                        .ThenBy(x => x.Month)
+                        .ToList();
+
+                    dgv_reports.DataSource = data;
+                    lbl_report_title.Text = "Sales by Month";
+                    decimal totalSales = data.Sum(x => x.TotalSales) ?? 0m;
+                    lbl_report_total.Text = "Total: " + totalSales.ToString("0.00") + " MAD";
+                }
+
+                // 3) Total Revenue All Time
+                else if (selectedReport == "Total Revenue")
+                {
+                    var data = db.Payments
+                        .Where(p => p.PaidAt.HasValue &&
+                                    p.PaidAt.Value >= fromDate &&
+                                    p.PaidAt.Value < toDate)
+                        .Select(p => new
+                        {
+                            p.PaymentId,
+                            p.OrderId,
+                            p.Method,
+                            p.Amount,
+                            p.PaidAt
+                        })
+                        .OrderByDescending(x => x.PaymentId)
+                        .ToList();
+
+                    decimal totalRevenue = data.Sum(x => (decimal)x.Amount);
+
+                    dgv_reports.DataSource = data;
+                    lbl_report_title.Text = "Total Revenue";
+                    lbl_report_total.Text = "Total: " + totalRevenue.ToString("0.00") + " MAD";
+                }
+
+                // 4) Most Sold Products
+                else if (selectedReport == "Most Sold Products")
+                {
+                    var data = db.OrderItems
+                        .Join(
+                            db.Products,
+                            oi => oi.ProductId,
+                            p => p.ProductId,
+                            (oi, p) => new { oi, p }
+                        )
+                        .GroupBy(x => new
+                        {
+                            x.oi.ProductId,
+                            x.p.Name
+                        })
+                        .Select(g => new
+                        {
+                            ProductId = g.Key.ProductId,
+                            ProductName = g.Key.Name,
+                            TotalQuantitySold = g.Sum(x => x.oi.Quantity),
+                            TotalRevenue = g.Sum(x => x.oi.Quantity * x.oi.UnitPrice)
+                        })
+                        .OrderByDescending(x => x.TotalQuantitySold)
+                        .ToList();
+
+                    dgv_reports.DataSource = data;
+                    lbl_report_title.Text = "Most Sold Products";
+                    lbl_report_total.Text = "Products Count: " + data.Count;
+                }
+
+                // 5) Orders by Employee
+                else if (selectedReport == "Orders by Employee")
+                {
+                    var data = db.EmployeeActivities
+                        .Where(a => a.Entity == "Orders" && a.Action == "Insert")
+                        .Join(
+                            db.Users,
+                            a => a.CNIE,
+                            u => u.CNIE,
+                            (a, u) => new
+                            {
+                                a.CNIE,
+                                FullName = u.LastName + " " + u.FIrstName,
+                                a.EntityId
+                            }
+                        )
+                        .GroupBy(x => new
+                        {
+                            x.CNIE,
+                            x.FullName
+                        })
+                        .Select(g => new
+                        {
+                            g.Key.CNIE,
+                            g.Key.FullName,
+                            OrdersCount = g.Count()
+                        })
+                        .OrderByDescending(x => x.OrdersCount)
+                        .ToList();
+
+                    dgv_reports.DataSource = data;
+                    lbl_report_title.Text = "Orders by Employee";
+                    lbl_report_total.Text = "Employees: " + data.Count;
+                }
+
+                // 6) Tables Usage
+                else if (selectedReport == "Tables Usage")
+                {
+                    var data = db.Orders
+                        .Where(o => o.TableId.HasValue)
+                        .Join(
+                            db.RestaurantTables,
+                            o => o.TableId.Value,
+                            t => t.TableId,
+                            (o, t) => new
+                            {
+                                t.TableId,
+                                t.TableNumber,
+                                o.OrderId
+                            }
+                        )
+                        .GroupBy(x => new
+                        {
+                            x.TableId,
+                            x.TableNumber
+                        })
+                        .Select(g => new
+                        {
+                            g.Key.TableId,
+                            g.Key.TableNumber,
+                            OrdersCount = g.Count()
+                        })
+                        .OrderByDescending(x => x.OrdersCount)
+                        .ToList();
+
+                    dgv_reports.DataSource = data;
+                    lbl_report_title.Text = "Tables Usage";
+                    lbl_report_total.Text = "Used Tables: " + data.Count;
+                }
+
+                // 7) DineIn vs TakeAway
+                else if (selectedReport == "DineIn vs TakeAway")
+                {
+                    int dineInCount = db.Orders.Count(o => o.OrderType == "DineIn");
+                    int takeAwayCount = db.Orders.Count(o => o.OrderType == "TakeAway");
+
+                    decimal dineInRevenue = db.Orders
+                        .Where(o => o.OrderType == "DineIn")
+                        .Select(o => (decimal?)o.Price)
+                        .Sum() ?? 0;
+
+                    decimal takeAwayRevenue = db.Orders
+                        .Where(o => o.OrderType == "TakeAway")
+                        .Select(o => (decimal?)o.Price)
+                        .Sum() ?? 0;
+
+                    var data = new[]
+                    {
+                new
+                {
+                    OrderType = "DineIn",
+                    OrdersCount = dineInCount,
+                    Revenue = dineInRevenue
+                },
+                new
+                {
+                    OrderType = "TakeAway",
+                    OrdersCount = takeAwayCount,
+                    Revenue = takeAwayRevenue
+                }
+            }.ToList();
+
+                    dgv_reports.DataSource = data;
+                    lbl_report_title.Text = "DineIn vs TakeAway";
+                    lbl_report_total.Text = "DineIn: " + dineInCount + " | TakeAway: " + takeAwayCount;
+                }
+            }
+        }
+
+        private void btn_clear_report_Click(object sender, EventArgs e)
+        {
+            report_type.SelectedIndex = -1;
+            lbl_report_title.Text = "";
+            lbl_report_total.Text = "";
+            dgv_reports.DataSource = null;
         }
     }
 }
