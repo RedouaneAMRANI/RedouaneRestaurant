@@ -55,6 +55,7 @@ namespace RestaurantManagement
             picture_products.BackgroundImageLayout = ImageLayout.Stretch;
 
             LoadNotifications();
+            UpdateNotificationIcon();
             panel_notifications.Visible = false;
             panel_notifications.BringToFront();
             panel_notifications.Left = btn_notifications.Left - 55;
@@ -137,14 +138,7 @@ namespace RestaurantManagement
 
             //Tabcontrol
             ActivateButton(btn_dashboard);
-            dash.Visible = true;
-            orders.Visible = false;
-            reports.Visible = false;
-            products.Visible = false;
-            table.Visible = false;
-            staff.Visible = false;
-            payment.Visible = false;
-            history.Visible = false;
+            ApplyRolePermissions();
 
             // Reservations tables double click event
             table1.DoubleClick += Panel_DoubleClick;
@@ -157,6 +151,52 @@ namespace RestaurantManagement
             table8.DoubleClick += Panel_DoubleClick;
             table9.DoubleClick += Panel_DoubleClick;
             table10.DoubleClick += Panel_DoubleClick;
+        }
+
+        void ApplyRolePermissions()
+        {
+            string role = CurrentUser.Role?.Trim().ToLower();
+
+            btn_dashboard.Enabled = false;
+            btn_orders.Enabled = false;
+            tables.Enabled = false;
+            btn_menu.Enabled = false;
+            btn_staff.Enabled = false;
+            btn_payment.Enabled = false;
+            btn_history.Enabled = false;
+            btn_reports.Enabled = false;
+
+            if (role == "employe")
+            {
+                btn_dashboard.Enabled = true;
+                btn_orders.Enabled = true;
+                tables.Enabled = true;
+            }
+            else if (role == "coocker")
+            {
+                dash.Visible = false;
+                orders.Visible = false;
+                table.Visible = false;
+                products.Visible = false;
+                staff.Visible = false;
+                payment.Visible = false; 
+                history.Visible = false;
+                reports.Visible = false;
+                search_dashboard.Enabled = false;
+                btn_search_dashboard.Enabled = false;
+                orderdetails.Visible = true;
+            }
+            else if (role == "admin")
+            {
+                btn_dashboard.Enabled = true;
+                btn_orders.Enabled = true;
+                tables.Enabled = true;
+                btn_menu.Enabled = true;
+                btn_staff.Enabled = true;
+                btn_payment.Enabled = true;
+                btn_history.Enabled = true;
+                btn_reports.Enabled = true;
+            }
         }
 
         //////////////////// Timer date and time
@@ -2262,6 +2302,22 @@ namespace RestaurantManagement
         }
 
         //////////////////// Notifications
+
+        void UpdateNotificationIcon()
+        {
+            int notifCount = 0;
+            int.TryParse(lbl_notifications_count.Text, out notifCount);
+
+            if (notifCount > 0)
+            {
+                btn_notifications.BackgroundImage = Properties.Resources.notification__1_;
+            }
+            else
+            {
+                btn_notifications.BackgroundImage = Properties.Resources.bell__1_;
+            }
+        }
+
         void LoadNotifications()
         {
             using (EFDBEntities db = new EFDBEntities())
@@ -2279,9 +2335,10 @@ namespace RestaurantManagement
                     .ToList();
 
                 dgv_notifications.DataSource = data;
-
                 lbl_notifications_count.Text = data.Count.ToString();
             }
+
+            UpdateNotificationIcon();
         }
 
         private void btn_notifications_Click(object sender, EventArgs e)
