@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Auth));
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.btn_exit_auth = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.chk_showpassword = new Guna.UI2.WinForms.Guna2CheckBox();
             this.chk_rememberme = new Guna.UI2.WinForms.Guna2CheckBox();
             this.btnloginAuth = new Guna.UI2.WinForms.Guna2Button();
             this.password_auth = new Guna.UI2.WinForms.Guna2TextBox();
@@ -41,7 +42,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.chk_showpassword = new Guna.UI2.WinForms.Guna2CheckBox();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -86,6 +86,27 @@
             this.btn_exit_auth.Size = new System.Drawing.Size(31, 28);
             this.btn_exit_auth.TabIndex = 5;
             this.btn_exit_auth.Click += new System.EventHandler(this.btn_exit_auth_Click);
+            // 
+            // chk_showpassword
+            // 
+            this.chk_showpassword.AutoSize = true;
+            this.chk_showpassword.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.chk_showpassword.CheckedState.BorderRadius = 2;
+            this.chk_showpassword.CheckedState.BorderThickness = 0;
+            this.chk_showpassword.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.chk_showpassword.Font = new System.Drawing.Font("Cooper Black", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_showpassword.Location = new System.Drawing.Point(163, 804);
+            this.chk_showpassword.Margin = new System.Windows.Forms.Padding(2);
+            this.chk_showpassword.Name = "chk_showpassword";
+            this.chk_showpassword.Size = new System.Drawing.Size(200, 21);
+            this.chk_showpassword.TabIndex = 4;
+            this.chk_showpassword.Text = "Show / Hide Password";
+            this.chk_showpassword.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.chk_showpassword.UncheckedState.BorderRadius = 2;
+            this.chk_showpassword.UncheckedState.BorderThickness = 0;
+            this.chk_showpassword.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.chk_showpassword.UseVisualStyleBackColor = true;
+            this.chk_showpassword.CheckedChanged += new System.EventHandler(this.chk_showpassword_CheckedChanged);
             // 
             // chk_rememberme
             // 
@@ -144,7 +165,6 @@
             this.password_auth.HoverState.Parent = this.password_auth;
             this.password_auth.Location = new System.Drawing.Point(149, 729);
             this.password_auth.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.password_auth.MaxLength = 4;
             this.password_auth.Name = "password_auth";
             this.password_auth.PasswordChar = '*';
             this.password_auth.PlaceholderText = "";
@@ -171,7 +191,6 @@
             this.cnie_auth.HoverState.Parent = this.cnie_auth;
             this.cnie_auth.Location = new System.Drawing.Point(149, 563);
             this.cnie_auth.Margin = new System.Windows.Forms.Padding(4);
-            this.cnie_auth.MaxLength = 8;
             this.cnie_auth.Name = "cnie_auth";
             this.cnie_auth.PasswordChar = '\0';
             this.cnie_auth.PlaceholderText = "";
@@ -220,7 +239,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(74)))));
-            this.label2.Location = new System.Drawing.Point(193, 357);
+            this.label2.Location = new System.Drawing.Point(193, 372);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(353, 24);
@@ -230,10 +249,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(102, -27);
+            this.pictureBox1.Location = new System.Drawing.Point(94, -24);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(528, 446);
+            this.pictureBox1.Size = new System.Drawing.Size(550, 469);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -249,27 +268,6 @@
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
-            // chk_showpassword
-            // 
-            this.chk_showpassword.AutoSize = true;
-            this.chk_showpassword.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.chk_showpassword.CheckedState.BorderRadius = 2;
-            this.chk_showpassword.CheckedState.BorderThickness = 0;
-            this.chk_showpassword.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.chk_showpassword.Font = new System.Drawing.Font("Cooper Black", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk_showpassword.Location = new System.Drawing.Point(163, 804);
-            this.chk_showpassword.Margin = new System.Windows.Forms.Padding(2);
-            this.chk_showpassword.Name = "chk_showpassword";
-            this.chk_showpassword.Size = new System.Drawing.Size(200, 21);
-            this.chk_showpassword.TabIndex = 4;
-            this.chk_showpassword.Text = "Show / Hide Password";
-            this.chk_showpassword.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.chk_showpassword.UncheckedState.BorderRadius = 2;
-            this.chk_showpassword.UncheckedState.BorderThickness = 0;
-            this.chk_showpassword.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.chk_showpassword.UseVisualStyleBackColor = true;
-            this.chk_showpassword.CheckedChanged += new System.EventHandler(this.chk_showpassword_CheckedChanged);
-            // 
             // Auth
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -279,6 +277,7 @@
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.guna2Panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Auth";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

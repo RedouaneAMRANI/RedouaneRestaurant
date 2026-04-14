@@ -30,6 +30,8 @@ namespace RestaurantManagement
         Reservation model_Reservation = new Reservation();
         Order model_Order = new Order();
         OrderItem model_OrderItem = new OrderItem();
+        Payment payment_Model = new Payment();
+        EmployeeActivity model_Activity = new EmployeeActivity();  
         private List<CartItemModel> cartItems = new List<CartItemModel>();
         private int selectedProductId = 0;
         private float selectedProductPrice = 0;
@@ -51,6 +53,12 @@ namespace RestaurantManagement
 
             picture_products.Image = picture_products.BackgroundImage;
             picture_products.BackgroundImageLayout = ImageLayout.Stretch;
+
+            LoadNotifications();
+            panel_notifications.Visible = false;
+            panel_notifications.BringToFront();
+            panel_notifications.Left = btn_notifications.Left - 55;
+            panel_notifications.Top = btn_notifications.Bottom + 3;
 
             lbl_fullname.Text = CurrentUser.Username;
             lbl_role.Text = CurrentUser.Role;
@@ -183,7 +191,6 @@ namespace RestaurantManagement
             currentButton = (Guna.UI2.WinForms.Guna2Button)sender;
             currentButton.FillColor = Color.FromArgb(199, 161, 122); // Gold
         }
-
         //////////////////// Tabcontrol
         private void btn_dashboard_Click(object sender, EventArgs e)
         {
@@ -197,6 +204,8 @@ namespace RestaurantManagement
             payment.Visible = false;
             history.Visible = false;
             reports.Visible = false;
+
+            panel_notifications.Visible = false;
         }
 
         private void btn_orders_Click(object sender, EventArgs e)
@@ -211,6 +220,8 @@ namespace RestaurantManagement
             payment.Visible = false;
             history.Visible = false;
             reports.Visible = false;
+
+            panel_notifications.Visible = false;
         }
 
         private void btn_menu_Click(object sender, EventArgs e)
@@ -225,6 +236,8 @@ namespace RestaurantManagement
             payment.Visible = false;
             history.Visible = false;
             reports.Visible = false;
+
+            panel_notifications.Visible = false;
         }
 
         private void btn_staff_Click(object sender, EventArgs e)
@@ -240,6 +253,7 @@ namespace RestaurantManagement
             history.Visible = false;
             reports.Visible = false;
 
+            panel_notifications.Visible = false;
         }
 
         private void btn_payment_Click(object sender, EventArgs e)
@@ -255,6 +269,7 @@ namespace RestaurantManagement
             history.Visible = false;
             reports.Visible = false;
 
+            panel_notifications.Visible = false;
         }
 
         private void btn_history_Click(object sender, EventArgs e)
@@ -270,6 +285,7 @@ namespace RestaurantManagement
             dash.Visible = false;
             reports.Visible = false;
 
+            panel_notifications.Visible = false;
         }
 
         private void btn_tables_Click(object sender, EventArgs e)
@@ -284,6 +300,8 @@ namespace RestaurantManagement
             orders.Visible = false;
             dash.Visible = false;
             reports.Visible = false;
+
+            panel_notifications.Visible = false;
         }
 
         private void btn_reports_Click(object sender, EventArgs e)
@@ -298,6 +316,8 @@ namespace RestaurantManagement
             products.Visible = false;
             orders.Visible = false;
             dash.Visible = false;
+
+            panel_notifications.Visible = false;
         }
 
         //////////////////// Browse image for user
@@ -314,6 +334,15 @@ namespace RestaurantManagement
             MemoryStream ms = new MemoryStream();
             imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             return ms.ToArray();
+        }
+
+        void RefreshDashboardStats()
+        {
+            LoadDashboardStats();
+            LoadReportsStats();
+            LoadRecentOrdersDashboard();
+            LoadRecentActivitiesDashboard();
+            LoadNotifications();
         }
 
         //////////////////// USER FORM
@@ -666,10 +695,7 @@ namespace RestaurantManagement
                         ActivityLogger.Log("Update", "Products", existingProduct.ProductId);
                     }
                 }
-                LoadDashboardStats();
-                LoadReportsStats();
-                LoadRecentOrdersDashboard();
-                LoadRecentActivitiesDashboard();
+                RefreshDashboardStats();
 
                 ClearProducts();
                 MessageBox.Show("Submitted successfully!");
@@ -884,10 +910,7 @@ namespace RestaurantManagement
                     }
                     LoadTables();
                 }
-                LoadDashboardStats();
-                LoadReportsStats();
-                LoadRecentOrdersDashboard();
-                LoadRecentActivitiesDashboard();
+                RefreshDashboardStats();
 
                 ClearTables();
                 MessageBox.Show("Submitted successfully!");
@@ -1219,21 +1242,13 @@ namespace RestaurantManagement
                     ClearOrders();
                     LoadOrders_Products();
 
-                    LoadDashboardStats();
-                    LoadReportsStats();
-                    LoadRecentOrdersDashboard();
-                    LoadRecentActivitiesDashboard();
+                    RefreshDashboardStats();
                 }
             }
             else
             {
                 MessageBox.Show("Please fill in all required fields");
             }
-        }
-
-        private void quantite_product_ValueChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void dgv_orders_DoubleClick(object sender, EventArgs e)
@@ -1933,7 +1948,6 @@ namespace RestaurantManagement
         }
 
         //////////////////// Reports
-
         void LoadReportsStats()
         {
             using (EFDBEntities db = new EFDBEntities())
@@ -2245,6 +2259,36 @@ namespace RestaurantManagement
             lbl_report_title.Text = "";
             lbl_report_total.Text = "";
             dgv_reports.DataSource = null;
+        }
+
+        //////////////////// Notifications
+        void LoadNotifications()
+        {
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                var data = db.Orders
+                    .Where(o => o.Status == "WaitList")
+                    .Select(o => new
+                    {
+                        o.OrderId,
+                        o.CustomerName,
+                        o.OrderType,
+                        o.CreatedAt
+                    })
+                    .OrderByDescending(o => o.OrderId)
+                    .ToList();
+
+                dgv_notifications.DataSource = data;
+
+                lbl_notifications_count.Text = data.Count.ToString();
+            }
+        }
+
+        private void btn_notifications_Click(object sender, EventArgs e)
+        {
+            panel_notifications.Parent = this;
+            panel_notifications.Visible = !panel_notifications.Visible;
+            panel_notifications.BringToFront();
         }
     }
 }
