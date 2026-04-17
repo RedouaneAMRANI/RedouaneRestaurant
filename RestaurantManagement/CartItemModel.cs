@@ -10,11 +10,11 @@ namespace RestaurantManagement
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
-        public float UnitPrice { get; set; }
+        public Decimal UnitPrice { get; set; }
         public int Quantity { get; set; }
         public byte[] Image { get; set; }
 
-        public float Total
+        public Decimal Total
         {
             get { return UnitPrice * Quantity; }
         }

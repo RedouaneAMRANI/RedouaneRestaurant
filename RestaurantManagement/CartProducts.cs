@@ -50,6 +50,40 @@ namespace RestaurantManagement
             }
         }
 
+        public void LoadCartProductsReadOnly(List<CartItemModel> items)
+        {
+            flowLayoutPanel_cart.Controls.Clear();
+
+            foreach (var item in items)
+            {
+                UC_CartProduct uc = new UC_CartProduct();
+
+                uc.ProductId = item.ProductId;
+                uc.lbl_product_name.Text = item.ProductName;
+                uc.lbl_price.Text = item.UnitPrice.ToString("0.00");
+                uc.num_quantity.Value = item.Quantity;
+                uc.lbl_total.Text = item.Total.ToString("0.00");
+
+                if (item.Image != null)
+                {
+                    using (MemoryStream ms = new MemoryStream(item.Image))
+                    {
+                        uc.pic_product.Image = Image.FromStream(ms);
+                    }
+                }
+                else
+                {
+                    uc.pic_product.Image = uc.pic_product.BackgroundImage;
+                }
+
+                // read only
+                uc.num_quantity.Enabled = false;
+                uc.btn_delete.Visible = false;
+
+                flowLayoutPanel_cart.Controls.Add(uc);
+            }
+        }
+
         private void Uc_OnDelete(object sender, int productId)
         {
             if (OnDeleteProduct != null)

@@ -3,20 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\restaurantmanagement\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|c:\\users\\redone1\\desktop\\projet\\restaurantmanagement\\restaurantmanagement\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|solutionrelative:restaurantmanagement\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|c:\\users\\redone1\\desktop\\projet\\restaurantmanagement\\restaurantmanagement\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\restaurantmanagement\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|solutionrelative:restaurantmanagement\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\restaurantmanagement\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|solutionrelative:restaurantmanagement\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\restaurantmanagement\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D9BE7706-D956-4979-8183-76667797FBE0}|RestaurantManagement\\RestaurantManagement.csproj|solutionrelative:restaurantmanagement\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,33 +18,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Auth.cs",
-              "DocumentMoniker": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\RestaurantManagement\\Auth.cs",
-              "RelativeDocumentMoniker": "RestaurantManagement\\Auth.cs",
-              "ToolTip": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\RestaurantManagement\\Auth.cs",
-              "RelativeToolTip": "RestaurantManagement\\Auth.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAwwEEAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T22:45:14.566Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Auth.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\RestaurantManagement\\Auth.cs",
-              "RelativeDocumentMoniker": "RestaurantManagement\\Auth.cs",
-              "ToolTip": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\RestaurantManagement\\Auth.cs [Design]",
-              "RelativeToolTip": "RestaurantManagement\\Auth.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T22:45:09.612Z",
-              "EditorCaption": " [Design]"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -61,7 +28,7 @@
               "RelativeDocumentMoniker": "RestaurantManagement\\Dashboard.cs",
               "ToolTip": "C:\\Users\\REDONE1\\Desktop\\Projet\\RestaurantManagement\\RestaurantManagement\\Dashboard.cs",
               "RelativeToolTip": "RestaurantManagement\\Dashboard.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAswMcAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAACAAAAAAAAAAAAAQwBMAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-26T16:36:21.979Z",
               "EditorCaption": ""

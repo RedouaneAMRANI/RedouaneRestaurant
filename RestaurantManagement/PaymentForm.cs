@@ -18,7 +18,7 @@ namespace RestaurantManagement
     public partial class PaymentForm : Form
     {
         private int _savedOrderId = 0;
-        private double _totalAmount = 0;
+        private Decimal _totalAmount = 0;
         private bool _isPaid = false;
 
         private List<CartItemModel> _cartItems;
@@ -82,7 +82,7 @@ namespace RestaurantManagement
                 }
                 else if (_reservedTableId != null)
                 {
-                    lbl_table_type.Text = "Reserved Table / DineIn";
+                    lbl_table_type.Text = "Reserved / DineIn";
                 }
                 else
                 {
@@ -156,7 +156,7 @@ namespace RestaurantManagement
 
                 if (!string.IsNullOrWhiteSpace(_customerName))
                 {
-                    if (Regex.IsMatch(_customerName, @"^[a-zA-Z0-9]+$"))
+                    if (Regex.IsMatch(_customerName, @"^[a-zA-Z ]+$"))
                     {
                         order.CustomerName = _customerName.Trim();
                     }
@@ -319,9 +319,9 @@ namespace RestaurantManagement
 
         private void btn_print_Click(object sender, EventArgs e)
         {
-            if (!_isPaid || _savedOrderId == 0)
+            if (_savedOrderId == 0)
             {
-                MessageBox.Show("Please complete payment first.");
+                MessageBox.Show("Please save the order first.");
                 return;
             }
 

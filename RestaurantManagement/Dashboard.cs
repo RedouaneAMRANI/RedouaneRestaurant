@@ -34,7 +34,7 @@ namespace RestaurantManagement
         EmployeeActivity model_Activity = new EmployeeActivity();  
         private List<CartItemModel> cartItems = new List<CartItemModel>();
         private int selectedProductId = 0;
-        private float selectedProductPrice = 0;
+        private decimal selectedProductPrice = 0;
         private byte[] selectedProductImage = null;
         private string selectedProductName = "";
         private CartProducts cartForm;
@@ -129,6 +129,17 @@ namespace RestaurantManagement
 
             dateto_report.MinDate = datefrom_report.Value;
 
+            LoadDetailsOrderTableCombos();
+            LoadTodayDetailsOrders();
+
+            dgv_detailsorders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_detailsorders.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_detailsorders.MultiSelect = false;
+            dgv_detailsorders.ReadOnly = true;
+            dgv_detailsorders.AllowUserToAddRows = false;
+
+            DisableDetailsOrdersInputs();
+
             //Timer date and time
             timer1.Interval = 1000;
             timer1.Tick += Timer1_Tick;
@@ -184,7 +195,7 @@ namespace RestaurantManagement
                 reports.Visible = false;
                 search_dashboard.Enabled = false;
                 btn_search_dashboard.Enabled = false;
-                orderdetails.Visible = true;
+                coocker.Visible = true;
             }
             else if (role == "admin")
             {
@@ -379,10 +390,10 @@ namespace RestaurantManagement
         void RefreshDashboardStats()
         {
             LoadDashboardStats();
-            LoadReportsStats();
             LoadRecentOrdersDashboard();
             LoadRecentActivitiesDashboard();
             LoadNotifications();
+            LoadTodayDetailsOrders();
         }
 
         //////////////////// USER FORM
@@ -460,7 +471,7 @@ namespace RestaurantManagement
                     MessageBox.Show("CNIE must be 8 characters long");
                     return; 
                 }
-                if (Regex.IsMatch(lastname.Text, @"^[a-zA-Z0-9]+$"))
+                if (Regex.IsMatch(lastname.Text, @"^[a-zA-Z ]+$"))
                 {
                     model_User.LastName = lastname.Text.Trim();
                 }
@@ -469,7 +480,7 @@ namespace RestaurantManagement
                     MessageBox.Show("LastName must contain only letters");
                     return;
                 }
-                if (Regex.IsMatch(firstname.Text, @"^[a-zA-Z0-9]+$"))
+                if (Regex.IsMatch(firstname.Text, @"^[a-zA-Z ]+$"))
                 {
                     model_User.FIrstName = firstname.Text.Trim();
                 }
@@ -681,9 +692,9 @@ namespace RestaurantManagement
         {
             if (name_products.Text != "" && price_products.Text != "" && categories_products.Text != "" && status_products.Text != "")
             {
-                if (Regex.IsMatch(name_products.Text, @"^[a-zA-Z0-9]+$"))
+                if (Regex.IsMatch(name_products.Text, @"^[a-zA-Z ]+$"))
                 {
-                    model_Products.Name = name_products.Text.Trim();
+                    model_Products.Name = name_products.Text;
                 }
                 else
                 {
@@ -893,7 +904,7 @@ namespace RestaurantManagement
                         Reservation newReservation = new Reservation();
 
                         newReservation.TableId = table.TableId;
-                        if (Regex.IsMatch(customername.Text, @"^[a-zA-Z0-9]+$"))
+                        if (Regex.IsMatch(customername.Text, @"^[a-zA-Z ]+$"))
                         {
                             newReservation.CustomerName = customername.Text.Trim();
                         }
@@ -902,13 +913,13 @@ namespace RestaurantManagement
                             MessageBox.Show("customername must contain only letters");
                             return;
                         }
-                        if (Regex.IsMatch(customerphone.Text, @"^\d+$"))
+                        if (Regex.IsMatch(customerphone.Text, @"^\d+$") && customerphone.Text.Length == 10)
                         {
                             newReservation.CustomerPhone = customerphone.Text.Trim();
                         }
                         else
                         {
-                            MessageBox.Show("Phone must contain only numbers");
+                            MessageBox.Show("Phone must contain only numbers and be 10 digits long");
                             return;
                         }
                         newReservation.Status = statusreservation.Text;
@@ -1141,7 +1152,7 @@ namespace RestaurantManagement
                 if (product != null)
                 {
                     selectedProductId = product.ProductId;
-                    selectedProductPrice = (float)product.Price;
+                    selectedProductPrice = (Decimal)product.Price;
                     selectedProductName = product.Name;
                     selectedProductImage = product.Image;
                 }
@@ -1369,7 +1380,7 @@ namespace RestaurantManagement
                         CartItemModel item = new CartItemModel();
                         item.ProductId = product.ProductId;
                         item.ProductName = product.Name;
-                        item.UnitPrice = (float)oi.UnitPrice;
+                        item.UnitPrice = (Decimal)oi.UnitPrice;
                         item.Quantity = oi.Quantity;
                         item.Image = product.Image;
 
@@ -1883,7 +1894,15 @@ namespace RestaurantManagement
 
                 // Notifications count
                 lbl_notifications_count.ForeColor = Color.FromArgb(231, 76, 60); // Red
-                int notificationsCount = db.Orders.Count(o => o.Status == "WaitList");
+                DateTime today_order = DateTime.Today;
+                DateTime tomorrow_order = today.AddDays(1);
+
+                int notificationsCount = db.Orders
+                    .Count(o => o.CreatedAt.HasValue
+                             && o.CreatedAt.Value >= today_order
+                             && o.CreatedAt.Value < tomorrow_order
+                             && (o.Status == "WaitList" || o.Status == "Confirmed"));
+
                 lbl_notifications_count.Text = notificationsCount.ToString();
             }
         }
@@ -2322,19 +2341,29 @@ namespace RestaurantManagement
         {
             using (EFDBEntities db = new EFDBEntities())
             {
+                DateTime today = DateTime.Today;
+                DateTime tomorrow = today.AddDays(1);
+
                 var data = db.Orders
-                    .Where(o => o.Status == "WaitList")
+                    .Where(o => o.CreatedAt.HasValue
+                             && o.CreatedAt.Value >= today
+                             && o.CreatedAt.Value < tomorrow
+                             && (o.Status == "WaitList" || o.Status == "Confirmed"))
+                    .OrderByDescending(o => o.CreatedAt)
+                    .ThenByDescending(o => o.OrderId)
                     .Select(o => new
                     {
                         o.OrderId,
                         o.CustomerName,
                         o.OrderType,
+                        o.Status,
                         o.CreatedAt
                     })
-                    .OrderByDescending(o => o.OrderId)
                     .ToList();
 
+                dgv_notifications.DataSource = null;
                 dgv_notifications.DataSource = data;
+
                 lbl_notifications_count.Text = data.Count.ToString();
             }
 
@@ -2346,6 +2375,324 @@ namespace RestaurantManagement
             panel_notifications.Parent = this;
             panel_notifications.Visible = !panel_notifications.Visible;
             panel_notifications.BringToFront();
+        }
+
+        private Order selectedDetailsOrder = null;
+        private bool isLoadingDetailsOrder = false;
+
+        //////////////////// cook details   
+
+        void DisableDetailsOrdersInputs()
+        {
+            ordertype_details.Enabled = false;
+            customername_details.Enabled = false;
+            customerphone_details.Enabled = false;
+            table_details.Enabled = false;
+            tablereserved_details.Enabled = false;
+            btn_cart_details.Enabled = true;   
+            status_details.Enabled = true;    
+        }
+
+        void ClearDetailsOrders()
+        {
+            isLoadingDetailsOrder = true;
+
+            ordertype_details.SelectedIndex = -1;
+            customername_details.Text = "";
+            customerphone_details.Text = "";
+            table_details.DataSource = null;
+            tablereserved_details.DataSource = null;
+            status_details.SelectedIndex = -1;
+
+            cartItems.Clear();
+            RefreshCartForm();
+            lbl_cart_count.Text = "0";
+
+            selectedDetailsOrder = null;
+
+            DisableDetailsOrdersInputs();
+
+            isLoadingDetailsOrder = false;
+        }
+
+        void LoadDetailsOrderTableCombos(int? selectedTableId = null)
+        {
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                var freeTables = db.RestaurantTables
+                    .Where(t => t.Status == "Free")
+                    .ToList()
+                    .Select(t => new
+                    {
+                        t.TableId,
+                        Display = "Table " + t.TableNumber + " Capacity " + t.Capacity
+                    })
+                    .ToList();
+
+                var reservedTables = db.Reservations
+                    .Where(r => r.Status == "Reserved")
+                    .Join(db.RestaurantTables,
+                          r => r.TableId,
+                          t => t.TableId,
+                          (r, t) => new
+                          {
+                              t.TableId,
+                              t.TableNumber,
+                              t.Capacity
+                          })
+                    .ToList()
+                    .Select(x => new
+                    {
+                        x.TableId,
+                        Display = "Table " + x.TableNumber + " Capacity " + x.Capacity
+                    })
+                    .ToList();
+
+                if (selectedTableId != null)
+                {
+                    bool existsInFree = freeTables.Any(x => x.TableId == selectedTableId.Value);
+                    bool existsInReserved = reservedTables.Any(x => x.TableId == selectedTableId.Value);
+
+                    if (!existsInFree && !existsInReserved)
+                    {
+                        var currentTable = db.RestaurantTables
+                            .Where(t => t.TableId == selectedTableId.Value)
+                            .ToList()
+                            .Select(t => new
+                            {
+                                t.TableId,
+                                Display = "Table " + t.TableNumber + " Capacity " + t.Capacity + " (" + t.Status + ")"
+                            })
+                            .FirstOrDefault();
+
+                        if (currentTable != null)
+                        {
+                            freeTables.Add(currentTable);
+                        }
+                    }
+                }
+
+                table_details.DataSource = null;
+                table_details.DataSource = freeTables;
+                table_details.DisplayMember = "Display";
+                table_details.ValueMember = "TableId";
+                table_details.SelectedIndex = -1;
+
+                tablereserved_details.DataSource = null;
+                tablereserved_details.DataSource = reservedTables;
+                tablereserved_details.DisplayMember = "Display";
+                tablereserved_details.ValueMember = "TableId";
+                tablereserved_details.SelectedIndex = -1;
+            }
+        }
+
+        void LoadTodayDetailsOrders()
+        {
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                DateTime today = DateTime.Today;
+                DateTime tomorrow = today.AddDays(1);
+
+                var data = db.Orders
+                    .Where(o => o.CreatedAt.HasValue
+                             && o.CreatedAt.Value >= today
+                             && o.CreatedAt.Value < tomorrow
+                             && (o.Status == "WaitList"
+                              || o.Status == "Confirmed"
+                              || o.Status == "Prepared"
+                              || o.Status == "Preparing"))
+                    .OrderBy(o => o.CreatedAt)
+                    .ThenBy(o => o.OrderId)
+                    .Select(o => new
+                    {
+                        o.OrderId,
+                        o.OrderType,
+                        o.CustomerName,
+                        o.CustomerPhone,
+                        o.Status,
+                        o.TableId,
+                        o.CreatedAt,
+                        o.Price
+                    })
+                    .ToList();
+
+                dgv_detailsorders.DataSource = null;
+                dgv_detailsorders.DataSource = data;
+            }
+
+            dgv_detailsorders.ClearSelection();
+        }
+
+        private void dgv_detailsorders_DoubleClick(object sender, EventArgs e)
+        {
+            if (dgv_detailsorders.CurrentRow == null || dgv_detailsorders.CurrentRow.Index == -1)
+                return;
+
+            int orderId = Convert.ToInt32(dgv_detailsorders.CurrentRow.Cells["OrderId"].Value);
+
+            using (var db = new EFDBEntities())
+            {
+                var order = db.Orders.Find(orderId);
+
+                if (order == null)
+                {
+                    MessageBox.Show("Order not found");
+                    return;
+                }
+
+                isLoadingDetailsOrder = true;
+                selectedDetailsOrder = order;
+
+                DisableDetailsOrdersInputs();
+
+                ordertype_details.Text = order.OrderType;
+                customername_details.Text = order.CustomerName;
+                customerphone_details.Text = order.CustomerPhone;
+                status_details.Text = order.Status;
+
+                if (order.OrderType == "DineIn")
+                {
+                    LoadDetailsOrderTableCombos(order.TableId);
+
+                    if (order.TableId != null)
+                    {
+                        bool isReservedTable = db.Reservations
+                            .Any(r => r.TableId == order.TableId.Value && r.Status == "Reserved");
+
+                        if (isReservedTable)
+                        {
+                            tablereserved_details.SelectedValue = order.TableId.Value;
+                            table_details.SelectedIndex = -1;
+                        }
+                        else
+                        {
+                            table_details.SelectedValue = order.TableId.Value;
+                            tablereserved_details.SelectedIndex = -1;
+                        }
+                    }
+                    else
+                    {
+                        table_details.SelectedIndex = -1;
+                        tablereserved_details.SelectedIndex = -1;
+                    }
+                }
+                else
+                {
+                    table_details.DataSource = null;
+                    tablereserved_details.DataSource = null;
+                }
+
+                cartItems.Clear();
+
+                var orderItems = db.OrderItems
+                    .Where(x => x.OrderId == order.OrderId)
+                    .ToList();
+
+                foreach (var oi in orderItems)
+                {
+                    var product = db.Products.FirstOrDefault(p => p.ProductId == oi.ProductId);
+
+                    if (product != null)
+                    {
+                        CartItemModel item = new CartItemModel();
+                        item.ProductId = product.ProductId;
+                        item.ProductName = product.Name;
+                        item.UnitPrice = (Decimal)oi.UnitPrice;
+                        item.Quantity = oi.Quantity;
+                        item.Image = product.Image;
+
+                        cartItems.Add(item);
+                    }
+                }
+
+                isLoadingDetailsOrder = false;
+            }
+
+            UpdateCartCount();
+            RefreshCartFormReadOnly();
+        }
+
+        private void RefreshCartFormReadOnly()
+        {
+            if (cartForm == null || cartForm.IsDisposed)
+            {
+                cartForm = new CartProducts();
+            }
+
+            cartForm.LoadCartProductsReadOnly(cartItems);
+        }
+
+        private void btn_cart_details_Click(object sender, EventArgs e)
+        {
+            if (cartItems.Count == 0)
+            {
+                MessageBox.Show("No products in this order");
+                return;
+            }
+
+            if (cartForm == null || cartForm.IsDisposed)
+            {
+                cartForm = new CartProducts();
+            }
+
+            cartForm.LoadCartProductsReadOnly(cartItems);
+            cartForm.Show();
+            cartForm.BringToFront();
+        }
+
+        private void btn_valide_orderdetails_Click(object sender, EventArgs e)
+        {
+            if (selectedDetailsOrder == null)
+            {
+                MessageBox.Show("Please double click an order first");
+                return;
+            }
+
+            if (status_details.Text == "")
+            {
+                MessageBox.Show("Please select status");
+                return;
+            }
+
+            using (EFDBEntities db = new EFDBEntities())
+            {
+                var order = db.Orders.Find(selectedDetailsOrder.OrderId);
+
+                if (order == null)
+                {
+                    MessageBox.Show("Order not found");
+                    return;
+                }
+
+                order.Status = status_details.Text;
+
+                db.SaveChanges();
+
+                ActivityLogger.Log("Update Status", "Orders", order.OrderId);
+
+                if (order.Status == "Served" && order.TableId != null)
+                {
+                    var table = db.RestaurantTables.Find(order.TableId.Value);
+                    if (table != null)
+                    {
+                        table.Status = "Free";
+                        db.SaveChanges();
+                    }
+                }
+            }
+
+            MessageBox.Show("Order status updated successfully!");
+
+            ClearDetailsOrders();
+            LoadDetailsOrderTableCombos();
+            LoadTodayDetailsOrders();
+            RefreshDashboardStats();
+            LoadNotifications();
+        }
+
+        private void btn_clear_orderdetails_Click(object sender, EventArgs e)
+        {
+            ClearDetailsOrders();
         }
     }
 }

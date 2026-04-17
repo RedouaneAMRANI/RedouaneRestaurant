@@ -273,11 +273,11 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        private System.Windows.Forms.LinkLabel btn_delete;
         public System.Windows.Forms.Label lbl_product_name;
         public System.Windows.Forms.Label lbl_price;
         public System.Windows.Forms.Label lbl_total;
         public Guna.UI2.WinForms.Guna2PictureBox pic_product;
         public Guna.UI2.WinForms.Guna2NumericUpDown num_quantity;
+        public System.Windows.Forms.LinkLabel btn_delete;
     }
 }
