@@ -211,12 +211,14 @@ namespace RestaurantManagement
         }
 
         //////////////////// Timer date and time
+        
         private void Timer1_Tick(object sender, EventArgs e)
         {
             labelDate.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
         }
 
         //////////////////// Logout button
+        
         private void btn_logout_Click(object sender, EventArgs e)
         {
             ActivityLogger.Log("Logout", "Auth", null);
@@ -232,6 +234,7 @@ namespace RestaurantManagement
         }
 
         //////////////////// Change button color when clicked
+        
         Guna.UI2.WinForms.Guna2Button currentButton;
         private void ActivateButton(object sender)
         {
@@ -242,6 +245,7 @@ namespace RestaurantManagement
             currentButton = (Guna.UI2.WinForms.Guna2Button)sender;
             currentButton.FillColor = Color.FromArgb(199, 161, 122); // Gold
         }
+
         //////////////////// Tabcontrol
         private void btn_dashboard_Click(object sender, EventArgs e)
         {
@@ -1001,8 +1005,20 @@ namespace RestaurantManagement
                     tablenumber.Text = table.TableNumber.ToString();
                     statusreservation.Text = reservation.Status;
 
-                    if (reservation.Reserveat != null)
-                        datereservation.Value = reservation.Reserveat.Value;
+                    if (reservation.Reserveat.HasValue)
+                    {
+                        DateTime reserveDate = reservation.Reserveat.Value;
+
+                        if (reserveDate >= datereservation.MinDate &&
+                            reserveDate <= datereservation.MaxDate)
+                        {
+                            datereservation.Value = reserveDate;
+                        }
+                        else
+                        {
+                            datereservation.Value = DateTime.Now;
+                        }
+                    }
                 }
                 else
                 {
